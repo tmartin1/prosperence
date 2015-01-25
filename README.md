@@ -22,6 +22,9 @@ Throughout all of the initial building of the plan, and forever, no personal/ide
 
   - __Product Owner__: Timothy Martin
   - __Scrum Master__: tba
+  - __Lead Architect__: tba
+  - __Build Master__: tba
+  - __UX Lead__: tba
   - __Development Team Members__: tba
 
 ## Requirements
