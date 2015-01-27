@@ -18,14 +18,14 @@ angular.module('prosperenceApp')
         templateUrl: 'app/plan-builder/msa/msa.html',
         controller: 'NwsCtrl'
       })
-      .state('tax-projection', {
-        url: '/tax-projection',
-        templateUrl: 'app/plan-builder/tax-projection/tax-projection.html',
+      .state('tax', {
+        url: '/tax',
+        templateUrl: 'app/plan-builder/tax/tax.html',
         controller: 'NwsCtrl'
       })
-      .state('risk-analysis', {
-        url: '/risk-analysis',
-        templateUrl: 'app/plan-builder/risk-analysis/risk-analysis.html',
+      .state('risk', {
+        url: '/risk',
+        templateUrl: 'app/plan-builder/risk/risk.html',
         controller: 'NwsCtrl'
       })
       .state('retire', {
