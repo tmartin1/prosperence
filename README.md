@@ -3,12 +3,11 @@ Providing a reliable resource for individuals to build a comprehensive financial
 
 ## Table of Contents
 1. [Summary](#summary)
-1. [Prosperence (beta)](#prosperence-(beta))
+1. [Prosperence (beta)](#prosperence-beta)
 1. [University of Prosperence](#university of prosperence)
 1. [Team](#team)
 1. [Requirements](#requirements)
 1. [Development](#development)
-1. [Installing Dependencies](#installing-dependencies)
 1. [Contributing](#contributing)
 1. [Road Map](#road-map)
 
@@ -17,7 +16,7 @@ A vast majority of Americans do not have a financial plan. In my time as a finan
 
 The goal of Prosperence is to deliver a program that allows a user to build a comprehensive financial plan that is customized for their situation and goals without having any education or knowledge about finance or financial planning. Prosperence will strive to educate the user throughout the process, removing the ambiguity, uncertainty, and stress that typically come from talking to a financial product salesman, planner, or other financial professional.
 
-## Prosperence (beta)
+## Prosperence beta
 Throughout all of the initial building of the plan, and forever, no personal/identifying information (email, phone number, address, etc.) will need to be entered for a user to build a financial plan. Users will be able to create an account or download and save their financial plan (finished or in progress) without any fear of personal information being leaked or attacked. Once their account is created, their information will be saved. From there, they will be able to review and update their plan, and they will have the opportunity to complete more questionnaires to have a more accurate plan.
 
 ## University of Prosperence
