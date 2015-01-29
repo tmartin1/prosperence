@@ -2,15 +2,15 @@
 Providing a reliable resource for individuals to build a comprehensive financial plan independently, and with confindence.
 
 ## Table of Contents
-1. [Summary](#Summary)
-1. [Prosperence (beta)](#Prosperence-(beta))
-1. [University of Prosperence](#University of Prosperence)
-1. [Team](#Team)
+1. [Summary](#summary)
+1. [Prosperence (beta)](#prosperence-(beta))
+1. [University of Prosperence](#university of prosperence)
+1. [Team](#team)
 1. [Requirements](#requirements)
 1. [Development](#development)
 1. [Installing Dependencies](#installing-dependencies)
 1. [Contributing](#contributing)
-1. [Road Map](#Road Map)
+1. [Road Map](#road-map)
 
 ## Summary
 A vast majority of Americans do not have a financial plan. In my time as a financial planner, I've heard people say it's because they don't know how to build one, or they don't think they could afford a financial planner, or they don't trust financial planners, or any other number of reasons.
