@@ -1,3 +1,15 @@
+### The Easy Way
+
+If you are using Sublime as your IDE, install and setup the [JsFormat](https://packagecontrol.io/packages/JsFormat) package as follows:
+
+1. Open Package Controll (⌘⇧p) and install JsFormat. 
+1. Add the following line in the user settings found in: Preferences > Package Settings > JsFormat > Settings - User
+
+        ```javascript
+        {
+          format_on_save: true
+        }
+
 ### Indentation
 
 When writing any block of code that is logically subordinate to the line immediately before and after it, that block should be indented two spaces more than the surrounding lines
