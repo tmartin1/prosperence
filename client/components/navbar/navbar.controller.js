@@ -1,13 +1,21 @@
 'use strict';
 
 angular.module('prosperenceApp')
-  .controller('NavbarCtrl', function ($scope, $location, Auth) {
-    $scope.menu = [
-      { 'title': 'Home', 'link': '/' },
-      { 'title': 'About', 'link': '/about' },
-      { 'title': 'Resources', 'link': '/resources' },
-      { 'title': 'Start My Plan', 'link': '/plan-builder' }
-    ];
+  .controller('NavbarCtrl', function($scope, $location, Auth) {
+    $scope.menu = [{
+      'title': 'Home',
+      'link': '/'
+    }, {
+      'title': 'About',
+      'link': '/about'
+    }, {
+      'title': 'My Plan',
+      'link': '/plan-builder'
+    }, {
+      'title': 'University of Prosperence',
+      'class': 'fa fa-graduation-cap',
+      'link': '/university'
+    }, ];
 
     $scope.isCollapsed = true;
     $scope.isLoggedIn = Auth.isLoggedIn;
