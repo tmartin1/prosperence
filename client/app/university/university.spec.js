@@ -1,21 +1,21 @@
 'use strict';
 
-describe('Controller: ResourcesCtrl', function () {
+describe('Controller: UniversityCtrl', function() {
+  var UniversityCtrl, scope;
 
   // load the controller's module
   beforeEach(module('prosperenceApp'));
 
-  var ResourcesCtrl, scope;
 
   // Initialize the controller and a mock scope
-  beforeEach(inject(function ($controller, $rootScope) {
+  beforeEach(inject(function($controller, $rootScope) {
     scope = $rootScope.$new();
-    ResourcesCtrl = $controller('ResourcesCtrl', {
+    UniversityCtrl = $controller('UniversityCtrl', {
       $scope: scope
     });
   }));
 
-  it('should ...', function () {
+  it('should ...', function() {
     expect(1).toEqual(1);
   });
 });
