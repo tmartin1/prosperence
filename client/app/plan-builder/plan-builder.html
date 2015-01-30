@@ -1,0 +1,35 @@
+<header class="hero-unit" id="banner">
+  <div class="container">
+    <label>
+      <h1>Plan Builder <sub style="font-size:40%; font-weight:normal;">beta</sub></h1>
+      <br>
+      <p class="lead"><i>It's the job that's never started that takes longest to finish.</i></p>
+    </label>
+  </div>
+</header>
+
+<div class="container-fluid">
+  <div class="row-fluid">
+    
+    <!--Sidebar content-->
+    <div class="col-sm-2">
+      <h2>Sidebar</h2>
+      <ul class="nav nav-tabs nav-pills nav-stacked">
+        <li role="presentation" class="active"><a ui-sref="plan-builder.start">Introduction</a></li>
+        <li role="presentation" ng-repeat=""></li>
+        <!-- Make this a ng-repeat function -->
+        <li role="presentation"><a ui-sref="plan-builder.nws">Net Worth</a></li>
+        <li role="presentation"><a ui-sref="plan-builder.tax">Tax Projection</a></li>
+        <li role="presentation"><a ui-sref="plan-builder.msa">Budget Analysis</a></li>
+        <li role="presentation"><a ui-sref="plan-builder.risk">Risk Analysis</a></li>
+        <li role="presentation"><a ui-sref="plan-builder.retire">Retirement Savings</a></li>
+      </ul>
+    </div>
+    
+    <!--Body content-->
+    <div class="col-sm-10">
+      <div ui-view></div>
+    </div>
+
+  </div>
+</div>
