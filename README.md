@@ -45,6 +45,7 @@ From within the root directory:
 sudo npm install -g bower
 npm install
 bower install
+grunt serve
 ```
 
 ## Contributing
