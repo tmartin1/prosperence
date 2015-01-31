@@ -14,31 +14,49 @@ angular.module('prosperenceApp')
       .state('plan-builder.start', {
         url: '/start',
         templateUrl: 'app/plan-builder/start/start.html',
-        controller: 'PlanBuilderCtrl'
+        controller: 'PlanBuilderCtrl',
+        data: {
+          title: 'Plan Builder'
+        }
       })
       .state('plan-builder.nws', {
         url: '/nws',
         templateUrl: 'app/plan-builder/nws/nws.html',
-        controller: 'NwsCtrl'
+        controller: 'NwsCtrl',
+        data: {
+          title: 'Net Worth Calculator'
+        }
       })
       .state('plan-builder.msa', {
         url: '/msa',
         templateUrl: 'app/plan-builder/msa/msa.html',
-        controller: 'NwsCtrl'
+        controller: 'MsaCtrl',
+        data: {
+          title: 'Budget Analysis'
+        }
       })
       .state('plan-builder.tax', {
         url: '/tax',
         templateUrl: 'app/plan-builder/tax/tax.html',
-        controller: 'NwsCtrl'
+        controller: 'TaxProjectionCtrl',
+        data: {
+          title: 'Income Tax Projection'
+        }
       })
       .state('plan-builder.risk', {
         url: '/risk',
         templateUrl: 'app/plan-builder/risk/risk.html',
-        controller: 'NwsCtrl'
+        controller: 'RiskAnalysisCtrl',
+        data: {
+          title: 'Risk Analysis'
+        }
       })
       .state('plan-builder.retire', {
         url: '/retire',
         templateUrl: 'app/plan-builder/retire/retire.html',
-        controller: 'NwsCtrl'
+        controller: 'RetireCtrl',
+        data: {
+          title: 'Retirement Projection'
+        }
       });
   });

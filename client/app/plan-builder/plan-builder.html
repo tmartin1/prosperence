@@ -2,9 +2,8 @@
   <div class="container">
     <label>
       <!-- TODO: Make the title dynamic depending on the view -->
-      <h1>Plan Builder <sub style="font-size:40%; font-weight:normal;">beta</sub></h1>
-      <br>
-      <p class="lead"><i>It's the job that's never started that takes longest to finish.</i></p>
+      <!-- <h1>{{heading}}</h1> -->
+      <h1>{{heading}}</h1>
     </label>
   </div>
 </header>
@@ -18,7 +17,7 @@
       <!-- TODO: Fix sidebar to accurately show active colors -->
       <ul class="nav nav-tabs nav-pills nav-stacked">
         <li role="presentation" class="active"><a ui-sref="plan-builder.start">Introduction</a></li>
-        <li role="presentation" ng-repeat=""></li>
+        <!-- <li role="presentation" ng-repeat=""></li> -->
         <!-- TODO: Make this a ng-repeat function -->
         <li role="presentation"><a ui-sref="plan-builder.nws">Net Worth</a></li>
         <li role="presentation"><a ui-sref="plan-builder.tax">Tax Projection</a></li>
@@ -38,4 +37,18 @@
 
 </div>
 
-<div ng-include="'components/builderNav/builderNav.html'"></div>
+<!-- Plan builder navigation and progress bar -->
+<div class="container">
+  <center>
+    <a class="btn btn-lg btn-default" ng-if="!!previous" ui-sref="{{previous}}">Previous</a>
+    <a class="btn btn-lg btn-default" ng-if="!!next" ui-sref="{{next}}">Save and Continue</a>
+    <br><br>
+
+    <div class="progress progress-striped active" style="width:50%">
+      <div class="progress-bar" style="width: {{progress}};"></div>
+    </div>
+
+  </center>
+
+  <button class="btn btn-lg btn-default pull-right" ng-click="save()">Save and Exit</button>
+</div>
