@@ -1,7 +1,7 @@
 'use strict';
 
 angular.module('prosperenceApp')
-	.controller('PlanBuilderCtrl', function($rootScope, $scope, $state, Auth) {
+	.controller('PlanBuilderCtrl', function($rootScope, $scope, $location, $state, Auth) {
 		$scope.previous, $scope.next;
 		$scope.isCollapsed = true;
 		$scope.getCurrentUser = Auth.getCurrentUser;
@@ -39,5 +39,10 @@ angular.module('prosperenceApp')
 				updateRelationals(toState, fromState);
 			}
 		);
+
+		// Sets active class on sidebar.
+		$scope.isActive = function(viewLocation) {
+			return viewLocation === $state.current.url;
+		};
 
 	});
