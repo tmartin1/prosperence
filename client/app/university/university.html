@@ -19,20 +19,20 @@
       <h2>Sidebar</h2>
       <ul class="nav nav-tabs nav-pills nav-stacked">
         <!-- TODO: Make links disabled until previous sections are completed (allow user to go back and forth between completed sections and the one they're currently working on) -->
-        <li role="presentation" ng-class="{active: isActive('/welcome')}"><a ui-sref="plan-builder.welcome">Welcome</a></li>
-        <li role="presentation" ng-class="{active: isActive('/paths')}"><a ui-sref="plan-builder.paths">Paths</a></li>
-        <li role="presentation" ng-class="{active: isActive('/courses')}"><a ui-sref="plan-builder.courses">All Courses</a></li>
-        <li role="presentation" ng-class="{active: isActive('/resources')}"><a ui-sref="plan-builder.resources">Resources</a></li>
+        <li role="presentation" ng-class="{active: isActive('/welcome')}"><a ui-sref="university.welcome">Welcome</a></li>
+        <li role="presentation" ng-class="{active: isActive('/paths')}"><a ui-sref="university.paths">Paths</a></li>
+        <li role="presentation" ng-class="{active: isActive('/courses')}"><a ui-sref="university.courses">All Courses</a></li>
+        <li role="presentation" ng-class="{active: isActive('/resources')}"><a ui-sref="university.resources">Resources</a></li>
         <hr>
-        <li role="presentation" ng-class="{active: isActive('/bookmarks')}"><a ui-sref="plan-builder.bookmarks">My Bookmarks</a></li>
-        <li role="presentation" ng-class="{active: isActive('/favorites')}"><a ui-sref="plan-builder.favorites">Favorites</a></li>
+        <li role="presentation" ng-class="{active: isActive('/favorites')}"><a ui-sref="university.favorites">Favorites</a></li>
+        <li role="presentation" ng-class="{active: isActive('/in-progress')}"><a ui-sref="university.in-progress">In Progress</a></li>
         <br>
       </ul>
     </div>
     
     <!--Body content-->
     <div class="col-sm-10">
-      <h2>Main Content</h2>
+      <div ui-view></div>
     </div>
 
   </div>
