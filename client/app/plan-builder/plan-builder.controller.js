@@ -1,8 +1,8 @@
 'use strict';
 
 angular.module('prosperenceApp')
-	.controller('PlanBuilderCtrl', function($rootScope, $scope, $location, $state, Auth) {
-		$scope.heading, $scope.previous, $scope.next;
+	.controller('PlanBuilderCtrl', function($rootScope, $scope, $state, Auth) {
+		$scope.previous, $scope.next;
 		$scope.isCollapsed = true;
 		$scope.getCurrentUser = Auth.getCurrentUser;
 
@@ -16,33 +16,28 @@ angular.module('prosperenceApp')
 			'plan-builder.retire'
 		];
 
-		$scope.heading = $state.current.data.title; // Set the title
-		var current = order.indexOf($state.current.name);
-		$scope.previous = order[current - 1];
-		$scope.next = order[current + 1];
+		// Sets the title, progress bar, and the 'previous' and 'next' links.
+		var updateRelationals = function(focus) {
+			$scope.heading = focus.data.title;
+			var index = order.indexOf(focus.name);
+			// ui-router does not currently support dynamic sref: https://github.com/angular-ui/ui-router/issues/1208
+			$scope.previous = order[index - 1].replace('.', '/');
+			$scope.next = order[index + 1].replace('.', '/');
+			$scope.progress = Math.max(.05, (index / order.length - 1)) * 100 + '%';
+		};
+		updateRelationals($state.current);
 
+		// Save all changes on form inputs.
+		$scope.save = function(route) {
+			console.log('saving');
+		};
 
 		// Update page heading and navbar on state change.
 		// From docs: https://github.com/angular-ui/ui-router/wiki#wiki-state-change-events
 		$rootScope.$on('$stateChangeStart',
 			function(event, toState, toParams, fromState, fromParams) {
-				event.preventDefault();
-				// $scope.heading = $state.current.data.title; // Update the title
-				// $scope.heading = states[$state.current.url].title; // Set the title
-				// Update the nav and progress bars
+				updateRelationals(toState, fromState);
 			}
 		);
-
-		// Save all changes from form inputs.
-		$scope.save = function(route) {
-			console.log('saving');
-			console.log($scope.heading);
-			current = Math.max(0, order.indexOf($state.current.url.replace('/', '.')));
-			console.log(current);
-			// current = Math.max(0, order.indexOf($state.current.url));
-			// $scope.previous = order[current - 1] || false;
-			// $scope.next = order[current + 1] || false;
-			// $scope.progress = Math.max(.05, (current / order.length)) * 100 + '%';
-		};
 
 	});
