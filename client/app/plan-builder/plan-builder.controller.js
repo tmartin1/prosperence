@@ -27,22 +27,22 @@ angular.module('prosperenceApp')
 		};
 		updateRelationals($state.current);
 
-		// Save all changes on form inputs.
-		$scope.save = function(route) {
-			console.log('saving');
-		};
-
-		// Update page heading and navbar on state change.
+		// Update page heading and navbar on state change within plan-builder.
 		// From docs: https://github.com/angular-ui/ui-router/wiki#wiki-state-change-events
-		$rootScope.$on('$stateChangeStart',
+		$scope.$on('$stateChangeStart',
 			function(event, toState, toParams, fromState, fromParams) {
-				updateRelationals(toState, fromState);
+				if (order.indexOf(toState.name) >= 0) updateRelationals(toState);
 			}
 		);
 
 		// Sets active class on sidebar.
 		$scope.isActive = function(viewLocation) {
 			return viewLocation === $state.current.url;
+		};
+
+		// Save all changes on form inputs.
+		$scope.save = function(route) {
+			console.log('saving');
 		};
 
 	});
