@@ -21,8 +21,8 @@ angular.module('prosperenceApp')
 			$scope.heading = focus.data.title;
 			var index = order.indexOf(focus.name);
 			// ui-router does not currently support dynamic sref: https://github.com/angular-ui/ui-router/issues/1208
-			$scope.previous = order[index - 1].replace('.', '/');
-			$scope.next = order[index + 1].replace('.', '/');
+			$scope.previous = order[index - 1] ? order[index - 1].replace('.', '/') : false;
+			$scope.next = order[index + 1] ? order[index + 1].replace('.', '/') : false;
 			$scope.progress = Math.max(.05, (index / order.length - 1)) * 100 + '%';
 		};
 		updateRelationals($state.current);
