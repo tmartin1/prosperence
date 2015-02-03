@@ -45,6 +45,12 @@ From within the root directory:
 sudo npm install -g bower
 npm install
 bower install
+```
+
+To run a local instance, start mongo and then run grunt as follows:
+
+```sh
+mongod
 grunt serve
 ```
 
