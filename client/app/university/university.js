@@ -2,7 +2,7 @@
 
 angular.module('prosperenceApp')
   .config(function($stateProvider, $urlRouterProvider) {
-    $urlRouterProvider.otherwise("/university/welcome");
+    $urlRouterProvider.when('/university', '/university/welcome');
 
     $stateProvider
       .state('university', {
