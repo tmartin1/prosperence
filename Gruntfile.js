@@ -203,7 +203,7 @@ module.exports = function(grunt) {
         options: {
           nodeArgs: ['--debug-brk'],
           env: {
-            PORT: process.env.PORT || 9000
+            PORT: process.env.PORT || 8080
           },
           callback: function(nodemon) {
             nodemon.on('log', function(event) {
