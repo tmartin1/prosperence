@@ -1,6 +1,8 @@
 # Prosperence
 Providing a reliable resource for individuals to build a comprehensive financial plan independently, and with confindence.
 
+[![Circle CI](https://circleci.com/gh/prosperence/prosperence/tree/master.svg?style=svg)](https://circleci.com/gh/prosperence/prosperence/1)
+
 ## Table of Contents
 1. [Summary](#summary)
 1. [Prosperence (beta)](#prosperence-beta)
