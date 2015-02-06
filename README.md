@@ -27,7 +27,7 @@ The goal for University of Prosperence is to provide a library of resources, tha
 Read more about [University of Prosperence on our wiki](https://github.com/prosperence/prosperence/wiki/University-of-Prosperence).
 
 ## Team
-  - __Product Owner__: Timothy Martin
+  - __Product Owner__: [Timothy Martin](https://github.com/tmartin1)
   - __Scrum Master__: tba
   - __Lead Architect__: tba
   - __Build Master__: tba
