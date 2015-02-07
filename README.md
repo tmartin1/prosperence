@@ -1,5 +1,5 @@
 # Prosperence
-Providing a reliable resource for individuals to build a comprehensive financial plan independently, and with confindence.
+The goal of Prosperence is to provide a reliable resource for individuals to build a comprehensive financial plan independently, confindently, and completely free.
 
 [![Circle CI](https://circleci.com/gh/prosperence/prosperence/tree/master.svg?style=svg)](https://circleci.com/gh/prosperence/prosperence/1)
 
@@ -14,11 +14,11 @@ Providing a reliable resource for individuals to build a comprehensive financial
 1. [Road Map](#road-map)
 
 ## Summary
-A vast majority of Americans do not have a financial plan. In my time as a financial planner, I've heard people say it's because they don't know how to build one, or they don't think they could afford a financial planner, or they don't trust financial planners, or any other number of reasons.
+Too many Americans do not have an adequate financial plan. In my time as a financial planner, I've heard people say it's because they don't know how to build one, or they don't think they could afford a financial planner, or they don't trust financial planners, or any other number of reasons.
 
 The goal of Prosperence is to deliver a program that allows a user to build a comprehensive financial plan that is customized for their situation and goals without having any education or knowledge about finance or financial planning. Prosperence will strive to educate the user throughout the process, removing the ambiguity, uncertainty, and stress that typically come from talking to a financial product salesman, planner, or other financial professional.
 
-## Prosperence beta
+## Prosperence <sub>beta</sub>
 Throughout all of the initial building of the plan, and forever, no personal/identifying information (email, phone number, address, etc.) will need to be entered for a user to build a financial plan. Users will be able to create an account or download and save their financial plan (finished or in progress) without any fear of personal information being leaked or attacked. Once their account is created, their information will be saved. From there, they will be able to review and update their plan, and they will have the opportunity to complete more questionnaires to have a more accurate plan.
 
 ## University of Prosperence
@@ -44,9 +44,10 @@ Read more about [University of Prosperence on our wiki](https://github.com/prosp
 From within the root directory:
 
 ```sh
-sudo npm install -g bower
+npm install -g bower
 npm install
 bower install
+gem install sass
 ```
 
 To run a local instance, start mongo and then run grunt as follows:
