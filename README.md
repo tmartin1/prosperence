@@ -44,9 +44,10 @@ Read more about [University of Prosperence on our wiki](https://github.com/prosp
 From within the root directory:
 
 ```sh
-sudo npm install -g bower
+npm install -g bower
 npm install
 bower install
+gem install sass
 ```
 
 To run a local instance, start mongo and then run grunt as follows:
