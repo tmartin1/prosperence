@@ -1,5 +1,5 @@
 # Prosperence
-The goal of Prosperence is to provide a reliable resource for individuals to build a comprehensive financial plan independently, confindently, and completely free.
+The goal of Prosperence is to provide a reliable resource for individuals to build a comprehensive financial plan independently, confidently, and completely free.
 
 [![Circle CI](https://circleci.com/gh/prosperence/prosperence/tree/master.svg?style=svg)](https://circleci.com/gh/prosperence/prosperence/1)
 
