@@ -15,12 +15,12 @@
       <h2>Sidebar</h2>
       <ul class="nav nav-tabs nav-pills nav-stacked">
         <!-- TODO: Make links disabled until previous sections are completed (allow user to go back and forth between completed sections and the one they're currently working on) -->
-        <li role="presentation" ng-class="{active: isActive('/start')}"><a ui-sref="plan-builder.start">Introduction</a></li>
-        <li role="presentation" ng-class="{active: isActive('/nws')}"><a ui-sref="plan-builder.nws">Net Worth</a></li>
-        <li role="presentation" ng-class="{active: isActive('/tax')}"><a ui-sref="plan-builder.tax">Tax Projection</a></li>
-        <li role="presentation" ng-class="{active: isActive('/msa')}"><a ui-sref="plan-builder.msa">Budget Analysis</a></li>
-        <li role="presentation" ng-class="{active: isActive('/risk')}"><a ui-sref="plan-builder.risk">Risk Analysis</a></li>
-        <li role="presentation" ng-class="{active: isActive('/retire')}"><a ui-sref="plan-builder.retire">Retirement Savings</a></li>
+        <li role="presentation" ui-sref-active="active"><a ui-sref="plan-builder.start">Introduction</a></li>
+        <li role="presentation" ui-sref-active="active"><a ui-sref="plan-builder.nws">Net Worth</a></li>
+        <li role="presentation" ui-sref-active="active"><a ui-sref="plan-builder.tax">Tax Projection</a></li>
+        <li role="presentation" ui-sref-active="active"><a ui-sref="plan-builder.msa">Budget Analysis</a></li>
+        <li role="presentation" ui-sref-active="active"><a ui-sref="plan-builder.risk">Risk Analysis</a></li>
+        <li role="presentation" ui-sref-active="active"><a ui-sref="plan-builder.retire">Retirement Savings</a></li>
       </ul>
     </div>
     

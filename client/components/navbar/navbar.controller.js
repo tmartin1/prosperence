@@ -35,4 +35,9 @@ angular.module('prosperenceApp')
       Auth.logout();
       $location.path('/');
     };
+
+        // Sets active class on sidebar.
+    // $scope.isActive = function(viewLocation) {
+    //   return viewLocation === $state.current.url;
+    // };
   });
