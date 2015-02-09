@@ -1,7 +1,7 @@
 'use strict';
 
 angular.module('prosperenceApp')
-  .controller('NavbarCtrl', function($scope, $location, Auth) {
+  .controller('NavbarCtrl', function($scope, $state, $location, Auth) {
 
     $scope.isCollapsed = true;
     $scope.isLoggedIn = Auth.isLoggedIn;
@@ -23,12 +23,14 @@ angular.module('prosperenceApp')
     }, {
       'title': 'Start Planning',
       'link': 'plan-builder.start',
-      'shown': '!isLoggedIn()'
+      'shown': '!isLoggedIn()',
+      'abstractLink': 'plan-builder'
     }, {
       'title': 'University of Prosperence',
       'class': 'fa fa-graduation-cap',
       'link': 'university.welcome',
-      'shown': true
+      'shown': true,
+      'abstractLink': 'university'
     }, ];
 
     $scope.logout = function() {
@@ -37,7 +39,7 @@ angular.module('prosperenceApp')
     };
 
         // Sets active class on sidebar.
-    // $scope.isActive = function(viewLocation) {
-    //   return viewLocation === $state.current.url;
-    // };
+    $scope.isActive = function(viewLocation) {
+      return $state.includes(viewLocation);
+    };
   });
