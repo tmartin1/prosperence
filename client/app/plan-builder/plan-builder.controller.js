@@ -35,11 +35,6 @@ angular.module('prosperenceApp')
 			}
 		);
 
-		// Sets active class on sidebar.
-		$scope.isActive = function(viewLocation) {
-			return viewLocation === $state.current.url;
-		};
-
 		// Save all changes on form inputs.
 		$scope.save = function(route) {
 			console.log('saving');
