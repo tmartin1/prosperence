@@ -19,6 +19,14 @@ angular.module('prosperenceApp')
           title: 'Plan Builder'
         }
       })
+      .state('plan-builder.basics', {
+        url: '/basics',
+        templateUrl: 'app/plan-builder/basics/basics.html',
+        controller: 'BasicsCtrl',
+        data: {
+          title: 'General Info'
+        }
+      })
       .state('plan-builder.nws', {
         url: '/nws',
         templateUrl: 'app/plan-builder/nws/nws.html',

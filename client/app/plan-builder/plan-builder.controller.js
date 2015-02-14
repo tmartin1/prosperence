@@ -9,6 +9,7 @@ angular.module('prosperenceApp')
 		// Defines the order of how pages are displayed to the user.
 		var order = [
 			'plan-builder.start',
+			'plan-builder.basic',
 			'plan-builder.nws',
 			'plan-builder.tax',
 			'plan-builder.msa',
