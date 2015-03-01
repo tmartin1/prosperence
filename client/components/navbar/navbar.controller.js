@@ -20,7 +20,7 @@ angular.module('prosperenceApp')
       'abstractLink': 'plan-builder'
     }, {
       'title': 'Dashboard',
-      'link': 'dashboard',
+      'link': 'dashboard.overview',
       'shown': 'isLoggedIn()',
       'abstractLink': 'dashboard'
     }, {
