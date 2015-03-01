@@ -9,28 +9,30 @@ angular.module('prosperenceApp')
     $scope.getCurrentUser = Auth.getCurrentUser;
 
     $scope.menu = [{
-      'title': 'Home',
+      'title': 'Prosperence',
       'link': 'main',
+      'style': 'font-size:18px;',
       'shown': true
+    }, {
+      'title': 'Start Planning',
+      'link': 'plan-builder.start',
+      'shown': '!getCurrentUser().planBuilderComplete',
+      'abstractLink': 'plan-builder'
+    }, {
+      'title': 'Dashboard',
+      'link': 'dashboard',
+      'shown': 'isLoggedIn()',
+      'abstractLink': 'dashboard'
+    }, {
+      'title': 'University of Prosperence',
+      'icon': 'fa fa-graduation-cap',
+      'link': 'university.welcome',
+      'shown': true,
+      'abstractLink': 'university'
     }, {
       'title': 'About',
       'link': 'about',
       'shown': true
-    }, {
-      'title': 'My Plan',
-      'link': 'my-plan',
-      'shown': 'isLoggedIn()'
-    }, {
-      'title': 'Start Planning',
-      'link': 'plan-builder.start',
-      'shown': '!isLoggedIn()',
-      'abstractLink': 'plan-builder'
-    }, {
-      'title': 'University of Prosperence',
-      'class': 'fa fa-graduation-cap',
-      'link': 'university.welcome',
-      'shown': true,
-      'abstractLink': 'university'
     }, ];
 
     $scope.logout = function() {
