@@ -1,0 +1,16 @@
+.submenu {
+  padding-top: 4px;
+  margin-top: -4px;
+  background-color: #ddecf3;
+  line-height: 80%;
+  font-size: 90%;
+  border-radius: 0px 0px 4px 4px;
+}
+
+.submenu .item .active {
+  background-color: #cae1ec;
+}
+
+.submenu .item:hover {
+  background-color: #cae1ec;
+}
