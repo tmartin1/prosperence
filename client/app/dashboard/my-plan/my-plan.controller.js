@@ -1,6 +1,6 @@
 'use strict';
 
 angular.module('prosperenceApp')
-  .controller('MyPlanCtrl', function ($scope, User, Auth) {
-    $scope.temp = {};
-  });
+.controller('MyPlanCtrl', function ($scope, User, Auth) {
+  // 
+});
