@@ -19,7 +19,7 @@
           <!-- TODO: If screen size is small, use the item.icon instead and shrink the sidebar to icons only -->
           <ul ng-show="item.submenu.visible" class="nav submenu">
             <li ng-repeat="sub in item.submenu" class="item">
-              <a href="" ng-click="setPlanView(sub, item.submenu)" ng-class="{ active: sub.active }">{{ sub.title }}</a>
+              <a href="" ng-click="setSubView(sub, item.submenu, item)" ng-class="{ active: sub.active }">{{ sub.title }}</a>
             </li>
           </ul>
         </li>
