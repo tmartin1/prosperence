@@ -61,7 +61,7 @@ changes to the dev branch into yours by running this command
 from your branch:
 
 ```
-$ git pull --rebase upstream dev
+$ git pull upstream dev
 ```
 
 If there are conflicting changes, git will start yelling at you part way
