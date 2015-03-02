@@ -17,9 +17,10 @@
       id="navbar-main">
 
       <ul class="nav navbar-nav">
-        <li ng-repeat="item in menu" ng-class="{active: isActive(item.abstractLink || item.link)}">
+        <li ng-repeat="item in menu" ng-class="{active: isActive(item.abstractLink || item.link)}" style="{{item.style}}">
           <a ng-show="{{item.shown}}" ui-sref="{{item.link}}">
-            <span class="{{item.icon}}" style="{{item.style}}"> {{item.title}} </span>
+            <span class="{{item.icon}}" style="{{item.style}}"></span>
+            <span> {{item.title}} </span>
           </a>
         </li>
         <li ng-show="isAdmin()" ng-class="{active: isActive('/admin')}"><a href="/admin">Admin</a></li>

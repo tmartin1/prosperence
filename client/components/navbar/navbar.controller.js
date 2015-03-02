@@ -14,6 +14,10 @@ angular.module('prosperenceApp')
       'style': 'font-size:18px;',
       'shown': true
     }, {
+      'title': 'About',
+      'link': 'about',
+      'shown': true
+    }, {
       'title': 'Start Planning',
       'link': 'plan-builder.start',
       'shown': '!getCurrentUser().planBuilderComplete',
@@ -24,15 +28,11 @@ angular.module('prosperenceApp')
       'shown': 'isLoggedIn()',
       'abstractLink': 'dashboard'
     }, {
-      'title': 'University of Prosperence',
+      'title': 'University',
       'icon': 'fa fa-graduation-cap',
       'link': 'university.welcome',
       'shown': true,
       'abstractLink': 'university'
-    }, {
-      'title': 'About',
-      'link': 'about',
-      'shown': true
     }, ];
 
     $scope.logout = function() {
