@@ -1,15 +1,3 @@
-### The Easy Way
-
-If you are using Sublime as your IDE, install and setup the [JsFormat](https://packagecontrol.io/packages/JsFormat) package as follows:
-
-1. Open Package Controll (⌘⇧p) and install JsFormat. 
-1. Add the following line in the user settings found in: Preferences > Package Settings > JsFormat > Settings - User
-
-        ```javascript
-        {
-          format_on_save: true
-        }
-
 ### Indentation
 
 When writing any block of code that is logically subordinate to the line immediately before and after it, that block should be indented two spaces more than the surrounding lines
@@ -41,6 +29,22 @@ When writing any block of code that is logically subordinate to the line immedia
         if(condition){
           action();
           }
+        ```
+
+    * In the event of promises or dependents that are not inside the scope of the previous line, there should be no difference in their indentation
+
+        ```javascript
+        // good:
+        angular.module('rockridge')
+        .controller('SomeCtrl', function($scope) {
+          //
+        });
+
+        // bad:
+        angular.module('rockridge')
+          .controller('SomeCtrl', function($scope) {
+            //
+          });
         ```
 
     * No two lines should ever have more or less than 2 spaces difference in their indentation. Any number of mistakes in the above rules could lead to this, but one example would be:
@@ -82,7 +86,7 @@ When writing any block of code that is logically subordinate to the line immedia
     var animal = ['cat', 'dog', 'fish'];
     ```
 
-* Name your variables after their purpose, not their structure
+* Name your variables after their purpose, not their structure.
 
     ```javascript
     // good:
@@ -90,6 +94,19 @@ When writing any block of code that is logically subordinate to the line immedia
 
     // bad:
     var array = ['cat', 'dog', 'fish'];
+    ```
+
+* When compound or complex names are needed, use camelCase.
+
+    ```javascript
+    // good:
+    var grossAnnualIncome = 123456;
+
+    // bad:
+    var gross-annual-income = 123456;
+    
+    // bad:
+    var gross_annual_income = 123456;
     ```
 
 
@@ -141,20 +158,10 @@ When writing any block of code that is logically subordinate to the line immedia
     }
     ```
 
-* Don't use function statements for the entire first half of the course. They introduce a slew of subtle new rules to how the language behaves, and without a clear benefit. Once you and all your peers are expert level in the second half, you can start to use the more (needlessly) complicated option if you like.
-
-    ```javascript
-    // good:
-    var go = function(){...};
-
-    // bad:
-    function stop(){...};
-    ```
-
 
 ### Semicolons
 
-* Don't forget semicolons at the end of lines
+* Don't forget semicolons at the end of lines.
 
   ```javascript
   // good:
@@ -165,7 +172,6 @@ When writing any block of code that is logically subordinate to the line immedia
   ```
 
 * Semicolons are not required at the end of statements that include a block--i.e. `if`, `for`, `while`, etc.
-
 
   ```javascript
   // good:
@@ -232,42 +238,25 @@ When writing any block of code that is logically subordinate to the line immedia
 * Put `else` and `else if` statements on the same line as the ending curly brace for the preceding `if` block
     ```javascript
     // good:
-    if(condition){
+    if(condition) {
       response();
-    }else{
+    } else {
       otherResponse();
     }
 
     // bad:
-    if(condition){
+    if(condition) {
       response();
     }
-    else{
+    else {
       otherResponse();
     }
     ```
-
 
 
 ### Working with files
 
 * Do not end a file with any character other than a newline.
-* Don't use the -a or -m flags for `git commit` for the first half of the class, since they conceal what is actually happening (and do slightly different things than most people expect).
-
-    ```shell
-    # good:
-    > git add .
-    > git commit
-    [save edits to the commit message file using the text editor that opens]
-
-    # bad:
-    > git commit -a
-    [save edits to the commit message file using the text editor that opens]
-
-    # bad:
-    > git add .
-    > git commit -m "updated algorithm"
-    ```
 
 
 ### Opening or closing too many blocks at once
