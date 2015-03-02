@@ -6,14 +6,10 @@
 'use strict';
 
 var User = require('../api/user/user.model');
+var testUser = require('../../tests/testUser');
 
 User.find({}).remove(function() {
-  User.create({
-    provider: 'local',
-    name: 'Test User',
-    email: 'test@test.com',
-    password: 'test'
-  }, {
+  User.create(testUser, {
     provider: 'local',
     role: 'admin',
     name: 'Admin',
