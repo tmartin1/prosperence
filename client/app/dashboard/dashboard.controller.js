@@ -22,20 +22,16 @@ angular.module('prosperenceApp')
       active: true
     }, {
       title: 'Budget',
-      view: getPath('my-plan/budget/budget.html'),
-      active: false
+      view: getPath('my-plan/budget/budget.html')
     }, {
       title: 'Insurance',
-      view: getPath('my-plan/insurance/insurance.html'),
-      active: false
+      view: getPath('my-plan/insurance/insurance.html')
     }, {
       title: 'Retirement',
-      view: getPath('my-plan/retire/retire.html'),
-      active: false
+      view: getPath('my-plan/retire/retire.html')
     }, {
       title: 'Add More',
-      view: getPath('my-plan/more/more.html'),
-      active: false
+      view: getPath('my-plan/more/more.html')
     }]
   }, {
     title: 'Progress',
@@ -56,12 +52,10 @@ angular.module('prosperenceApp')
       active: true
     }, {
       title: 'Notifications',
-      view: getPath('settings/notifications/notifications.html'),
-      active: false
+      view: getPath('settings/notifications/notifications.html')
     }, {
       title: 'Security',
-      view: getPath('settings/security/security.html'),
-      active: false
+      view: getPath('settings/security/security.html')
     }]
   }];
 
