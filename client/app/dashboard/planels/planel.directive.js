@@ -1,6 +1,6 @@
 'use strict';
 
-angular.module('rockridge')
+angular.module('prosperenceApp')
 .directive('planel', function() {
   return {
     restrict: 'E',

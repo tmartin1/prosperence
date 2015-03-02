@@ -35,13 +35,13 @@ When writing any block of code that is logically subordinate to the line immedia
 
         ```javascript
         // good:
-        angular.module('rockridge')
+        angular.module('prosperenceApp')
         .controller('SomeCtrl', function($scope) {
           //
         });
 
         // bad:
-        angular.module('rockridge')
+        angular.module('prosperenceApp')
           .controller('SomeCtrl', function($scope) {
             //
           });
@@ -59,7 +59,7 @@ When writing any block of code that is logically subordinate to the line immedia
         ```
 
     * Especially with Angular, HTML attribute lists can get quite lengthly. If an HTML element attribute list is getting too long (typically if it has more than 3 attributes), add indented line breaks to make the file more readable.
-    
+
         ```html
         <!-- good -->
         <input type="password"
@@ -68,7 +68,7 @@ When writing any block of code that is logically subordinate to the line immedia
                ng-model="user.newPassword"
                ng-minlength="3"
                required />
-        
+
         <!-- bad -->
         <input type="password" name="newPassword" class="form-control" ng-model="user.newPassword" ng-minlength="3" required />
         ```
@@ -117,7 +117,7 @@ When writing any block of code that is logically subordinate to the line immedia
 
     // bad:
     var gross-annual-income = 123456;
-    
+
     // bad:
     var gross_annual_income = 123456;
     ```
