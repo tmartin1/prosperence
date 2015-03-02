@@ -58,7 +58,20 @@ When writing any block of code that is logically subordinate to the line immedia
         }});
         ```
 
-    * use sublime's arrow collapsing as a guide. do the collapsing lines seem like they should be 'contained' by the line with an arrow on it?
+    * Especially with Angular, HTML attribute lists can get quite lengthly. If an HTML element attribute list is getting too long (typically if it has more than 3 attributes), add indented line breaks to make the file more readable.
+    
+        ```html
+        <!-- good -->
+        <input type="password"
+               name="newPassword"
+               class="form-control"
+               ng-model="user.newPassword"
+               ng-minlength="3"
+               required />
+        
+        <!-- bad -->
+        <input type="password" name="newPassword" class="form-control" ng-model="user.newPassword" ng-minlength="3" required />
+        ```
 
 
 ### Variable names
