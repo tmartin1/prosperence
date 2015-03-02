@@ -1,16 +1,16 @@
 'use strict';
 
-describe('Controller: RiskAnalysisCtrl', function () {
+describe('Controller: SetGoalsCtrl', function () {
 
   // load the controller's module
   beforeEach(module('prosperenceApp'));
 
-  var RiskAnalysisCtrl, scope;
+  var SetGoalsCtrl, scope;
 
   // Initialize the controller and a mock scope
   beforeEach(inject(function ($controller, $rootScope) {
     scope = $rootScope.$new();
-    RiskAnalysisCtrl = $controller('RiskAnalysisCtrl', {
+    SetGoalsCtrl = $controller('SetGoalsCtrl', {
       $scope: scope
     });
   }));

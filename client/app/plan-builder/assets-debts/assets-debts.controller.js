@@ -1,6 +1,6 @@
 'use strict';
 
 angular.module('prosperenceApp')
-  .controller('NwsCtrl', function ($scope) {
+  .controller('AssetsDebtsCtrl', function ($scope) {
     $scope.message = 'Hello';
   });

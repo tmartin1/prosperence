@@ -24,23 +24,31 @@ angular.module('prosperenceApp')
     templateUrl: 'app/plan-builder/basics/basics.html',
     controller: 'BasicsCtrl',
     data: {
-      title: 'General Info'
+      title: 'Personal Info'
     }
   })
-  .state('plan-builder.nws', {
-    url: '/nws',
-    templateUrl: 'app/plan-builder/nws/nws.html',
-    controller: 'NwsCtrl',
+  .state('plan-builder.assets-debts', {
+    url: '/assets-debts',
+    templateUrl: 'app/plan-builder/assets-debts/assets-debts.html',
+    controller: 'AssetsDebtsCtrl',
     data: {
-      title: 'Net Worth Calculator'
+      title: 'Net Worth'
     }
   })
-  .state('plan-builder.msa', {
-    url: '/msa',
-    templateUrl: 'app/plan-builder/msa/msa.html',
-    controller: 'MsaCtrl',
+  .state('plan-builder.cash-flow', {
+    url: '/cash-flow',
+    templateUrl: 'app/plan-builder/cash-flow/cash-flow.html',
+    controller: 'CashFlowCtrl',
     data: {
-      title: 'Budget Analysis'
+      title: 'Cash Flow'
+    }
+  })
+  .state('plan-builder.insurances', {
+    url: '/insurances',
+    templateUrl: 'app/plan-builder/insurances/insurances.html',
+    controller: 'InsurancesCtrl',
+    data: {
+      title: 'Insurances'
     }
   })
   .state('plan-builder.tax', {
@@ -48,23 +56,15 @@ angular.module('prosperenceApp')
     templateUrl: 'app/plan-builder/tax/tax.html',
     controller: 'TaxProjectionCtrl',
     data: {
-      title: 'Income Tax Projection'
+      title: 'Tax Questions'
     }
   })
-  .state('plan-builder.risk', {
-    url: '/risk',
-    templateUrl: 'app/plan-builder/risk/risk.html',
-    controller: 'RiskAnalysisCtrl',
+  .state('plan-builder.goals', {
+    url: '/goals',
+    templateUrl: 'app/plan-builder/goals/goals.html',
+    controller: 'SetGoalsCtrl',
     data: {
-      title: 'Risk Analysis'
-    }
-  })
-  .state('plan-builder.retire', {
-    url: '/retire',
-    templateUrl: 'app/plan-builder/retire/retire.html',
-    controller: 'RetireCtrl',
-    data: {
-      title: 'Retirement Projection'
+      title: 'Goals'
     }
   });
 });
