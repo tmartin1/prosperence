@@ -24,6 +24,18 @@ angular.module('prosperenceApp')
     controller: 'MyPlanCtrl',
     authenticate: true
   })
+  .state('dashboard.progress', {
+    url: '/progress',
+    templateUrl: 'app/dashboard/progress/progress.html',
+    controller: 'ProgressCtrl',
+    authenticate: true
+  })
+  .state('dashboard.university', {
+    url: '/university',
+    templateUrl: 'app/dashboard/university/university.html',
+    controller: 'MyUniversityCtrl',
+    authenticate: true
+  })
   .state('dashboard.settings', {
     url: '/settings',
     templateUrl: 'app/dashboard/settings/settings.html',

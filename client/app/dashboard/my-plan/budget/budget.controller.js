@@ -1,6 +1,6 @@
 'use strict';
 
 angular.module('prosperenceApp')
-.controller('MoreCtrl', function ($scope) {
+.controller('BudgetCtrl', function ($scope) {
   //
 });

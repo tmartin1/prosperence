@@ -3,7 +3,7 @@
 angular.module('prosperenceApp')
 .controller('DashboardCtrl', function ($scope, $state) {
   // Defines initial view conditions for my-plan and settings.
-  $scope.myPlanView = $scope.myPlanView || getPath('my-plan/nws/nws.html');
+  $scope.myPlanView = $scope.myPlanView || getPath('my-plan/net-worth/net-worth.html');
   $scope.settingsView = $scope.settingsView || getPath('settings/basic/basic.html');
 
   // Sidebar information.
@@ -18,11 +18,11 @@ angular.module('prosperenceApp')
     setView: 'myPlanView',
     submenu: [{
       title: 'Net Worth',
-      view: getPath('my-plan/nws/nws.html'),
+      view: getPath('my-plan/net-worth/net-worth.html'),
       active: true
     }, {
       title: 'Budget',
-      view: getPath('my-plan/msa/msa.html'),
+      view: getPath('my-plan/budget/budget.html'),
       active: false
     }, {
       title: 'Insurance',
@@ -37,6 +37,14 @@ angular.module('prosperenceApp')
       view: getPath('my-plan/more/more.html'),
       active: false
     }]
+  }, {
+    title: 'Progress',
+    link: 'dashboard.progress',
+    icon: ''
+  }, {
+    title: 'My University',
+    link: 'dashboard.university',
+    icon: ''
   }, {
     title: 'Settings',
     link: 'dashboard.settings',
@@ -56,7 +64,7 @@ angular.module('prosperenceApp')
       active: false
     }]
   }];
-  
+
   // Check and set submenu viewability on load/state enter.
   for (var i=0; i<$scope.sidebar.length; i++) {
     if ($state.current.name === $scope.sidebar[i].link && $scope.sidebar[i].submenu) {
