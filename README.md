@@ -1,7 +1,7 @@
 # Prosperence
 The goal of Prosperence is to provide a reliable resource for individuals to build a comprehensive financial plan independently, confidently, and completely free.
 
-[![Circle CI](https://circleci.com/gh/prosperence/prosperence/tree/master.svg?style=svg)](https://circleci.com/gh/prosperence/prosperence/1) [![Stories in Ready](https://badge.waffle.io/prosperence/prosperence.svg?label=ready&title=Ready)](http://waffle.io/prosperence/prosperence)
+[![Circle CI](https://circleci.com/gh/prosperence/prosperence/tree/master.svg?style=svg)](https://circleci.com/gh/prosperence/prosperence/1) [![Coverage Status](https://coveralls.io/repos/prosperence/prosperence/badge.svg)](https://coveralls.io/r/prosperence/prosperence) [![Stories in Ready](https://badge.waffle.io/prosperence/prosperence.svg?label=ready&title=Ready)](http://waffle.io/prosperence/prosperence)
 
 ## Table of Contents
 1. [Summary](#summary)
