@@ -1,12 +1,12 @@
 # Prosperence
 The goal of Prosperence is to provide a reliable resource for individuals to build a comprehensive financial plan independently, confidently, and completely free.
 
-[![Circle CI](https://circleci.com/gh/prosperence/prosperence/tree/master.svg?style=svg)](https://circleci.com/gh/prosperence/prosperence/1)
+[![Circle CI](https://circleci.com/gh/prosperence/prosperence/tree/master.svg?style=svg)](https://circleci.com/gh/prosperence/prosperence/1) [![Stories in Ready](https://badge.waffle.io/prosperence/prosperence.svg?label=ready&title=Ready)](http://waffle.io/prosperence/prosperence)
 
 ## Table of Contents
 1. [Summary](#summary)
 1. [Prosperence (beta)](#prosperence-beta)
-1. [University of Prosperence](#university of prosperence)
+1. [University of Prosperence](#university-of-prosperence)
 1. [Team](#team)
 1. [Requirements](#requirements)
 1. [Development](#development)
