@@ -27,20 +27,36 @@ angular.module('prosperenceApp')
       title: 'Personal Info'
     }
   })
-  .state('plan-builder.assets-debts', {
-    url: '/assets-debts',
-    templateUrl: 'app/plan-builder/assets-debts/assets-debts.html',
-    controller: 'AssetsDebtsCtrl',
+  .state('plan-builder.assets', {
+    url: '/assets',
+    templateUrl: 'app/plan-builder/assets/assets.html',
+    controller: 'AssetsCtrl',
     data: {
-      title: 'Net Worth'
+      title: 'Assets'
     }
   })
-  .state('plan-builder.cash-flow', {
-    url: '/cash-flow',
-    templateUrl: 'app/plan-builder/cash-flow/cash-flow.html',
-    controller: 'CashFlowCtrl',
+  .state('plan-builder.debts', {
+    url: '/debts',
+    templateUrl: 'app/plan-builder/debts/debts.html',
+    controller: 'DebtsCtrl',
     data: {
-      title: 'Cash Flow'
+      title: 'Debts'
+    }
+  })
+  .state('plan-builder.spending', {
+    url: '/spending',
+    templateUrl: 'app/plan-builder/spending/spending.html',
+    controller: 'SpendingCtrl',
+    data: {
+      title: 'Monthly Spending'
+    }
+  })
+  .state('plan-builder.savings', {
+    url: '/savings',
+    templateUrl: 'app/plan-builder/savings/savings.html',
+    controller: 'SavingsCtrl',
+    data: {
+      title: 'Savings Contributions'
     }
   })
   .state('plan-builder.insurances', {

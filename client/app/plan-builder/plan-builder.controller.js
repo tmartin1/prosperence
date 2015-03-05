@@ -5,6 +5,8 @@ angular.module('prosperenceApp')
   $scope.isCollapsed = true;
 
   $scope.user = Auth.getCurrentUser() || {};
+  $scope.user.personal = $scope.user.personal || {};
+  $scope.user.plan = $scope.user.plan || {};
 
   // List of states for location questions.
   $scope.states = ['AK', 'AL', 'AR', 'AZ', 'CA', 'CO', 'CT', 'DC', 'DE', 'FL',
@@ -17,8 +19,10 @@ angular.module('prosperenceApp')
   var order = [
     'plan-builder.start',
     'plan-builder.basics',
-    'plan-builder.assets-debts',
-    'plan-builder.cash-flow',
+    'plan-builder.assets',
+    'plan-builder.debts',
+    'plan-builder.spending',
+    'plan-builder.savings',
     'plan-builder.insurances',
     'plan-builder.tax',
     'plan-builder.goals'
