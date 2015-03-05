@@ -1,0 +1,42 @@
+<!-- For table entry questions -->
+<form class="ui form">
+  <table ng-class="{ 'two fields': query.fields.length === 2,
+                     'three fields': query.fields.length === 3,
+                     'four fields': query.fields.length === 4,
+                     'five fields': query.fields.length === 5 }">
+
+    <!-- Build column headers -->
+    <tr>
+      <th ng-class="{ 'four wide': field.type === 'number', 'field': true }"
+          ng-repeat="field in query.fields"
+          style="text-align:{{field.textAlign}}">
+        <label>{{ field.label }}</label>
+      </th>
+      <th></th> <!-- Spaceholder for row delete button -->
+    </tr>
+
+    <!-- Load existing items if present -->
+    <tr ng-repeat="items in plan[query.bind]">
+      <td ng-class="{ 'three wide': field.type === 'number', 'field': true }"
+          ng-repeat="field in query.fields">
+
+        <input ng-model="plan[query.bind][$parent.$index][field.label]"
+               type="{{field.type}}"
+               style="margin:5px auto; text-align:{{field.textAlign}}"
+               ng-required="{{field.required}}"/>
+      </td>
+      <td>
+        <button class="mini circular ui icon button"
+                ng-click="deleteRow($index, query.bind)">
+                <i class="fa fa-times"></i>
+        </button>
+      </td>
+    </tr>
+  </table>
+</form><br>
+
+<!-- Allow new items to be added -->
+<button class="ui button"
+        ng-click="addRow(query.bind)">
+        Add Item
+</button>
