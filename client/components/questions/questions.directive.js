@@ -12,7 +12,7 @@ angular.module('prosperenceApp')
     restrict: 'E',
     scope: {
       queries: '=',
-      planGroup: '=',
+      plangroup: '=',
       sections: '='
     },
     controller: function($scope) {
@@ -39,29 +39,31 @@ angular.module('prosperenceApp')
     transclude: true,
     scope: {
       query: '=',
-      planGroup: '=',
+      plangroup: '=',
       sections: '='
     },
     controller: function($scope) {
-      // If query is binding to a nested object, recursively track through plan to assign binding.
-      var setBinding = function(path) {
-        if (!$scope.planGroup[path[0]]) $scope.planGroup[path[0]] = {};
-        $scope.planGroup = $scope.planGroup[path[0]];
-        path.splice(0, 1);
-        if (path.length) setBinding(path);
-      };
-      if ($scope.query.bind.split('.').length > 1) {
-        var temp = $scope.query.bind.split('.');
-        setBinding(temp);
-      }
-
-      // If planGroup is undefined, then initialize it as an empty object.
-      $scope.planGroup = $scope.planGroup || {};
-      $scope.planGroup[$scope.query.bind] = $scope.planGroup[$scope.query.bind] || {};
+      console.log($scope.plangroup);
+      // // If query is binding to a nested object, recursively track through plan to assign binding.
+      // var setBinding = function(path) {
+      //   if (!$scope.plangroup[path[0]]) $scope.plangroup[path[0]] = {};
+      //   $scope.plangroup = $scope.plangroup[path[0]];
+      //   path.splice(0, 1);
+      //   if (path.length > 1) setBinding(path);
+      //   else $scope.query.bind = path[0];
+      // };
+      //
+      // if ($scope.query.bind.split('.').length > 1) {
+      //   // If plangroup is undefined, then initialize it as an empty object.
+      //   if ($scope.plangroup === undefined) $scope.plangroup = {};
+      //   // Set binding to nested property.
+      //   var temp = $scope.query.bind.split('.');
+      //   setBinding(temp);
+      // }
 
       // If a binding is defined for a multi question object,
       if ($scope.query.type === 'multi' && $scope.query.bind) {
-        $scope.planGroup = $scope.planGroup[$scope.query.bind];
+        $scope.plangroup = $scope.plangroup[$scope.query.bind];
       }
 
       var makeRow = function(){
@@ -73,11 +75,13 @@ angular.module('prosperenceApp')
       };
 
       $scope.addRow = function(property) {
-        $scope.planGroup[property] = $scope.planGroup[property] || [];
-        $scope.planGroup[property].push(makeRow());
+        console.log($scope.plangroup)
+        console.log(property)
+        $scope.plangroup[property] = $scope.plangroup[property] || [];
+        $scope.plangroup[property].push(makeRow());
       };
       $scope.deleteRow = function(index, property) {
-        $scope.planGroup[property].splice(index, 1);
+        $scope.plangroup[property].splice(index, 1);
       };
       $scope.isEnabled = function(title){
         return $scope.sections.enabled[title];
@@ -88,7 +92,7 @@ angular.module('prosperenceApp')
 
       // If property is empty and input type is a table, start with an empty row.
       if ($scope.query.type === 'table') {
-        $scope.planGroup[$scope.query.bind] = $scope.planGroup[$scope.query.bind] || [makeRow()];
+        $scope.plangroup[$scope.query.bind] = $scope.plangroup[$scope.query.bind] || [makeRow()];
       }
     },
     templateUrl: './components/questions/questionTemplate.html'

@@ -1,7 +1,7 @@
 <!-- For multi-question slides -->
 <!-- TODO: Currently, multi can only support basic input types (text, date, etc. - NOT select, checkboxes, radio). Refacor so that multi can handle any type of input request -->
 
-<div ng-repeat="item in query.subqueries" ng-if="planGroup[item.condition] === 'true' || item.condition === undefined">
+<div ng-repeat="item in query.subqueries" ng-if="plangroup[item.condition] === 'true' || item.condition === undefined">
   <label>{{ item.question }}</label>
   <!-- TODO: For select, checkbox, radio, button, table, multi, and review questions -->
   <!-- <div
@@ -11,7 +11,7 @@
   </div> -->
 
   <!-- For select option questions -->
-  <select ng-if="item.type === 'select'" ng-model="planGroup[item.bind]">
+  <select ng-if="item.type === 'select'" ng-model="plangroup[item.bind]">
     <option ng-repeat="option in item.options" value="{{option.value}}">{{ option.text }}</option>
   </select>
 
@@ -34,7 +34,7 @@
         </tr>
 
         <!-- Load existing items if present -->
-        <tr ng-repeat="subitem in planGroup[item.bind]">
+        <tr ng-repeat="subitem in plangroup[item.bind]">
           <td ng-class="{ 'three wide': field.type === 'number', 'field': true }"
               ng-repeat="field in item.fields"
               style="padding:5px">
@@ -53,15 +53,15 @@
     </form><br>
 
     <!-- Allow new items to be added -->
-    <button class="ui button"
+    <button class="btn btn-primary"
             ng-click="addRow(item.bind)">
-            Add Item
+            Add More
     </button>
   </div>
 
   <!-- For everything else -->
   <input ng-if="['select','checkbox','radio','button','table','multi','review'].indexOf(item.type) === -1"
          type="{{item.type}}"
-         ng-model="planGroup[item.bind]"/>
+         ng-model="plangroup[item.bind]"/>
   <br><br>
 </div>

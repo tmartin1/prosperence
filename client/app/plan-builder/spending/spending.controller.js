@@ -5,6 +5,19 @@ angular.module('prosperenceApp')
 
   // Array of question objects to be asked in the 'Cash Flow' section.
   $scope.queries = [{
+    title: 'Income Information',
+    type: 'multi',
+    subqueries: [{
+      question: 'What is your Gross Annual Income?',
+      type: 'number',
+      bind: 'grossAnnualIncome'
+    }, {
+      question: 'What is your spouse\'s Gross Annual Income?',
+      type: 'number',
+      bind: 'spouseGrossAnnualIncome',
+      condition: 'maritalStatus'
+    }]
+  }, {
     title: 'Payroll Deductions',
     type: 'multi',
     bind: 'expenses',

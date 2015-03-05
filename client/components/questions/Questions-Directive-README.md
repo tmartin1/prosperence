@@ -5,7 +5,7 @@ The Questions directive is a way to ensure uniform presentation of questions to 
 From the html template where this directive is needed, it can be implemented as such:
 
 ```html
-<questions queries="queries" plan-group="plan.assets"></questions>
+<questions queries="queries" plangroup="user.plan.assets"></questions>
 ```
 
 <code>queries</code> is a collection of question objects, in this case (from plan-builder states) this refers to <code>$scope.queries</code> from the respective states' controller.

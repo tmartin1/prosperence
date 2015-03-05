@@ -9,15 +9,14 @@ angular.module('prosperenceApp')
   $scope.queries = [{
     title: 'Personal Information',
     type: 'multi',
-    bind: 'personal',
     subqueries: [{
       question: 'What is your first name?',
       type: 'text',
-      bind: 'firstname'
+      bind: 'firstName'
     }, {
       question: 'What is your last name?',
       type: 'text',
-      bind: 'lastname'
+      bind: 'lastName'
     }, {
       question: 'What is your date of birth?',
       type: 'date',
@@ -26,11 +25,10 @@ angular.module('prosperenceApp')
   }, {
     title: 'Family',
     type: 'multi',
-    bind: 'personal',
     subqueries: [{
       question: 'Are you maried?',
       type: 'select',
-      bind: 'maritalStatus',
+      bind: 'married',
       options: [{
         text: 'Yes',
         value: true
@@ -42,30 +40,30 @@ angular.module('prosperenceApp')
       question: 'What is your spouse\'s first name?',
       type: 'text',
       bind: 'spouseFirstName',
-      condition: 'maritalStatus'
+      condition: 'married'
     }, {
       question: 'What is your spouse\'s last name?',
       type: 'text',
       bind: 'spouseLastName',
-      condition: 'maritalStatus'
+      condition: 'married'
     }, {
       question: 'What is your spouce\'s date of birth?',
       type: 'date',
       bind: 'spouseBirthdate',
-      condition: 'maritalStatus'
+      condition: 'married'
     }, {
       // Removed spouse resident questions for now, cann add back later.
       // 	question: 'In which city does ' + $scope.plan.spouseFirstName +
       // 		' live?',
       // 	type: 'text',
       // 	bind: 'spouseCityResident',
-      // 	condition: 'maritalStatus'
+      // 	condition: 'married'
       // }, {
       // 	question: 'In which state does ' + $scope.plan.spouseFirstName +
       // 		' live?',
       // 	type: 'select',
       // 	bind: 'spouseStateResident',
-      // 	condition: 'maritalStatus',
+      // 	condition: 'married',
       // 	options: $scope.states
       // }, {
       question: 'Do you have children?',
@@ -93,17 +91,16 @@ angular.module('prosperenceApp')
       condition: 'hasChildren'
     }]
   }, {
-    title: 'Work and Residence',
+    title: 'Residence and Work Location',
     type: 'multi',
-    bind: 'personal',
     subqueries: [{
       question: 'In which city do you live?',
       type: 'text',
-      bind: 'cityResident'
+      bind: 'residentAddress.city'
     }, {
       question: 'In which state do you live?',
       type: 'select',
-      bind: 'stateResident',
+      bind: 'residentAddress.state',
       options: $scope.states
     }, {
       question: 'Do you work in a different state than you live?',
@@ -119,23 +116,14 @@ angular.module('prosperenceApp')
     }, {
       question: 'In which city do you work?',
       type: 'text',
-      bind: 'cityWork',
+      bind: 'workAddress.city',
       condition: 'sameWorkResidence'
     }, {
       question: 'In which state do you work?',
       type: 'select',
-      bind: 'stateWork',
+      bind: 'workState',
       options: $scope.states,
-      condition: 'sameWorkResidence'
-    }, {
-      question: 'What is your Gross Annual Income?',
-      type: 'number',
-      bind: 'grossAnnualIncome'
-    }, {
-      question: 'What is your spouse\'s Gross Annual Income?',
-      type: 'number',
-      bind: 'spouseGrossAnnualIncome',
-      condition: 'maritalStatus'
+      condition: 'workAddress.state'
     }]
   }];
 

@@ -79,7 +79,54 @@ angular.module('prosperenceApp')
       queries[i+1].isOpen = true;
       queries[i].isOpen = false;
     }
+    console.log($scope.user.plan);
+  };
 
+  // Function to pass to directives that maintains closure access to $scope.user.plan.
+  // In the HTML this would be used like: <div ng-model="setBinding('[PROPERTY]')"></div>
+  var binding = $scope.user;
+  var setBinding = function(target) {
+    var property;
+
+    // If binding is a single property on the user, then simply apply it.
+    var path = target.split('.');
+    if (path.length === 0) return binding[target];
+
+    // To set the binding for nested objects, accepts an array as a parameter.
+    var setNestedBinding = function(path) {
+      // If target group doesn't exist, create it as an empty object.
+      if (!binding[path[0]]) binding[path[0]] = {};
+      binding = binding[path.shift()];
+      if (path.length > 0) setBinding(path);
+    };
+    setNestedBinding(path);
+
+    return binding;
+  };
+
+  $scope.testBinding = function() {
+    console.log($scope.user);
+    var temp = setBinding('plan.debts.creditCards');
+
+    console.log('$scope.user.plan.debts.creditCards');
+    console.log($scope.user.plan.debts.creditCards);
+    console.log('');
+
+    console.log('temp');
+    console.log(temp);
+    console.log('');
+
+    // Push to $scope.user.plan.debts.creditCards
+    $scope.user.plan.debts.creditCards.push({ name: 'VISA', rate: 10.99, amount: 5000 });
+
+    // Relog
+    console.log('$scope.user.plan.debts.creditCards');
+    console.log($scope.user.plan.debts.creditCards);
+    console.log('');
+
+    console.log('temp after new card added');
+    console.log(temp);
+    console.log('');
   };
 
   // Update page heading and navbar on state change within plan-builder.
