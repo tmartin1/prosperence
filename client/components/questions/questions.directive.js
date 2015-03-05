@@ -43,6 +43,22 @@ angular.module('prosperenceApp')
       sections: '='
     },
     controller: function($scope) {
+      // If query is binding to a nested object, recursively track through plan to assign binding.
+      var setBinding = function(path) {
+        if (!$scope.planGroup[path[0]]) $scope.planGroup[path[0]] = {};
+        $scope.planGroup = $scope.planGroup[path[0]];
+        path.splice(0, 1);
+        if (path.length) setBinding(path);
+      };
+      if ($scope.query.bind.split('.').length > 1) {
+        var temp = $scope.query.bind.split('.');
+        setBinding(temp);
+      }
+
+      // If planGroup is undefined, then initialize it as an empty object.
+      $scope.planGroup = $scope.planGroup || {};
+      $scope.planGroup[$scope.query.bind] = $scope.planGroup[$scope.query.bind] || {};
+
       // If a binding is defined for a multi question object,
       if ($scope.query.type === 'multi' && $scope.query.bind) {
         $scope.planGroup = $scope.planGroup[$scope.query.bind];
