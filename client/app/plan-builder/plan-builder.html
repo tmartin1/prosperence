@@ -37,8 +37,8 @@
 <!-- Plan builder navigation and progress bar -->
 <div class="container">
   <center>
-    <a class="btn btn-lg btn-default" ng-if="!!previous" ng-href="{{previous}}"><i class="fa fa-chevron-left"></i> Previous</a>
-    <a class="btn btn-lg btn-default" ng-if="!!next" ng-href="{{next}}">Next <i class="fa fa-chevron-right"></i></a>
+    <a class="btn btn-lg btn-default" ng-click="previous()"><i class="fa fa-chevron-left"></i> Previous</a>
+    <a class="btn btn-lg btn-default" ng-click="next()">Next <i class="fa fa-chevron-right"></i></a>
     <!-- <a class="btn btn-lg btn-default" ng-if="!!previous" ng-click="previous()">Previous</a> -->
     <!-- <button class="btn btn-lg btn-default" ng-if="!!next" ng-click="next()">Next</button> -->
     <a class="btn btn-lg btn-default" ng-if="!next">Submit</a>
