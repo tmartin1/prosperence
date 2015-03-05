@@ -5,7 +5,10 @@ angular.module('prosperenceApp', [
   'ngResource',
   'ngSanitize',
   'ui.router',
-  'ui.bootstrap'
+  'ui.bootstrap',
+  'ui.select',
+  'angularUtils.directives.dirPagination',
+  'LocalStorageModule'
 ])
 .config(function($stateProvider, $urlRouterProvider, $locationProvider, $httpProvider) {
   $urlRouterProvider
