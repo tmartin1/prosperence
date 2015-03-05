@@ -1,0 +1,17 @@
+<!-- For checkbox option questions -->
+<div ng-repeat="option in query.options">
+  <div class="ui checkbox">
+
+    <input type="checkbox"
+           value="{{option.value}}"
+           id="chkbx-{{option}}"
+           name="{{query.bind}}[]"
+           ng-checked="{{query.bind}}.indexOf('{{option}}') > -1">
+
+    <label for="chkbx-{{option}}">
+      {{ option.text }}
+    </label>
+
+    <br>
+  </div>
+</div>

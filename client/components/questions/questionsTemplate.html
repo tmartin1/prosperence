@@ -1,0 +1,23 @@
+<!-- HTML Template for Questions, template builder for individual questions -->
+
+<!-- ****************************************************************************
+// Pease read the Question-Directive-README.md before editing this file.
+**************************************************************************** -->
+
+<accordion close-others="true" style="margin-top:-14px">
+
+  <accordion-group ng-repeat="query in queries"
+                   heading="{{query.title}}"
+                   is-open="query.isOpen"
+                   is-disabled="!query.isEnabled">
+
+    <question query="query"
+              plan-group="planGroup"
+              sections="sections"
+              ng-click="select(query)"
+              ng-model="planGroup[query.bind]">
+    </question>
+
+  </accordion-group>
+
+</accordion>
