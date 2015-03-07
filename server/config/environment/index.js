@@ -2,6 +2,12 @@
 
 var path = require('path');
 var _ = require('lodash');
+var local = {};
+try {
+  local = require('./../local.env.js');
+} catch(err) {
+  //do nothing
+}
 
 function requiredProcessEnv(name) {
   if(!process.env[name]) {
@@ -40,6 +46,11 @@ var all = {
       }
     }
   },
+
+  cloudsearch: {
+    accessKeyId: process.env.CLOUDSEARCH_AMAZON_ID || local.CLOUDSEARCH_AMAZON_ID,
+    secretAccessKey: process.env.CLOUDSEARCH_AMAZON_SECRET || local.CLOUDSEARCH_AMAZON_SECRET
+  }
 
 };
 
