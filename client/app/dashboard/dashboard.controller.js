@@ -1,7 +1,8 @@
 'use strict';
 
 angular.module('prosperenceApp')
-.controller('DashboardCtrl', function ($scope, $state) {
+.controller('DashboardCtrl', function ($scope, $state, CalcsService, Auth) {
+
   // Defines initial view conditions for my-plan and settings.
   $scope.myPlanView = $scope.myPlanView || getPath('my-plan/net-worth/net-worth.html');
   $scope.settingsView = $scope.settingsView || getPath('settings/basic/basic.html');

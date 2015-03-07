@@ -22,15 +22,15 @@ angular.module('prosperenceApp')
       $http.post('/auth/local', {
         email: user.email,
         password: user.password
-      }).
-      success(function(data) {
+      })
+      .success(function(data) {
         $cookieStore.put('token', data.token);
         currentUser = User.get();
         deferred.resolve(data);
         $state.go('dashboard.overview');
         return cb();
-      }).
-      error(function(err) {
+      })
+      .error(function(err) {
         this.logout();
         deferred.reject(err);
         return cb(err);
@@ -82,6 +82,18 @@ angular.module('prosperenceApp')
       return User.changePassword({ id: currentUser._id }, {
         oldPassword: oldPassword,
         newPassword: newPassword
+      }, function(user) {
+        return cb(user);
+      }, function(err) {
+        return cb(err);
+      }).$promise;
+    },
+
+    updatePlan: function(newPlan, callback) {
+      var cb = callback || angular.noop;
+
+      return User.updatePlan({ id: currentUser._id }, {
+        newPlan: newPlan
       }, function(user) {
         return cb(user);
       }, function(err) {
