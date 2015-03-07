@@ -89,7 +89,7 @@ module.exports = function(grunt) {
       },
       sass: {
         files: [
-          '<%= settings.client %>/{app,components}/**/*.{scss,sass}'
+          '<%= settings.client %>/{app,components}/**/*.{scss,sass}',
         ],
         tasks: ['sass', 'autoprefixer']
       },
@@ -514,7 +514,7 @@ module.exports = function(grunt) {
         options: {
           transform: function(filePath) {
             filePath = filePath.replace('/client/app/', '');
-            filePath = filePath.replace('/client/components/', '');
+            filePath = filePath.replace('/client/components/', '../components/');
             return '@import \'' + filePath + '\';';
           },
           starttag: '// injector',
