@@ -12,7 +12,7 @@
 
   <!-- For select option questions -->
   <select ng-if="item.type === 'select'" ng-model="plangroup[item.bind]">
-    <option ng-repeat="option in item.options" value="{{option.value}}">{{ option.text }}</option>
+    <option ng-repeat="option in item.options" value="{{option.value || option}}">{{ option.text || option }}</option>
   </select>
 
   <!-- For table entry questions -->
