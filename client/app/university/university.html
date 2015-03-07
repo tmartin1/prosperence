@@ -2,18 +2,31 @@
   <div class="container">
     <h1>University of Prosperence</h1>
     <br>
-    <div class="input-group">
-      <input type="text" class="form-control" placeholder="Search for a specific tutorial or other resource.">
-      <span class="input-group-btn">
-        <button class="btn btn-default" type="button">Go!</button>
-      </span>
+
+    <div class="input-group nav-search">
+      <ui-select ng-model="suggestedCourse.selected"
+                 theme="bootstrap"
+                 reset-search-input="true"
+                 on-select="doSearch($item.title)"
+                 title="Search">
+        <ui-select-match placeholder="Search...">{{$select.selected.value}}</ui-select-match>
+        <ui-select-choices repeat="suggestedCourse.title as suggestedCourse in suggestedCourses track by $index"
+                           refresh="doSuggestor($select.search)"
+                           refresh-delay="0">
+          <div ng-bind-html="suggestedCourse.title | highlight: $select.search"></div>
+        </ui-select-choices>
+      </ui-select>
+          <span class="input-group-addon" id="basic-addon1 search" ng-click="doSearch(searchTerm)">
+            <span class="glyphicon glyphicon-search"></span>
+          </span>
     </div>
+
   </div>
 </header>
 
 <div class="container-fluid">
   <div class="row-fluid">
-    
+
     <!--Sidebar content-->
     <div class="col-sm-2">
       <h2>Sidebar</h2>
@@ -29,7 +42,7 @@
         <br>
       </ul>
     </div>
-    
+
     <!--Body content-->
     <div class="col-sm-10">
       <div ui-view></div>
