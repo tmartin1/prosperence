@@ -9,11 +9,10 @@ angular.module('prosperenceApp')
   $scope.user.plan = $scope.user.plan || {};
 
   // List of states for location questions.
-  $scope.states = ['AK', 'AL', 'AR', 'AZ', 'CA', 'CO', 'CT', 'DC', 'DE', 'FL',
-    'GA', 'HI', 'IA', 'ID', 'IL', 'IN', 'KS', 'KY', 'LA', 'MA', 'MD', 'ME',
-    'MI', 'MN', 'MO', 'MS', 'MT', 'NC', 'ND', 'NE', 'NH', 'NJ', 'NM', 'NV',
-    'NY', 'OH', 'OK', 'OR', 'PA', 'RI', 'SC', 'SD', 'TN', 'TX', 'UT', 'VA',
-    'VT', 'WA', 'WI', 'WV', 'WY'];
+  $scope.states = ['AK', 'AL', 'AR', 'AZ', 'CA', 'CO', 'CT', 'DC', 'DE', 'FL', 'GA', 'HI',
+       'IA', 'ID', 'IL', 'IN', 'KS', 'KY', 'LA', 'MA', 'MD', 'ME', 'MI', 'MN', 'MO', 'MS',
+       'MT', 'NC', 'ND', 'NE', 'NH', 'NJ', 'NM', 'NV', 'NY', 'OH', 'OK', 'OR', 'PA', 'RI',
+       'SC', 'SD', 'TN', 'TX', 'UT', 'VA', 'VT', 'WA', 'WI', 'WV', 'WY'];
 
   // Defines the order of how pages are displayed to the user.
   var order = [
@@ -62,29 +61,11 @@ angular.module('prosperenceApp')
   // Move to next required input field, accordion group or section.
   $scope.next = function() {
     // If there is an empty required field, set focus to that input section and display popover.
-    // find the first invalid element
     var firstInvalid = $('.ng-invalid:visible').first();
-    // var firstInvalid = angular.element(elem[0].querySelector('.ng-invalid'))[0];
-    console.log(firstInvalid);
-    // if we find one, set focus
     if (firstInvalid.length > 0) {
-      return firstInvalid.focus();
+      firstInvalid.focus();
+      return;
     }
-
-    // var textboxes = $('input:visible');
-    // var currentBox;
-    // if ($('input:focus').length > 0) {
-    //   currentBox = $('input:focus');
-    // }
-    // var currentIndex = textboxes.index(currentBox);
-    //
-    // // If there is another input fields, move focus to that field.
-    // if (textboxes[currentIndex + 1] !== undefined) {
-    //   console.log('advancing to next input');
-    //   var nextBox = textboxes[currentIndex + 1];
-    //   nextBox.focus();
-    //   return nextBox.select();
-    // }
 
     // If all required sections are filled in, then move to the next section.
     queries = $scope.$$childHead.queries;
