@@ -30,16 +30,51 @@
     <!--Sidebar content-->
     <div class="col-sm-2">
       <h2>Sidebar</h2>
+        <!--<li role="presentation" ui-sref-active="active"><a ui-sref="university.paths">Paths</a></li>-->
+        <!--<li role="presentation" ui-sref-active="active"><a ui-sref="university.resources">Resources</a></li>-->
+        <!--<hr>-->
       <ul class="nav nav-tabs nav-pills nav-stacked">
-        <!-- TODO: Make links disabled until previous sections are completed (allow user to go back and forth between completed sections and the one they're currently working on) -->
+        <!--navigation buttons-->
         <li role="presentation" ui-sref-active="active"><a ui-sref="university.welcome">Welcome</a></li>
-        <li role="presentation" ui-sref-active="active"><a ui-sref="university.paths">Paths</a></li>
-        <li role="presentation" ui-sref-active="active"><a ui-sref="university.courses">All Courses</a></li>
-        <li role="presentation" ui-sref-active="active"><a ui-sref="university.resources">Resources</a></li>
-        <hr>
         <li role="presentation" ui-sref-active="active"><a ui-sref="university.favorites">Favorites</a></li>
-        <li role="presentation" ui-sref-active="active"><a ui-sref="university.progress">In Progress</a></li>
-        <br>
+        <li role="presentation" ui-sref-active="active"><a ui-sref="university.recommended">Recommended</a></li>
+        <li role="presentation" ui-sref-active="active"><a ui-sref="university.courses">All Courses</a></li>
+        <hr>
+
+        <!--facet filters-->
+        <li ng-repeat="(facet,object) in courses.facets" ng-if="courses.results.length">
+          <h5 class="facet-title" ng-bind="facet | uppercase"></h5>
+          <ul class="facet-list">
+            <li ng-repeat="item in object.buckets | limitTo: clickLimit">
+              <a href data-ng-click="doSearchByFilter(facet, item.value)" ng-show="item.value">
+                <input type="checkbox" ng-model="checked[item.value]">
+                <span ng-if="facet !=='minutes'" ng-bind-html="item.value | trust" class="facetText"></span>
+                <span ng-if="facet ==='minutes'" class="facetText">{{item.value | currency:'$'}}</span>
+                ({{item.count | number}})
+              </a>
+            </li>
+
+            <div ng-show='object.buckets.length > 5'>
+              <a href='#' ng-if='showMoreFacets' ng-click='showMoreFacetLinks(object.buckets.length)' class="show-more-link">
+                Show more
+              </a>
+
+              <a href='#' ng-if='!showMoreFacets' ng-click='showLessFacetLinks()' class="show-more-link">
+                Show less
+              </a>
+            </div>
+
+          </ul>
+        </li>
+
+        <!--duration range filter-->
+        <li class="minutes-filter">
+          <h5 class="facet-title">Minutes</h5>
+          <input type="text" ng-model="startMinutesFilter"> to <input type="text" ng-model="endMinutesFilter">
+          <a href='#' ng-click='doMinutesSort()' class="show-more-link">Go</a>
+        </li>
+        </br>
+
       </ul>
     </div>
 

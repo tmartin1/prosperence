@@ -55,43 +55,6 @@ angular.module('prosperenceApp')
       $scope.doSearch(searchTerm, pageNumber);
     };
 
-    // Function to sort by minutes
-    $scope.doMinutesSort = function() {
-      //remove existing minutes filter, if exists
-      $scope.filterFields.forEach(function(filter, i) {
-        if(filter.term === 'minutes') {
-          $scope.filterFields.splice(i, 1);
-        }
-      });
-
-      // filter by minutes range
-      $scope.doSearchByFilter('minutes', '[' + $scope.startMinutesFilter + ',' + $scope.endMinutesFilter + ']');
-    };
-
-    //ajax call to show more favorite records
-    $scope.showMoreFacetLinks = function(numberToShow) {
-      // toggle to "Show Less"
-      $scope.showMoreFacets = false;
-
-      // set limit filter for ng-repeat
-      $scope.clickLimit = numberToShow;
-    };
-
-    //ajax call to show less favorite records
-    $scope.showLessFacetLinks = function() {
-      // toggle to "Show More"
-      $scope.showMoreFacets = true;
-
-      // set limit filter for ng-repeat
-      $scope.clickLimit = 5;
-    };
-
-    //INIT
-    //initially, if courses empty, then call search to show items
-    $scope.doSearch('', 0, function(newCourses) {
-      $scope.courses = newCourses;
-    });
-
     //listen for courses-updated event, which is broadcasted from navbar.controller.js
     $scope.$on('courses-updated', function (event, args) {
       $scope.courses = args.newCourses;
