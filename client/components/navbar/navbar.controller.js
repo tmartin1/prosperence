@@ -30,7 +30,7 @@ angular.module('prosperenceApp')
   }, {
     'title': 'University',
     'icon': 'fa fa-graduation-cap',
-    'link': 'university.welcome',
+    'link': 'university.courses',
     'shown': true,
     'abstractLink': 'university'
   }, ];
@@ -57,7 +57,7 @@ angular.module('prosperenceApp')
   $scope.isActive = function(viewLocation) {
     return $state.includes(viewLocation);
   };
-  
+
 }).controller('loginController', function($scope, $modalInstance, Auth, $location, goToSignUp) {
     $scope.showSignUp = goToSignUp;
     $scope.toggleRegister = function(newPage) {

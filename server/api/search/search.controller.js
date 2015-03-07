@@ -4,7 +4,7 @@ var cloudsearchdomain = require(__dirname + "/../../config/endpoints").cloudsear
 
 exports.search = function(req, res) {
   var params = {};
-  params.size = req.body.limit || 10;
+  params.size = req.body.limit || 9;
   params.start = req.body.start || 0;
   params.partial = true;
 
@@ -39,7 +39,7 @@ exports.search = function(req, res) {
         filterHolder[key].forEach(function(value) {
 
           // check if range query or facet filter term query
-          if(key === 'price' || key === 'x' || key === 'y' || key === 'z'){
+          if(key === 'duration'){
             params.filterQuery += '( range field=' + key + ' ' +  value + ')';
           } else {
             params.filterQuery += key + ":'" + value + "' ";
@@ -77,7 +77,7 @@ exports.search = function(req, res) {
     }()
   }
 
-  //console.log(params);
+  console.log(params);
   cloudsearchdomain.search(params, function(err, data) {
     if(err) {
       res.json(err);
@@ -103,12 +103,12 @@ exports.search = function(req, res) {
           course.category = result.fields.category;
           course.title = result.fields.title[0];
           course.url = result.fields.url[0];
-          course.minutes = Math.ceil(result.fields.duration[0] % 60);
+          course.minutes = Math.ceil(result.fields.duration[0] / 60);
           course.image_url = result.fields.image_url[0];
 
           _results.results.push(course);
 
-          if(_results.results.length === data.hits.hit.length - 1) {
+          if(_results.results.length === data.hits.hit.length) {
             res.end(JSON.stringify({
               data: _results
             }));

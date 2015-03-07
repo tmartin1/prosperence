@@ -1,14 +1,14 @@
-<div class="row-fluid">
+<div class="row-fluid video-courses">
 
   <!-- Start video courses catalog -->
   <div id="catalog-photos" class="col-md-10">
-    <img ng-show="searchInProgress" id="ajax-loader" ng-src="assets/images/ajax-loader.gif" class="img-responsive"/>
-
     <div class="col-md-4" ng-repeat="course in courses.results track by $index"
          dir-paginate="course in courses.results | itemsPerPage: 12 track by $index" total-items="courses.totalCount">
       <div class="thumbnail">
-        <div class="imgBkg" ng-click="viewItem(course)">
-          <img class="centerImg" src="{{course.mediumImage}}"/>
+
+        <div class="embed-responsive embed-responsive-16by9">
+          <!-- use 'player' to reference player object. -->
+          <youtube-video video-id="course.youtube_id"></youtube-video>-->
         </div>
 
         <div class="caption">
@@ -16,7 +16,6 @@
           <h4 ng-if="course.title.length < 100">{{course.title}}</h4>
 
           <p>{{course.minutes}} minutes</p>
-          </p>
         </div>
       </div>
     </div>
