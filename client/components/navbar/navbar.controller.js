@@ -30,7 +30,7 @@ angular.module('prosperenceApp')
     }, {
       'title': 'University',
       'icon': 'fa fa-graduation-cap',
-      'link': 'university.welcome',
+      'link': 'university.courses',
       'shown': true,
       'abstractLink': 'university'
     }, ];
