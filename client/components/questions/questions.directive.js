@@ -32,6 +32,7 @@ angular.module('prosperenceApp')
       $('questions').keypress(function() {
         if (event.keyCode == 13) {
           var textboxes = $('input:visible');
+          // TODO: Figure out how to handle select fields in questions.
           // if ($('select:visible').length) {
           //   console.log('selects');
           //   console.log($('select:visible'));
@@ -80,7 +81,7 @@ angular.module('prosperenceApp')
       plangroup: '='
     },
     controller: function($scope) {
-      console.log($scope.plangroup);
+      // TODO: Set binding of nested objects.
       // // If query is binding to a nested object, recursively track through plan to assign binding.
       // var setBinding = function(path) {
       //   if (!$scope.plangroup[path[0]]) $scope.plangroup[path[0]] = {};
