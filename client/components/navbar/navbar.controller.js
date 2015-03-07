@@ -2,7 +2,6 @@
 
 angular.module('prosperenceApp')
 .controller('NavbarCtrl', function($scope, $state, $location, Auth, $modal) {
-
   $scope.isCollapsed = true;
   $scope.isLoggedIn = Auth.isLoggedIn;
   $scope.isAdmin = Auth.isAdmin;
@@ -12,7 +11,13 @@ angular.module('prosperenceApp')
     'title': 'Prosperence',
     'link': 'main',
     'style': 'font-size:18px;',
-    'shown': true
+    'shown': '!isLoggedIn()'
+  }, {
+    'title': 'Prosperence',
+    'link': 'dashboard.overview',
+    'style': 'font-size:18px;',
+    'shown': 'isLoggedIn()',
+    'abstractLink': 'dashboard'
   }, {
     'title': 'About',
     'link': 'about',
@@ -22,11 +27,6 @@ angular.module('prosperenceApp')
     'link': 'plan-builder.start',
     'shown': '!getCurrentUser().planBuilderComplete',
     'abstractLink': 'plan-builder'
-  }, {
-    'title': 'Dashboard',
-    'link': 'dashboard.overview',
-    'shown': 'isLoggedIn()',
-    'abstractLink': 'dashboard'
   }, {
     'title': 'University',
     'icon': 'fa fa-graduation-cap',
@@ -57,58 +57,57 @@ angular.module('prosperenceApp')
   $scope.isActive = function(viewLocation) {
     return $state.includes(viewLocation);
   };
-  
-}).controller('loginController', function($scope, $modalInstance, Auth, $location, goToSignUp) {
-    $scope.showSignUp = goToSignUp;
-    $scope.toggleRegister = function(newPage) {
-      $scope.showSignUp = !$scope.showSignUp;
-    };
+})
+.controller('loginController', function($scope, $modalInstance, Auth, $location, goToSignUp) {
+  $scope.showSignUp = goToSignUp;
+  $scope.toggleRegister = function(newPage) {
+    $scope.showSignUp = !$scope.showSignUp;
+  };
 
-    //login logic
-    $scope.user = {};
-    $scope.errors = {};
+  //login logic
+  $scope.user = {};
+  $scope.errors = {};
 
-    $scope.login = function(form) {
-      $scope.submitted = true;
+  $scope.login = function(form) {
+    $scope.submitted = true;
 
-      if(form.$valid) {
-        Auth.login({
-          email: $scope.user.email,
-          password: $scope.user.password
-        })
-        .then( function() {
-          $modalInstance.close();
-        })
-        .catch( function(err) {
-          $scope.errors.other = err.message;
+    if(form.$valid) {
+      Auth.login({
+        email: $scope.user.email,
+        password: $scope.user.password
+      })
+      .then( function() {
+        $modalInstance.close();
+      })
+      .catch( function(err) {
+        $scope.errors.other = err.message;
+      });
+    }
+  };
+
+  //signup logic
+  $scope.register = function(form) {
+    $scope.submitted = true;
+
+    if(form.$valid) {
+      Auth.createUser({
+        name: $scope.user.name,
+        email: $scope.user.email,
+        password: $scope.user.password
+      })
+      .then( function() {
+        $modalInstance.close();
+      })
+      .catch( function(err) {
+        err = err.data;
+        $scope.errors = {};
+
+        // Update validity of form fields that match the mongoose errors
+        angular.forEach(err.errors, function(error, field) {
+          form[field].$setValidity('mongoose', false);
+          $scope.errors[field] = error.message;
         });
-      }
-    };
-
-    //signup logic
-    $scope.register = function(form) {
-      $scope.submitted = true;
-
-      if(form.$valid) {
-        Auth.createUser({
-          name: $scope.user.name,
-          email: $scope.user.email,
-          password: $scope.user.password
-        })
-        .then( function() {
-          $modalInstance.close();
-        })
-        .catch( function(err) {
-          err = err.data;
-          $scope.errors = {};
-
-          // Update validity of form fields that match the mongoose errors
-          angular.forEach(err.errors, function(error, field) {
-            form[field].$setValidity('mongoose', false);
-            $scope.errors[field] = error.message;
-          });
-        });
-      }
-    };
-  }
-);
+      });
+    }
+  };
+});
