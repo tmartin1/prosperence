@@ -10,8 +10,8 @@
           <li ng-repeat="item in object.buckets | limitTo: clickLimit">
             <a href data-ng-click="doSearchByFilter(facet, item.value)" ng-show="item.value">
               <input type="checkbox" ng-model="checked[item.value]">
-              <span ng-if="facet !=='duration'" ng-bind-html="item.value | trust" class="facetText"></span>
-              <span ng-if="facet ==='duration'" class="facetText">{{item.value | currency:'$'}}</span>
+              <span ng-if="facet !=='minutes'" ng-bind-html="item.value | trust" class="facetText"></span>
+              <span ng-if="facet ==='minutes'" class="facetText">{{item.value | currency:'$'}}</span>
               ({{item.count | number}})
             </a>
           </li>
@@ -29,10 +29,10 @@
         </ul>
       </li>
 
-      <li class="duration-filter">
-        <h5 class="facet-title">Duration</h5>
-        <input type="text" ng-model="startDurationFilter"> to <input type="text" ng-model="endDurationFilter">
-        <a href='#' ng-click='doDurationSort()' class="show-more-link">Go</a>
+      <li class="minutes-filter">
+        <h5 class="facet-title">Minutes</h5>
+        <input type="text" ng-model="startMinutesFilter"> to <input type="text" ng-model="endMinutesFilter">
+        <a href='#' ng-click='doMinutesSort()' class="show-more-link">Go</a>
       </li>
 
     </ul>
@@ -55,7 +55,7 @@
           <h4 ng-if="course.title.length >= 100">{{course.title.substr(0,75)}}...</h4>
           <h4 ng-if="course.title.length < 100">{{course.title}}</h4>
 
-          <p>Duration: {{course.duration}}</p>
+          <p>Minutes: {{course.minutes}}</p>
           </p>
         </div>
       </div>

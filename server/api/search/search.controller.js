@@ -103,7 +103,7 @@ exports.search = function(req, res) {
           course.category = result.fields.category;
           course.title = result.fields.title[0];
           course.url = result.fields.url[0];
-          course.duration = result.fields.duration[0];
+          course.minutes = Math.ceil(result.fields.duration[0] % 60);
           course.image_url = result.fields.image_url[0];
 
           _results.results.push(course);

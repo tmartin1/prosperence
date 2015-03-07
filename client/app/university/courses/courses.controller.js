@@ -14,8 +14,8 @@ angular.module('prosperenceApp')
     $scope.searchInProgress = true;
     $scope.clickLimit = 5;
     $scope.showMoreFacets = true;
-    $scope.startDurationFilter = 0;
-    $scope.endDurationFilter = 0;
+    $scope.startMinutesFilter = 0;
+    $scope.endMinutesFilter = 0;
 
     // Search by facet filter.
     $scope.doSearchByFilter = function(term, value) {
@@ -55,17 +55,17 @@ angular.module('prosperenceApp')
       $scope.doSearch(searchTerm, pageNumber);
     };
 
-    // Function to sort by duration
-    $scope.doDurationSort = function() {
-      //remove existing duration filter, if exists
+    // Function to sort by minutes
+    $scope.doMinutesSort = function() {
+      //remove existing minutes filter, if exists
       $scope.filterFields.forEach(function(filter, i) {
-        if(filter.term === 'duration') {
+        if(filter.term === 'minutes') {
           $scope.filterFields.splice(i, 1);
         }
       });
 
-      // filter by duration range
-      $scope.doSearchByFilter('duration', '[' + $scope.startDurationFilter + ',' + $scope.endDurationFilter + ']');
+      // filter by minutes range
+      $scope.doSearchByFilter('minutes', '[' + $scope.startMinutesFilter + ',' + $scope.endMinutesFilter + ']');
     };
 
     //ajax call to show more favorite records
