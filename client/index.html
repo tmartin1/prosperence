@@ -22,6 +22,7 @@
       <!-- injector:css -->
       <link rel="stylesheet" href="app/app.css">
       <link rel="stylesheet" href="app/main/main.css">
+      <link rel="stylesheet" href="app/plan-builder/plan-builder.css">
       <link rel="stylesheet" href="app/university/courses/courses.css">
       <link rel="stylesheet" href="app/university/university.css">
       <link rel="stylesheet" href="components/questions/questions.css">
@@ -37,8 +38,6 @@
     <!-- Add your site or application content here -->
     <div ui-view=""></div>
     <pr-keypress-events></pr-keypress-events>
-
-    <div ng-include="'components/footer/footer.html'"></div>
 
     <!--[if lt IE 9]>
     <script src="bower_components/es5-shim/es5-shim.js"></script>
@@ -102,6 +101,7 @@
           <script src="app/pr-keypress/pr-keypress.directive.js"></script>
           <script src="app/search/facet.factory.js"></script>
           <script src="app/search/search.service.js"></script>
+          <script src="app/services/calcsService.js"></script>
           <script src="app/university/courses/courses.controller.js"></script>
           <script src="app/university/favorites/favorites.controller.js"></script>
           <script src="app/university/recommended/recommended.controller.js"></script>

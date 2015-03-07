@@ -6,7 +6,8 @@
            value="{{option.value}}"
            id="chkbx-{{option}}"
            name="{{query.bind}}[]"
-           ng-checked="{{query.bind}}.indexOf('{{option}}') > -1">
+           ng-checked="{{query.bind}}.indexOf('{{option}}') > -1"
+           ng-required="query.required" />
 
     <label for="chkbx-{{option}}">
       {{ option.text }}

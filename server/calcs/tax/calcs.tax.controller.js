@@ -92,7 +92,7 @@ exports.projection = function(plan) {
     var amortTable = finance.calculateAmortization(plan.mortgage.initialBalance, plan.mortgage.currentTerm*12, plan.mortgage.currentRate*100, plan.mortgage.startDate);
 
     // Total up how much of the payment will go to interest over the current year.
-    var current = new Date(new Date().getFullYear(), 00); // Date object for current year.
+    var current = new Date(new Date().getFullYear(), 0); // Date object for current year.
     var start = (current.getFullYear() - plan.mortgage.startDate.getFullYear())*12 + (12 - plan.mortgage.startDate.getMonth());
     var end = start + 12;
     var interestPayment = 0;

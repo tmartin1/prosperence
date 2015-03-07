@@ -13,57 +13,36 @@ angular.module('prosperenceApp')
     scope: {
       queries: '=',
       plangroup: '=',
-      next: '&'
+      gotonext: '&'
     },
     controller: function($scope) {
       // By default, the first question in the series is opened
       $scope.queries[0].isOpen = true;
       $scope.queries[0].isEnabled = true;
 
-      console.log($scope.queries)
-
-      // Enable the next accordion section each time the user moves to a new section.
-      $scope.enableNext = function(index) {
-        if (typeof index === 'number' && $scope.queries[index+1]) {
-          $scope.queries[index + 1].isEnabled = true;
-        }
-      };
       // TODO: Previously enabled sections should remain enables if the user goes back.
 
       // Advances the focus of the user to the next fillable field when 'enter' is pressed.
       $('questions').keypress(function() {
-        if (event.keyCode == 13) {
+        if (event.keyCode === 13) {
           var textboxes = $('input:visible');
-          // TODO: Figure out how to handle select fields in questions.
-          // if ($('select:visible').length) {
-          //   console.log('selects');
-          //   console.log($('select:visible'));
-          //   textboxes.concat($('select:visible'));
-          // }
-          var currentBox;
-          // console.log($('input:focus'));
+          var currentIndex;
           if ($('input:focus').length > 0) {
-            currentBox = $('input:focus');
+            currentIndex = textboxes.index($('input:focus'));
           }
-          // else if ($('select:focus').length > 0) {
-          //   currentBox = $('select:focus');
-          // }
-          // var currentBox = $('input:focus') || $('select:focus');
-          var currentIndex = textboxes.index(currentBox);
-          console.log(currentBox);
-          // If there is another input fields, move focus to that field.
+          // If there is another input field, move focus to that field.
           if (textboxes[currentIndex + 1] !== undefined) {
             console.log('advancing to next input');
             var nextBox = textboxes[currentIndex + 1];
             nextBox.focus();
-            nextBox.select();
-          } else {
-            // If the user is on the last input in the current question, move to next question or section.
-            console.log('advancing to next question');
-            $scope.next();
+            return nextBox.select();
           }
-          // event.preventDefault();
-          // return false;
+          // If focus is on final input, invoke gotonext() to check validity and move to the next question or section.
+          else {
+            console.log('advancing to next invalid input or question');
+            $scope.gotonext();
+          }
+          event.preventDefault();
         }
       });
     },

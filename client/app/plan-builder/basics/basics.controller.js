@@ -12,15 +12,18 @@ angular.module('prosperenceApp')
     subqueries: [{
       question: 'What is your first name?',
       type: 'text',
-      bind: 'firstName'
+      bind: 'firstName',
+      required: true
     }, {
       question: 'What is your last name?',
       type: 'text',
-      bind: 'lastName'
+      bind: 'lastName',
+      required: true
     }, {
       question: 'What is your date of birth?',
       type: 'date',
-      bind: 'birthdate'
+      bind: 'birthdate',
+      required: true
     }]
   }, {
     title: 'Family',
@@ -29,6 +32,7 @@ angular.module('prosperenceApp')
       question: 'Are you maried?',
       type: 'select',
       bind: 'married',
+      required: true,
       options: [{
         text: 'Yes',
         value: true
@@ -40,16 +44,19 @@ angular.module('prosperenceApp')
       question: 'What is your spouse\'s first name?',
       type: 'text',
       bind: 'spouseFirstName',
+      required: true,
       condition: 'married'
     }, {
       question: 'What is your spouse\'s last name?',
       type: 'text',
       bind: 'spouseLastName',
+      required: true,
       condition: 'married'
     }, {
       question: 'What is your spouce\'s date of birth?',
       type: 'date',
       bind: 'spouseBirthdate',
+      required: true,
       condition: 'married'
     }, {
       // Removed spouse resident questions for now, cann add back later.
@@ -69,6 +76,7 @@ angular.module('prosperenceApp')
       question: 'Do you have children?',
       type: 'select',
       bind: 'hasChildren',
+      required: true,
       options: [{
         text: 'Yes',
         value: true
@@ -77,8 +85,9 @@ angular.module('prosperenceApp')
         value: false
       }]
     }, {
-      bind: 'children',
       type: 'table',
+      bind: 'children',
+      required: true,
       fields: [{
         label: 'Child Name',
         type: 'text',
@@ -104,8 +113,9 @@ angular.module('prosperenceApp')
       options: $scope.states
     }, {
       question: 'Do you work in a different state than you live?',
-      bind: 'sameWorkResidence',
       type: 'select',
+      bind: 'sameWorkResidence',
+      required: true,
       options: [{
         text: 'Yes',
         value: true
@@ -117,11 +127,13 @@ angular.module('prosperenceApp')
       question: 'In which city do you work?',
       type: 'text',
       bind: 'workAddress.city',
+      required: true,
       condition: 'sameWorkResidence'
     }, {
       question: 'In which state do you work?',
       type: 'select',
       bind: 'workAddress.state',
+      required: true,
       options: $scope.states,
       condition: 'workAddress.state'
     }]
