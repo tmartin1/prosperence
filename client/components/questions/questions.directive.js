@@ -20,6 +20,8 @@ angular.module('prosperenceApp')
       $scope.queries[0].isOpen = true;
       $scope.queries[0].isEnabled = true;
 
+      console.log($scope.queries)
+
       // Enable the next accordion section each time the user moves to a new section.
       $scope.enableNext = function(index) {
         if (typeof index === 'number' && $scope.queries[index+1]) {
@@ -60,11 +62,10 @@ angular.module('prosperenceApp')
             console.log('advancing to next question');
             $scope.next();
           }
-          event.preventDefault();
+          // event.preventDefault();
           // return false;
         }
       });
-
     },
     templateUrl: './components/questions/questionsTemplate.html'
   };
@@ -81,6 +82,8 @@ angular.module('prosperenceApp')
       plangroup: '='
     },
     controller: function($scope) {
+      if ($scope.query.isComplete) $scope.query.isEnabled = true;
+
       // TODO: Set binding of nested objects.
       // If query is binding to a nested object, recursively track through plan to assign binding.
       var setBinding = function(path) {

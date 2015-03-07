@@ -1,7 +1,8 @@
 <!-- For select option questions -->
-<select ng-model="planGroup[query.bind]">
+<select ng-model="planGroup[query.bind]" class="dropdown">
   <option ng-repeat="option in query.options"
-          ng-value="option.value || option">
+          ng-value="option.value || option"
+          class="item">
           {{ option.text || option }}
   </option>
 </select>

@@ -1,14 +1,10 @@
 <!-- For table entry questions -->
-<form class="ui form">
-  <table ng-class="{ 'two fields': query.fields.length === 2,
-                     'three fields': query.fields.length === 3,
-                     'four fields': query.fields.length === 4,
-                     'five fields': query.fields.length === 5 }">
+<form>
+  <table>
 
     <!-- Build column headers -->
     <tr>
-      <th ng-class="{ 'four wide': field.type === 'number', 'field': true }"
-          ng-repeat="field in query.fields"
+      <th ng-repeat="field in query.fields"
           style="text-align:{{field.textAlign}}">
         <label>{{ field.label }}</label>
       </th>
@@ -17,16 +13,16 @@
 
     <!-- Load existing items if present -->
     <tr ng-repeat="items in plangroup[query.bind]">
-      <td ng-class="{ 'three wide': field.type === 'number', 'field': true }"
-          ng-repeat="field in query.fields">
-
+      <td ng-repeat="field in query.fields" style="padding-right:8px;">
         <input ng-model="plangroup[query.bind][$parent.$index][field.label]"
                type="{{field.type}}"
-               style="margin:5px auto; text-align:{{field.textAlign}}"
+               class="form-control"
+               style="margin:4px auto; text-align:{{field.textAlign}}"
                ng-required="{{field.required}}"/>
       </td>
       <td>
-        <button class="mini circular ui icon button"
+        <button class="btn"
+                style="padding:2px 4px;"
                 ng-click="deleteRow($index, query.bind)">
                 <i class="fa fa-times"></i>
         </button>
