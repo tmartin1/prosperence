@@ -59,9 +59,9 @@ angular.module('prosperenceApp')
   };
   
 }).controller('loginController', function($scope, $modalInstance, Auth, $location, goToSignUp) {
-    $scope.page = goToSignUp ? 'signup' : 'login';
+    $scope.showSignUp = goToSignUp;
     $scope.toggleRegister = function(newPage) {
-      $scope.page = newPage;
+      $scope.showSignUp = !$scope.showSignUp;
     };
 
     //login logic
