@@ -41,6 +41,11 @@ var all = {
     }
   },
 
+  cloudsearch: {
+    accessKeyId: process.env.CLOUDSEARCH_AMAZON_ID || local.CLOUDSEARCH_AMAZON_ID,
+    secretAccessKey: process.env.CLOUDSEARCH_AMAZON_SECRET || local.CLOUDSEARCH_AMAZON_SECRET
+  }
+
 };
 
 // Export the config object based on the NODE_ENV

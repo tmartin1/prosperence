@@ -6,7 +6,7 @@ angular.module('prosperenceApp')
 
     search.doSearch = function(searchTerm, pageNumber, filters, limit, callback) {
       $rootScope.$broadcast('search-in-progress');
-      return $http.post('/api/cloudsearch/', {
+      return $http.post('/api/search/', {
         q: searchTerm,
         facets: 'category',
         start: pageNumber,
@@ -22,7 +22,7 @@ angular.module('prosperenceApp')
     };
 
     search.doSuggestor = function(searchTerm, callback) {
-      return $http.post('/api/cloudsearch/suggest/', {
+      return $http.post('/api/search/suggest/', {
         q: searchTerm
       })
         .success(function(results) {
@@ -74,4 +74,4 @@ angular.module('prosperenceApp')
     };
 
     return search;
-  });
+  }]);
