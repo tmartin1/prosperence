@@ -20,6 +20,7 @@
     <!-- build:css({.tmp,client}) app/app.css -->
     <link rel="stylesheet" href="app/app.css">
       <!-- injector:css -->
+      <link rel="stylesheet" href="app/app.css">
       <link rel="stylesheet" href="app/university/courses/courses.css">
       <!-- endinjector -->
     <!-- endbuild -->
@@ -32,6 +33,7 @@
 
     <!-- Add your site or application content here -->
     <div ui-view=""></div>
+    <pr-keypress-events></pr-keypress-events>
 
     <div ng-include="'components/footer/footer.html'"></div>
 
@@ -95,6 +97,7 @@
           <script src="app/plan-builder/savings/savings.controller.js"></script>
           <script src="app/plan-builder/spending/spending.controller.js"></script>
           <script src="app/plan-builder/tax/tax.controller.js"></script>
+          <script src="app/pr-keypress/pr-keypress.directive.js"></script>
           <script src="app/search/search.service.js"></script>
           <script src="app/university/courses/courses.controller.js"></script>
           <script src="app/university/favorites/favorites.controller.js"></script>
@@ -106,6 +109,7 @@
           <script src="app/university/welcome/welcome.controller.js"></script>
           <script src="components/auth/auth.service.js"></script>
           <script src="components/auth/user.service.js"></script>
+          <script src="components/filters/trust.filter.js"></script>
           <script src="components/modal/modal.service.js"></script>
           <script src="components/mongoose-error/mongoose-error.directive.js"></script>
           <script src="components/navbar/navbar.controller.js"></script>

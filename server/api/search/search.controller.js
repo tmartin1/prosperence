@@ -95,18 +95,18 @@ exports.search = function(req, res) {
       var isData = data.hits.hit.length > 0;
       if(isData) {
         for(var i = 0; i < data.hits.hit.length; i++) {
-          var product = {};
+          var course = {};
           var result = data.hits.hit[i];
 
           //add fields
-          product.id = result.fields.product_id[0];
-          product.price = result.fields.price[0];
-          product.title = result.fields.title[0];
-          product.mediumImage = result.fields.img_url[0];
-          product.category = result.fields.category[0];
-          product.prodAttributes = JSON.parse(result.fields.prod_attributes[0]);
+          course.youtube_id = result.fields.youtube_id[0];
+          course.category = result.fields.category;
+          course.title = result.fields.title[0];
+          course.url = result.fields.url[0];
+          course.duration = result.fields.duration[0];
+          course.image_url = result.fields.image_url[0];
 
-          _results.results.push(product);
+          _results.results.push(course);
 
           if(_results.results.length === data.hits.hit.length - 1) {
             res.end(JSON.stringify({
@@ -141,10 +141,10 @@ exports.suggest = function(req, res) {
         if(isData) {
 
           for(var i = 0; i < data.suggest.suggestions.length; i++) {
-            var product = {};
+            var course = {};
             var result = data.suggest.suggestions[i];
-            product.title = result.suggestion;
-            _results.push(product);
+            course.title = result.suggestion;
+            _results.push(course);
 
             if(_results.length === data.suggest.suggestions.length - 1) {
               res.end(JSON.stringify({

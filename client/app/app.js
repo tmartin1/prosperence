@@ -7,6 +7,7 @@ angular.module('prosperenceApp', [
   'ui.router',
   'ui.bootstrap',
   'ui.select',
+  'prosperenceApp.filter',
   'angularUtils.directives.dirPagination',
   'LocalStorageModule'
 ])

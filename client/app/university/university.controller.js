@@ -1,7 +1,7 @@
 'use strict';
 
 angular.module('prosperenceApp')
-.controller('UniversityCtrl', function($scope, search) {
+  .controller('UniversityCtrl', ['$scope', 'search', '$rootScope', function($scope, search, $rootScope) {
     $scope.doSearch = function(searchTerm, pageNumber) {
       pageNumber = pageNumber || 0;
       $scope.searchTerm = searchTerm;
@@ -26,9 +26,9 @@ angular.module('prosperenceApp')
     $rootScope.$on('keypress', function(onEvent, keypressEvent) {
       var keyCode = keypressEvent.which;
 
-      if (keyCode === 13 && $scope.searchTerm) {
+      if(keyCode === 13 && $scope.searchTerm) {
         $scope.doSearch($scope.searchTerm);
       }
     });
 
-  });
+  }]);
