@@ -35,18 +35,11 @@ angular.module('prosperenceApp')
     'abstractLink': 'university'
   }, ];
 
-  var loginController = function($scope) {
-    $scope.page = 'login';
-    $scope.toggleRegister = function(newPage) {
-      $scope.page = newPage;
-    }
-  }
-
   $scope.openLoginModal = function(goToSignUp) {
-    $modal.open({
+    $scope.modalInstance = $modal.open({
       templateUrl: 'components/navbar/partials/loginModal.html',
       size: 'lg',
-      controller: loginController
+      controller: 'loginController'
     });
   }
 
@@ -60,4 +53,57 @@ angular.module('prosperenceApp')
     return $state.includes(viewLocation);
   };
   
-});
+}).controller('loginController', function($scope, $modalInstance, Auth, $location) {
+    $scope.page = 'login';
+    $scope.toggleRegister = function(newPage) {
+      $scope.page = newPage;
+    };
+
+    //login logic
+    $scope.user = {};
+    $scope.errors = {};
+
+    $scope.login = function(form) {
+      $scope.submitted = true;
+
+      if(form.$valid) {
+        Auth.login({
+          email: $scope.user.email,
+          password: $scope.user.password
+        })
+        .then( function() {
+          $modalInstance.close();
+        })
+        .catch( function(err) {
+          $scope.errors.other = err.message;
+        });
+      }
+    };
+
+    //signup logic
+    $scope.register = function(form) {
+      $scope.submitted = true;
+
+      if(form.$valid) {
+        Auth.createUser({
+          name: $scope.user.name,
+          email: $scope.user.email,
+          password: $scope.user.password
+        })
+        .then( function() {
+          $modalInstance.close();
+        })
+        .catch( function(err) {
+          err = err.data;
+          $scope.errors = {};
+
+          // Update validity of form fields that match the mongoose errors
+          angular.forEach(err.errors, function(error, field) {
+            form[field].$setValidity('mongoose', false);
+            $scope.errors[field] = error.message;
+          });
+        });
+      }
+    };
+  }
+);
