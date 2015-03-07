@@ -9,7 +9,8 @@ angular.module('prosperenceApp', [
   'ui.select',
   'prosperenceApp.filter',
   'angularUtils.directives.dirPagination',
-  'LocalStorageModule'
+  'LocalStorageModule',
+  'youtube-embed'
 ])
 .config(function($stateProvider, $urlRouterProvider, $locationProvider, $httpProvider) {
   $urlRouterProvider

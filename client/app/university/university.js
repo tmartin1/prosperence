@@ -26,9 +26,4 @@ angular.module('prosperenceApp')
     templateUrl: 'app/university/courses/courses.html',
     controller: 'RecommendedCtrl'
   })
-  .state('university.welcome', {
-    url: '/welcome',
-    templateUrl: 'app/university/welcome/welcome.html',
-    controller: 'WelcomeCtrl'
-  });
 });
