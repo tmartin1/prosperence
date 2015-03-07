@@ -36,9 +36,9 @@ angular.module('prosperenceApp')
   }, ];
 
   var loginController = function($scope) {
-    $scope.onRegister = false;
-    $scope.toggleRegister = function() {
-      $scope.onRegister = !$scope.onRegister;
+    $scope.page = 'login';
+    $scope.toggleRegister = function(newPage) {
+      $scope.page = newPage;
     }
   }
 

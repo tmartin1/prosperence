@@ -1,4 +1,8 @@
-<div class="inputModal">
-  <div ng-if="!onRegister" ng-include="'app/account/login/login.html'"></div>
-  <div ng-if="onRegister" ng-include="'app/account/signup/signup.html'"></div>
+<div class="inputModal" ng-switch on="page">
+  <div ng-switch-when="signup" >
+    <div ng-include="'app/account/signup/signup.html'"></div>
+  </div>
+  <div ng-switch-default>
+    <div ng-include="'app/account/login/login.html'"></div>
+  </div>
 </div>
