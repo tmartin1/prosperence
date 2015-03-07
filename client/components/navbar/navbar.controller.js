@@ -53,7 +53,7 @@ angular.module('prosperenceApp')
     $location.path('/');
   };
 
-      // Sets active class on sidebar.
+  // Sets active class on sidebar.
   $scope.isActive = function(viewLocation) {
     return $state.includes(viewLocation);
   };
