@@ -1,7 +1,7 @@
 'use strict';
 
 angular.module('prosperenceApp')
-  .controller('CoursesCtrl', ['$scope', 'search', function($scope, search) {
+  .controller('CoursesCtrl', ['$scope', 'search', '$rootScope', function($scope, search, $rootScope) {
     $scope.facetFields = "";
     $scope.filterFields = "";
     $scope.selectedItems = [];
@@ -41,8 +41,11 @@ angular.module('prosperenceApp')
       pageNumber = pageNumber || 0;
       filterFields = filterFields || null;
       $scope.searchTerm = searchTerm;
-      search.doSearch(searchTerm, pageNumber, filterFields, null, function(newProducts) {
-        search.processFacets(newProducts);
+      search.doSearch(searchTerm, pageNumber, filterFields, null, function(newCourses) {
+        newCourses = search.processFacets(newCourses);
+        $rootScope.$broadcast('courses-updated', {
+          newCourses: newCourses
+        });
       });
     };
 
@@ -84,14 +87,20 @@ angular.module('prosperenceApp')
     };
 
     //INIT
-    //initially, if products empty, then call search to show items
-    $scope.doSearch('', 0, function(newProducts) {
-      $scope.products = newProducts;
+    //initially, if courses empty, then call search to show items
+    $scope.doSearch('', 0, function(newCourses) {
+      $scope.courses = newCourses;
+    });
+
+    //listen for courses-updated event, which is broadcasted from navbar.controller.js
+    $scope.$on('courses-updated', function (event, args) {
+      $scope.courses = args.newCourses;
+      $scope.searchInProgress = false;
     });
 
     $scope.$on('search-in-progress', function(event, args) {
-      $scope.products.results = [];
-      $scope.products.totalCount = 0;
+      $scope.courses.results = [];
+      $scope.courses.totalCount = 0;
       $scope.searchInProgress = true;
     })
   }]);

@@ -6,10 +6,10 @@ angular.module('prosperenceApp')
       pageNumber = pageNumber || 0;
       $scope.searchTerm = searchTerm;
 
-      search.doSearch(searchTerm, pageNumber, null, null, function(newProducts) {
-        newProducts = search.processFacets(newProducts);
-        $rootScope.$broadcast('products-updated', {
-          newProducts: newProducts
+      search.doSearch(searchTerm, pageNumber, null, null, function(newCourses) {
+        newCourses = search.processFacets(newCourses);
+        $rootScope.$broadcast('courses-updated', {
+          newCourses: newCourses
         });
         search.fromNavBar = true;
       });
@@ -17,8 +17,8 @@ angular.module('prosperenceApp')
 
     $scope.doSuggestor = function(searchTerm) {
       $scope.searchTerm = searchTerm;
-      search.doSuggestor(searchTerm, function(newProducts) {
-        $scope.suggestedProducts = newProducts;
+      search.doSuggestor(searchTerm, function(newCourses) {
+        $scope.suggestedCourses = newCourses;
       });
     };
 
