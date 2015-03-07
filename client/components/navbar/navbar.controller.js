@@ -1,7 +1,7 @@
 'use strict';
 
 angular.module('prosperenceApp')
-.controller('NavbarCtrl', function($scope, $state, $location, Auth) {
+.controller('NavbarCtrl', function($scope, $state, $location, Auth, $modal) {
 
   $scope.isCollapsed = true;
   $scope.isLoggedIn = Auth.isLoggedIn;
@@ -34,6 +34,21 @@ angular.module('prosperenceApp')
     'shown': true,
     'abstractLink': 'university'
   }, ];
+
+  var loginController = function($scope) {
+    $scope.onRegister = false;
+    $scope.toggleRegister = function() {
+      $scope.onRegister = !$scope.onRegister;
+    }
+  }
+
+  $scope.openLoginModal = function(goToSignUp) {
+    $modal.open({
+      templateUrl: 'components/navbar/partials/loginModal.html',
+      size: 'lg',
+      controller: loginController
+    });
+  }
 
   $scope.logout = function() {
     Auth.logout();
