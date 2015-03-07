@@ -16,11 +16,11 @@
     </tr>
 
     <!-- Load existing items if present -->
-    <tr ng-repeat="items in plan[query.bind]">
+    <tr ng-repeat="items in plangroup[query.bind]">
       <td ng-class="{ 'three wide': field.type === 'number', 'field': true }"
           ng-repeat="field in query.fields">
 
-        <input ng-model="plan[query.bind][$parent.$index][field.label]"
+        <input ng-model="plangroup[query.bind][$parent.$index][field.label]"
                type="{{field.type}}"
                style="margin:5px auto; text-align:{{field.textAlign}}"
                ng-required="{{field.required}}"/>
@@ -36,7 +36,7 @@
 </form><br>
 
 <!-- Allow new items to be added -->
-<button class="ui button"
+<button class="btn btn-primary"
         ng-click="addRow(query.bind)">
-        Add Item
+        Add More
 </button>

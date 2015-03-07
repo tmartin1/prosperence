@@ -16,11 +16,11 @@ var testUser = {
       state: 'CA'
     },
     workAddress: {
-      street: '123 Something St.',
+      street: '456 Something St.',
       city: 'San Francisco',
       state: 'CA'
     },
-    maritalStatus: 'married',
+    married: true,
     spouseFirstName: 'Spouse',
     spouseLastName: 'User',
     spouseBirthdate: new Date(1989, 8, 6),

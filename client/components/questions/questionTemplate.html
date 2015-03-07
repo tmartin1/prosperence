@@ -4,8 +4,8 @@
 // Pease read the Question-Directive-README.md before editing this file.
 **************************************************************************** -->
 
-<div ng-if="planGroup[query.condition] === 'true' || query.condition === undefined">
-  
+<div ng-if="plangroup[query.condition] === 'true' || query.condition === undefined">
+
   <p ng-if="!!query.question"><label>{{query.question}}</label></p>
 
   <!-- For select, checkbox, radio, button, table, multi, and review questions -->
@@ -16,7 +16,7 @@
   <!-- For everything else -->
   <input ng-if="['select','checkbox','radio','button','table','multi','review'].indexOf(query.type) === -1"
          type="{{query.type}}"
-         ng-model="planGroup[query.bind]"/>
+         ng-model="plangroup[query.bind]"/>
 
 </div>
 
@@ -28,7 +28,7 @@
 
 <div class="content" id="{{query.index}}">
 
-  <div ng-if="planGroup[query.condition] === 'true' || query.condition === undefined">
+  <div ng-if="plangroup[query.condition] === 'true' || query.condition === undefined">
     <p ng-if="query.type !== 'multi'"><label>{{query.question}}</label></p>
 
     <div ng-if="['select','checkbox','radio','button','table','multi','review'].indexOf(query.type) !== -1"
@@ -37,7 +37,7 @@
 
     <input ng-if="['select','checkbox','radio','button','table','multi','review'].indexOf(query.type) === -1"
            type="{{query.type}}"
-           ng-model="planGroup[query.bind]"/>
+           ng-model="plangroup[query.bind]"/>
   </div>
 
 </div> -->

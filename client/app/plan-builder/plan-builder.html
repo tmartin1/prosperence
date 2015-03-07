@@ -39,11 +39,15 @@
 <!-- Plan builder navigation and progress bar -->
 <div class="container">
   <center>
-    <a class="btn btn-lg btn-default" ng-click="previous()"><i class="fa fa-chevron-left"></i> Previous</a>
-    <a class="btn btn-lg btn-default" ng-click="next()">Next <i class="fa fa-chevron-right"></i></a>
-    <!-- <a class="btn btn-lg btn-default" ng-if="!!previous" ng-click="previous()">Previous</a> -->
-    <!-- <button class="btn btn-lg btn-default" ng-if="!!next" ng-click="next()">Next</button> -->
-    <a class="btn btn-lg btn-default" ng-if="!next">Submit</a>
+    <a class="btn btn-lg btn-default" ng-show="currentState !== 'plan-builder.start'" ng-click="previous()">
+      <i class="fa fa-chevron-left" style="margin-right:8px;"></i>
+      Previous
+    </a>
+    <a class="btn btn-lg btn-default" ng-show="currentState !== 'plan-builder.goals'" ng-click="next()">
+      Next
+      <i class="fa fa-chevron-right" style="margin-left:8px;"></i>
+    </a>
+    <a class="btn btn-lg btn-default" ng-show="currentState === 'plan-builder.goals'">Submit</a>
     <br><br>
 
     <div class="progress progress-striped active" style="width:50%">
@@ -51,5 +55,5 @@
     </div>
   </center>
 
-  <button class="btn btn-lg btn-default pull-right" ng-click="save()">Save and Exit</button>
+  <button class="btn btn-lg btn-default pull-right" ng-click="save()">Save Progress</button>
 </div>

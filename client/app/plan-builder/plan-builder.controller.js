@@ -31,11 +31,9 @@ angular.module('prosperenceApp')
   // Sets the title, progress bar, and the 'previous' and 'next' links.
   var updateRelationals = function(focus) {
     $scope.heading = focus.data.title;
+    $scope.currentState = focus.name;
     var index = order.indexOf(focus.name);
-    // ui-router does not currently support dynamic sref: https://github.com/angular-ui/ui-router/issues/1208
-    // $scope.previous = order[index - 1] ? order[index - 1].replace('.', '/') : false;
-    // $scope.next = order[index + 1] ? order[index + 1].replace('.', '/') : false;
-    $scope.progress = Math.max(.05, (index / order.length - 1)) * 100 + '%';
+    $scope.progress = Math.max(.05, (index / (order.length-1))) * 100 + '%';
   };
   updateRelationals($state.current);
 
@@ -77,9 +75,55 @@ angular.module('prosperenceApp')
         }
       }
       queries[i+1].isOpen = true;
+      queries[i+1].isEnabled = true;
       queries[i].isOpen = false;
     }
+  };
 
+  // Function to pass to directives that maintains closure access to $scope.user.plan.
+  // In the HTML this would be used like: <div ng-model="setBinding('[PROPERTY]')"></div>
+  var binding = $scope.user;
+  $scope.setBinding = function(target) {
+    // If binding is a single property on the user, then simply apply it.
+    var path = target.split('.');
+    if (path.length === 0) return binding[target];
+
+    // To set the binding for nested objects, accepts an array as a parameter.
+    var setNestedBinding = function(path) {
+      // If target group doesn't exist, create it as an empty object.
+      if (!binding[path[0]]) binding[path[0]] = {};
+      binding = binding[path.shift()];
+      if (path.length > 0) setNestedBinding(path);
+    };
+    setNestedBinding(path);
+
+    return binding;
+  };
+
+  // This currently successfully adds a new credit card to the plan.
+  $scope.testBinding = function() {
+    console.log($scope.user);
+    var temp = $scope.setBinding('plan.debts.creditCards');
+
+    console.log('$scope.user.plan.debts.creditCards');
+    console.log($scope.user.plan.debts.creditCards);
+    console.log('');
+
+    console.log('temp');
+    console.log(temp);
+    console.log('');
+
+    // Push to $scope.user.plan.debts.creditCards
+    $scope.user.plan.debts.creditCards.push({ name: 'VISA', rate: 10.99, amount: 5000 });
+
+    // Relog
+    console.log('$scope.user.plan.debts.creditCards after new card was added');
+    console.log($scope.user.plan.debts.creditCards);
+    console.log('');
+
+    console.log('temp after new card added');
+    console.log(temp);
+    console.log('');
   };
 
   // Update page heading and navbar on state change within plan-builder.
@@ -90,8 +134,12 @@ angular.module('prosperenceApp')
     }
   );
 
-  // Save all changes on form inputs.
+  // TODO: Save all changes on form inputs.
+  // for now, this is being used for testing purposes.
   $scope.save = function(route) {
+    console.log($scope.user.plan);
+    console.log($scope.currentState);
+    // $scope.testBinding();
     console.log('saving');
   };
 

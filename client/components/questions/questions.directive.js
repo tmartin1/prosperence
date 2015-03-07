@@ -12,8 +12,8 @@ angular.module('prosperenceApp')
     restrict: 'E',
     scope: {
       queries: '=',
-      planGroup: '=',
-      sections: '='
+      plangroup: '=',
+      next: '&'
     },
     controller: function($scope) {
       // By default, the first question in the series is opened
@@ -26,6 +26,45 @@ angular.module('prosperenceApp')
           $scope.queries[index + 1].isEnabled = true;
         }
       };
+      // TODO: Previously enabled sections should remain enables if the user goes back.
+
+      // Advances the focus of the user to the next fillable field when 'enter' is pressed.
+      $('questions').keypress(function() {
+        if (event.keyCode == 13) {
+          var textboxes = $('input:visible');
+          // TODO: Figure out how to handle select fields in questions.
+          // if ($('select:visible').length) {
+          //   console.log('selects');
+          //   console.log($('select:visible'));
+          //   textboxes.concat($('select:visible'));
+          // }
+          var currentBox;
+          // console.log($('input:focus'));
+          if ($('input:focus').length > 0) {
+            currentBox = $('input:focus');
+          }
+          // else if ($('select:focus').length > 0) {
+          //   currentBox = $('select:focus');
+          // }
+          // var currentBox = $('input:focus') || $('select:focus');
+          var currentIndex = textboxes.index(currentBox);
+          console.log(currentBox);
+          // If there is another input fields, move focus to that field.
+          if (textboxes[currentIndex + 1] !== undefined) {
+            console.log('advancing to next input');
+            var nextBox = textboxes[currentIndex + 1];
+            nextBox.focus();
+            nextBox.select();
+          } else {
+            // If the user is on the last input in the current question, move to next question or section.
+            console.log('advancing to next question');
+            $scope.next();
+          }
+          event.preventDefault();
+          // return false;
+        }
+      });
+
     },
     templateUrl: './components/questions/questionsTemplate.html'
   };
@@ -39,29 +78,30 @@ angular.module('prosperenceApp')
     transclude: true,
     scope: {
       query: '=',
-      planGroup: '=',
-      sections: '='
+      plangroup: '='
     },
     controller: function($scope) {
-      // If query is binding to a nested object, recursively track through plan to assign binding.
-      var setBinding = function(path) {
-        if (!$scope.planGroup[path[0]]) $scope.planGroup[path[0]] = {};
-        $scope.planGroup = $scope.planGroup[path[0]];
-        path.splice(0, 1);
-        if (path.length) setBinding(path);
-      };
-      if ($scope.query.bind.split('.').length > 1) {
-        var temp = $scope.query.bind.split('.');
-        setBinding(temp);
-      }
-
-      // If planGroup is undefined, then initialize it as an empty object.
-      $scope.planGroup = $scope.planGroup || {};
-      $scope.planGroup[$scope.query.bind] = $scope.planGroup[$scope.query.bind] || {};
+      // TODO: Set binding of nested objects.
+      // // If query is binding to a nested object, recursively track through plan to assign binding.
+      // var setBinding = function(path) {
+      //   if (!$scope.plangroup[path[0]]) $scope.plangroup[path[0]] = {};
+      //   $scope.plangroup = $scope.plangroup[path[0]];
+      //   path.splice(0, 1);
+      //   if (path.length > 1) setBinding(path);
+      //   else $scope.query.bind = path[0];
+      // };
+      //
+      // if ($scope.query.bind.split('.').length > 1) {
+      //   // If plangroup is undefined, then initialize it as an empty object.
+      //   if ($scope.plangroup === undefined) $scope.plangroup = {};
+      //   // Set binding to nested property.
+      //   var temp = $scope.query.bind.split('.');
+      //   setBinding(temp);
+      // }
 
       // If a binding is defined for a multi question object,
       if ($scope.query.type === 'multi' && $scope.query.bind) {
-        $scope.planGroup = $scope.planGroup[$scope.query.bind];
+        $scope.plangroup = $scope.plangroup[$scope.query.bind];
       }
 
       var makeRow = function(){
@@ -73,11 +113,11 @@ angular.module('prosperenceApp')
       };
 
       $scope.addRow = function(property) {
-        $scope.planGroup[property] = $scope.planGroup[property] || [];
-        $scope.planGroup[property].push(makeRow());
+        $scope.plangroup[property] = $scope.plangroup[property] || [];
+        $scope.plangroup[property].push(makeRow());
       };
       $scope.deleteRow = function(index, property) {
-        $scope.planGroup[property].splice(index, 1);
+        $scope.plangroup[property].splice(index, 1);
       };
       $scope.isEnabled = function(title){
         return $scope.sections.enabled[title];
@@ -88,7 +128,7 @@ angular.module('prosperenceApp')
 
       // If property is empty and input type is a table, start with an empty row.
       if ($scope.query.type === 'table') {
-        $scope.planGroup[$scope.query.bind] = $scope.planGroup[$scope.query.bind] || [makeRow()];
+        $scope.plangroup[$scope.query.bind] = $scope.plangroup[$scope.query.bind] || [makeRow()];
       }
     },
     templateUrl: './components/questions/questionTemplate.html'

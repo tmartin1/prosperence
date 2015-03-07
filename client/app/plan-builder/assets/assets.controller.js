@@ -2,7 +2,6 @@
 
 angular.module('prosperenceApp')
 .controller('AssetsCtrl', function ($scope) {
-  console.log($scope.user.plan);
 
   // Array of question objects to be asked in the 'Net Worth' section.
   $scope.queries = [{
