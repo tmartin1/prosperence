@@ -9,6 +9,9 @@ var validationError = function(res, err) {
   return res.json(422, err);
 };
 
+//getPlan
+//savePlan
+
 /**
  * Get list of users
  * restriction: 'admin'
