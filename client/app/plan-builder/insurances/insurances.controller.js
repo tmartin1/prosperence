@@ -7,20 +7,18 @@ angular.module('prosperenceApp')
     question: 'Health insurance is important and legally required.  The most important thing is that you have it.',
     type: 'multi',
     bind: 'insurances',
-    subqueries: [
-      {
-        question: 'Do you have health insurance?',
-        type: 'select',
-        options: [ {text:'Yes', value:true}, {text:'No', value:false} ],
-        bind: 'userHealth'
-      }, {
-        question: 'Does your spouse\'s have health insurance?',
-        type: 'select',
-        options: [ {text:'Yes', value:true}, {text:'No', value:false} ],
-        bind: 'spouseHealth',
-        condition: 'maritalStatus'
-      }
-    ]
+    subqueries: [{
+      question: 'Do you have health insurance?',
+      type: 'select',
+      options: [ {text:'Yes', value:true}, {text:'No', value:false} ],
+      bind: 'userHealth'
+    }, {
+      question: 'Does your spouse\'s have health insurance?',
+      type: 'select',
+      options: [ {text:'Yes', value:true}, {text:'No', value:false} ],
+      bind: 'spouseHealth',
+      condition: 'maritalStatus'
+    }]
   }, {
     title: 'Home and Auto Insurance',
     question: 'Homeowners insurance is important and legally required (if you own a home).  The most important thing is that you have it.',

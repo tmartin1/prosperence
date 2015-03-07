@@ -2,11 +2,14 @@
 
 angular.module('prosperenceApp')
 .controller('SpendingCtrl', function ($scope) {
+  // If plan.expenses does not exist, initialize it as an empty object.
+  $scope.user.plan.expenses = $scope.user.plan.expenses || {};
 
   // Array of question objects to be asked in the 'Cash Flow' section.
   $scope.queries = [{
     title: 'Income Information',
     type: 'multi',
+    bind: 'income',
     subqueries: [{
       question: 'What is your Gross Annual Income?',
       type: 'number',
@@ -15,7 +18,7 @@ angular.module('prosperenceApp')
       question: 'What is your spouse\'s Gross Annual Income?',
       type: 'number',
       bind: 'spouseGrossAnnualIncome',
-      condition: 'maritalStatus'
+      condition: 'married'
     }]
   }, {
     title: 'Payroll Deductions',
@@ -29,7 +32,7 @@ angular.module('prosperenceApp')
       question: "Enter the total deductions from your spouce's paycheck (not including retirement contributions):",
       bind: 'spousePayrollDeductions',
       type: 'number',
-      condition: 'maritalStatus'
+      condition: 'married'
     }]
   }, {
     title: 'Fixed Expenses',
