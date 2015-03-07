@@ -39,7 +39,7 @@ angular.module('prosperenceApp')
   var queries, index;
 
   // Move to previous accordion group or section.
-  $scope.previous = function() {
+  $scope.gotoprevious = function() {
     queries = $scope.$$childHead.queries;
     index = order.indexOf($state.current.name);
     if (!queries || !!queries[0].isOpen) {
@@ -59,7 +59,7 @@ angular.module('prosperenceApp')
   };
 
   // Move to next required input field, accordion group or section.
-  $scope.next = function() {
+  $scope.gotonext = function() {
     // If there is an empty required field, set focus to that input section and display popover.
     var firstInvalid = $('.ng-invalid:visible').first();
     if (firstInvalid.length > 0) {
@@ -74,7 +74,7 @@ angular.module('prosperenceApp')
       return $state.go(order[index+1]);
     }
 
-    // If user is on the final section, move to the next accordion section.
+    // If user is on the final section and all sections are valid, move to the next accordion section.
     else {
       var i = 0;
       while (!queries[i].isOpen) {
@@ -84,10 +84,10 @@ angular.module('prosperenceApp')
           return $state.go(order[index+1]);
         }
       }
-      queries[i+1].isOpen = true;
-      queries[i+1].isEnabled = true;
-      queries[i].isOpen = false;
       queries[i].isComplete = true;
+      queries[i].isOpen = false;
+      queries[i+1].isEnabled = true;
+      queries[i+1].isOpen = true;
     }
   };
 
