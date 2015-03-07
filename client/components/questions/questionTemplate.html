@@ -16,7 +16,8 @@
   <!-- For everything else -->
   <input ng-if="['select','checkbox','radio','button','table','multi','review'].indexOf(query.type) === -1"
          type="{{query.type}}"
-         ng-model="plangroup[query.bind]"/>
+         ng-model="plangroup[query.bind]"
+         ng-required="query.required"/>
 
 </div>
 

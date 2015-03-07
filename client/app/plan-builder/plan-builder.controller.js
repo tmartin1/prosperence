@@ -9,11 +9,10 @@ angular.module('prosperenceApp')
   $scope.user.plan = $scope.user.plan || {};
 
   // List of states for location questions.
-  $scope.states = ['AK', 'AL', 'AR', 'AZ', 'CA', 'CO', 'CT', 'DC', 'DE', 'FL',
-    'GA', 'HI', 'IA', 'ID', 'IL', 'IN', 'KS', 'KY', 'LA', 'MA', 'MD', 'ME',
-    'MI', 'MN', 'MO', 'MS', 'MT', 'NC', 'ND', 'NE', 'NH', 'NJ', 'NM', 'NV',
-    'NY', 'OH', 'OK', 'OR', 'PA', 'RI', 'SC', 'SD', 'TN', 'TX', 'UT', 'VA',
-    'VT', 'WA', 'WI', 'WV', 'WY'];
+  $scope.states = ['AK', 'AL', 'AR', 'AZ', 'CA', 'CO', 'CT', 'DC', 'DE', 'FL', 'GA', 'HI',
+       'IA', 'ID', 'IL', 'IN', 'KS', 'KY', 'LA', 'MA', 'MD', 'ME', 'MI', 'MN', 'MO', 'MS',
+       'MT', 'NC', 'ND', 'NE', 'NH', 'NJ', 'NM', 'NV', 'NY', 'OH', 'OK', 'OR', 'PA', 'RI',
+       'SC', 'SD', 'TN', 'TX', 'UT', 'VA', 'VT', 'WA', 'WI', 'WV', 'WY'];
 
   // Defines the order of how pages are displayed to the user.
   var order = [
@@ -40,7 +39,7 @@ angular.module('prosperenceApp')
   var queries, index;
 
   // Move to previous accordion group or section.
-  $scope.previous = function() {
+  $scope.gotoprevious = function() {
     queries = $scope.$$childHead.queries;
     index = order.indexOf($state.current.name);
     if (!queries || !!queries[0].isOpen) {
@@ -59,13 +58,24 @@ angular.module('prosperenceApp')
     }
   };
 
-  // Move to next accordion group or section.
-  $scope.next = function() {
+  // Move to next required input field, accordion group or section.
+  $scope.gotonext = function() {
+    // If there is an empty required field, set focus to that input section and display popover.
+    var firstInvalid = $('.ng-invalid:visible').first();
+    if (firstInvalid.length > 0) {
+      firstInvalid.focus();
+      return;
+    }
+
+    // If all required sections are filled in, then move to the next section.
     queries = $scope.$$childHead.queries;
     index = order.indexOf($state.current.name);
     if (!queries || !!queries[queries.length-1].isOpen) {
-      $state.go(order[index+1]);
-    } else {
+      return $state.go(order[index+1]);
+    }
+
+    // If user is on the final section and all sections are valid, move to the next accordion section.
+    else {
       var i = 0;
       while (!queries[i].isOpen) {
         i++;
@@ -74,10 +84,10 @@ angular.module('prosperenceApp')
           return $state.go(order[index+1]);
         }
       }
-      queries[i+1].isOpen = true;
-      queries[i+1].isEnabled = true;
       queries[i].isComplete = true;
       queries[i].isOpen = false;
+      queries[i+1].isEnabled = true;
+      queries[i+1].isOpen = true;
     }
   };
 

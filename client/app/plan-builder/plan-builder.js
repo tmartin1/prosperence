@@ -16,7 +16,7 @@ angular.module('prosperenceApp')
     templateUrl: 'app/plan-builder/start/start.html',
     controller: 'PlanBuilderCtrl',
     data: {
-      title: 'Plan Builder'
+      title: 'Getting Started'
     }
   })
   .state('plan-builder.basics', {
