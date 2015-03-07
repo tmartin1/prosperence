@@ -82,31 +82,34 @@ angular.module('prosperenceApp')
     },
     controller: function($scope) {
       // TODO: Set binding of nested objects.
-      // // If query is binding to a nested object, recursively track through plan to assign binding.
-      // var setBinding = function(path) {
-      //   if (!$scope.plangroup[path[0]]) $scope.plangroup[path[0]] = {};
-      //   $scope.plangroup = $scope.plangroup[path[0]];
-      //   path.splice(0, 1);
-      //   if (path.length > 1) setBinding(path);
-      //   else $scope.query.bind = path[0];
-      // };
-      //
-      // if ($scope.query.bind.split('.').length > 1) {
-      //   // If plangroup is undefined, then initialize it as an empty object.
-      //   if ($scope.plangroup === undefined) $scope.plangroup = {};
-      //   // Set binding to nested property.
-      //   var temp = $scope.query.bind.split('.');
-      //   setBinding(temp);
-      // }
+      // If query is binding to a nested object, recursively track through plan to assign binding.
+      var setBinding = function(path) {
+        // debugger;
+        if ($scope.plangroup[path[0]] === undefined) {
+          if ($scope.query.type === 'table') $scope.plangroup[path[0]] = [];
+          else $scope.plangroup[path[0]] = {};
+        }
+        $scope.plangroup = $scope.plangroup[path.shift()];
+        if (path.length > 1) setBinding(path);
+        else $scope.query.bind = path.shift();
+      };
+
+      if (!!$scope.query.bind && $scope.query.bind.split('.').length > 1) {
+        // If plangroup is undefined, then initialize it as an empty object.
+        if ($scope.plangroup === undefined) $scope.plangroup = {};
+        // Set binding to nested property.
+        setBinding($scope.query.bind.split('.'));
+      }
 
       // If a binding is defined for a multi question object,
       if ($scope.query.type === 'multi' && $scope.query.bind) {
         $scope.plangroup = $scope.plangroup[$scope.query.bind];
       }
 
-      var makeRow = function(){
+      // Creates a new row for the input table.
+      var makeRow = function() {
         var row = {};
-        for(var i = 0; i < $scope.query.fields.length; i++){
+        for(var i = 0; i < $scope.query.fields.length; i++) {
           row[$scope.query.fields[i].label] = '';
         }
         return row;
@@ -119,10 +122,10 @@ angular.module('prosperenceApp')
       $scope.deleteRow = function(index, property) {
         $scope.plangroup[property].splice(index, 1);
       };
-      $scope.isEnabled = function(title){
+      $scope.isEnabled = function(title) {
         return $scope.sections.enabled[title];
       };
-      $scope.isComplete = function(title){
+      $scope.isComplete = function(title) {
         return $scope.sections.complete[title];
       };
 
