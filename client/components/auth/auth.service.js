@@ -1,7 +1,7 @@
 'use strict';
 
 angular.module('prosperenceApp')
-.factory('Auth', function Auth($location, $rootScope, $http, User, $cookieStore, $q) {
+.factory('Auth', function Auth($location, $rootScope, $http, User, $cookieStore, $q, $state) {
   var currentUser = {};
   if($cookieStore.get('token')) {
     currentUser = User.get();
@@ -27,6 +27,7 @@ angular.module('prosperenceApp')
         $cookieStore.put('token', data.token);
         currentUser = User.get();
         deferred.resolve(data);
+        $state.go('dashboard.overview');
         return cb();
       }).
       error(function(err) {
