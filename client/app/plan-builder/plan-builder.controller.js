@@ -76,6 +76,7 @@ angular.module('prosperenceApp')
       }
       queries[i+1].isOpen = true;
       queries[i+1].isEnabled = true;
+      queries[i].isComplete = true;
       queries[i].isOpen = false;
     }
   };

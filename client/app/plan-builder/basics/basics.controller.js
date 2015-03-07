@@ -121,7 +121,7 @@ angular.module('prosperenceApp')
     }, {
       question: 'In which state do you work?',
       type: 'select',
-      bind: 'workState',
+      bind: 'workAddress.state',
       options: $scope.states,
       condition: 'workAddress.state'
     }]

@@ -11,13 +11,13 @@
   </div> -->
 
   <!-- For select option questions -->
-  <select ng-if="item.type === 'select'" ng-model="plangroup[item.bind]">
-    <option ng-repeat="option in item.options" value="{{option.value}}">{{ option.text }}</option>
+  <select ng-if="item.type === 'select'" ng-model="plangroup[item.bind]" class="dropdown">
+    <option ng-repeat="option in item.options" value="{{option.value || option}}" class="item">{{ option.text || option }}</option>
   </select>
 
   <!-- For table entry questions -->
   <div ng-if="item.type === 'table'">
-    <form class="ui form">
+    <form class="">
       <table ng-class="{ 'two fields': item.fields.length === 2,
                          'three fields': item.fields.length === 3,
                          'four fields': item.fields.length === 4,
@@ -43,7 +43,7 @@
                    style="text-align:{{field.textAlign}}"/>
           </td>
           <td>
-            <button class="mini circular ui icon button"
+            <button class="btn"
                     ng-click="deleteRow($index, item.bind)">
                     <i class="fa fa-times"></i>
             </button>
