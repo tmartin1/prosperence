@@ -13,7 +13,7 @@ angular.module('prosperenceApp')
     scope: {
       queries: '=',
       plangroup: '=',
-      sections: '='
+      next: '&'
     },
     controller: function($scope) {
       // By default, the first question in the series is opened
@@ -26,6 +26,44 @@ angular.module('prosperenceApp')
           $scope.queries[index + 1].isEnabled = true;
         }
       };
+      // TODO: Previously enabled sections should remain enables if the user goes back.
+
+      // Advances the focus of the user to the next fillable field when 'enter' is pressed.
+      $('questions').keypress(function() {
+        if (event.keyCode == 13) {
+          var textboxes = $('input:visible');
+          // if ($('select:visible').length) {
+          //   console.log('selects');
+          //   console.log($('select:visible'));
+          //   textboxes.concat($('select:visible'));
+          // }
+          var currentBox;
+          // console.log($('input:focus'));
+          if ($('input:focus').length > 0) {
+            currentBox = $('input:focus');
+          }
+          // else if ($('select:focus').length > 0) {
+          //   currentBox = $('select:focus');
+          // }
+          // var currentBox = $('input:focus') || $('select:focus');
+          var currentIndex = textboxes.index(currentBox);
+          console.log(currentBox);
+          // If there is another input fields, move focus to that field.
+          if (textboxes[currentIndex + 1] !== undefined) {
+            console.log('advancing to next input');
+            var nextBox = textboxes[currentIndex + 1];
+            nextBox.focus();
+            nextBox.select();
+          } else {
+            // If the user is on the last input in the current question, move to next question or section.
+            console.log('advancing to next question');
+            $scope.next();
+          }
+          event.preventDefault();
+          // return false;
+        }
+      });
+
     },
     templateUrl: './components/questions/questionsTemplate.html'
   };
@@ -39,8 +77,7 @@ angular.module('prosperenceApp')
     transclude: true,
     scope: {
       query: '=',
-      plangroup: '=',
-      sections: '='
+      plangroup: '='
     },
     controller: function($scope) {
       console.log($scope.plangroup);
@@ -75,8 +112,6 @@ angular.module('prosperenceApp')
       };
 
       $scope.addRow = function(property) {
-        console.log($scope.plangroup)
-        console.log(property)
         $scope.plangroup[property] = $scope.plangroup[property] || [];
         $scope.plangroup[property].push(makeRow());
       };

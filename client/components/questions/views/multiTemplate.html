@@ -57,11 +57,16 @@
             ng-click="addRow(item.bind)">
             Add More
     </button>
-  </div>
+  </div> <!-- End of table objects -->
 
-  <!-- For everything else -->
-  <input ng-if="['select','checkbox','radio','button','table','multi','review'].indexOf(item.type) === -1"
-         type="{{item.type}}"
-         ng-model="plangroup[item.bind]"/>
+  <!-- For date objects -->
+  <input ng-if="item.type === 'date'"
+         type="date"
+         ng-model="plangroup[item.bind]" />
+
+   <!-- For everything else -->
+   <input ng-if="['select','checkbox','radio','button','table','multi','review','date'].indexOf(item.type) === -1"
+          type="{{item.type}}"
+          ng-model="plangroup[item.bind]" />
   <br><br>
 </div>
