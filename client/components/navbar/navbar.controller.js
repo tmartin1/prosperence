@@ -39,7 +39,12 @@ angular.module('prosperenceApp')
     $scope.modalInstance = $modal.open({
       templateUrl: 'components/navbar/partials/loginModal.html',
       size: 'lg',
-      controller: 'loginController'
+      controller: 'loginController',
+      resolve: {
+        goToSignUp: function() {
+          return goToSignUp
+        }
+      }
     });
   }
 
@@ -53,8 +58,8 @@ angular.module('prosperenceApp')
     return $state.includes(viewLocation);
   };
   
-}).controller('loginController', function($scope, $modalInstance, Auth, $location) {
-    $scope.page = 'login';
+}).controller('loginController', function($scope, $modalInstance, Auth, $location, goToSignUp) {
+    $scope.page = goToSignUp ? 'signup' : 'login';
     $scope.toggleRegister = function(newPage) {
       $scope.page = newPage;
     };
