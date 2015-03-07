@@ -1,46 +1,6 @@
 <div class="row-fluid">
 
-  <!-- Sidebar wrapper -->
-  <div id="sidebar-wrapper" class="col-md-2">
-
-    <ul class="sidebar-nav">
-      <li ng-repeat="(facet,object) in courses.facets" ng-if="courses.results.length">
-        <h5 class="facet-title" ng-bind="facet | uppercase"></h5>
-        <ul class="facet-list">
-          <li ng-repeat="item in object.buckets | limitTo: clickLimit">
-            <a href data-ng-click="doSearchByFilter(facet, item.value)" ng-show="item.value">
-              <input type="checkbox" ng-model="checked[item.value]">
-              <span ng-if="facet !=='minutes'" ng-bind-html="item.value | trust" class="facetText"></span>
-              <span ng-if="facet ==='minutes'" class="facetText">{{item.value | currency:'$'}}</span>
-              ({{item.count | number}})
-            </a>
-          </li>
-
-          <div ng-show='object.buckets.length > 5'>
-            <a href='#' ng-if='showMoreFacets' ng-click='showMoreFacetLinks(object.buckets.length)' class="show-more-link">
-              Show more
-            </a>
-
-            <a href='#' ng-if='!showMoreFacets' ng-click='showLessFacetLinks()' class="show-more-link">
-              Show less
-            </a>
-          </div>
-
-        </ul>
-      </li>
-
-      <li class="minutes-filter">
-        <h5 class="facet-title">Minutes</h5>
-        <input type="text" ng-model="startMinutesFilter"> to <input type="text" ng-model="endMinutesFilter">
-        <a href='#' ng-click='doMinutesSort()' class="show-more-link">Go</a>
-      </li>
-
-    </ul>
-
-  </div>
-  <!-- End sidebar wrapper -->
-
-  <!-- Start photo catalog -->
+  <!-- Start video courses catalog -->
   <div id="catalog-photos" class="col-md-10">
     <img ng-show="searchInProgress" id="ajax-loader" ng-src="assets/images/ajax-loader.gif" class="img-responsive"/>
 
@@ -55,7 +15,7 @@
           <h4 ng-if="course.title.length >= 100">{{course.title.substr(0,75)}}...</h4>
           <h4 ng-if="course.title.length < 100">{{course.title}}</h4>
 
-          <p>Minutes: {{course.minutes}}</p>
+          <p>{{course.minutes}} minutes</p>
           </p>
         </div>
       </div>
@@ -74,5 +34,6 @@
                              template-url="bower_components/angular-utils-pagination/dirPagination.tpl.html">
     </dir-pagination-controls>
   </div>
+
 </div>
 <!-- End course info -->

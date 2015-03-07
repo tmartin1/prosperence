@@ -1,0 +1,39 @@
+// Styles for plan-builder side menu
+.directed-down-nav {
+  // background-color: red;
+  border: 1px solid gray;
+}
+
+.directed-down-nav li {
+  border-bottom: 1px solid gray;
+  padding: 0px;
+}
+
+/* Required for Down Triangle */
+.tri-down:before, .tri-down:after {
+  content: "";
+  position: absolute;
+  width: 0;
+  height: 0;
+  border-style: solid;
+  border-color: transparent;
+  border-bottom: 0;
+}
+
+/* Stroke */
+.tri-down:before {
+  bottom: -10px;
+  left: 50px;
+
+  /* If 1px darken stroke slightly */
+  border-top-color: #777;
+  border-width: 10px;
+}
+
+/* Fill */
+.tri-down:after {
+  bottom: -9px;
+  left: 51px;
+  border-top-color: #fff;
+  border-width: 9px;
+}
