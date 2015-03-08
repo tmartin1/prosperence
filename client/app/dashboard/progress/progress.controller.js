@@ -5,5 +5,5 @@ angular.module('prosperenceApp')
   $scope.temp = {};
 
   // Check highcharts menu and update if needed. This line must be lower than the last highchart.
-  $scope.updateChartMenu();
+  // $scope.updateChartMenu();
 });
