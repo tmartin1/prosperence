@@ -14,7 +14,7 @@
     <!-- Load existing items if present -->
     <tr ng-repeat="items in plangroup[query.bind]">
       <td ng-repeat="field in query.fields" style="padding-right:8px;">
-        <input ng-model="plangroup[query.bind][$parent.$index][field.label]"
+        <input ng-model="plangroup[query.bind][$parent.$index][field.value]"
                type="{{field.type}}"
                class="form-control"
                style="margin:4px auto; text-align:{{field.textAlign}}"
