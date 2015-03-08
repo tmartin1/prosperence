@@ -20,8 +20,6 @@ angular.module('prosperenceApp')
       $scope.queries[0].isOpen = true;
       $scope.queries[0].isEnabled = true;
 
-      console.log($scope.queries)
-
       // Enable the next accordion section each time the user moves to a new section.
       $scope.enableNext = function(index) {
         if (typeof index === 'number' && $scope.queries[index+1]) {
