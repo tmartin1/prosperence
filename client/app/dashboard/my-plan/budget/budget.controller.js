@@ -1,7 +1,11 @@
 'use strict';
 
 angular.module('prosperenceApp')
-.controller('BudgetCtrl', function ($scope) {
+.controller('BudgetCtrl', function ($scope, Auth) {
+
+  $scope.user = Auth.getCurrentUser();
+  $scope.plan = $scope.user.plan;
+
   var expenses = $scope.plan.expenses;
 
   var buildData = function(obj) {
