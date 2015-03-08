@@ -24,9 +24,15 @@ require('./server/config/express')(app);
 require('./server/routes')(app);
 
 // Start server
-server.listen(config.port, config.ip, function () {
-  console.log('Express server listening on %d, in %s mode', config.port, app.get('env'));
-});
+if(process.env.NODE_ENV === 'production') {
+  server.listen(80, config.ip, function() {
+    console.log('Express server listening on %d, in %s mode', config.port, app.get('env'));
+  });
+} else if(process.env.NODE_ENV === 'development') {
+  server.listen(config.port, config.ip, function () {
+    console.log('Express server listening on %d, in %s mode', config.port, app.get('env'));
+  });
+}
 
 // Expose app
 exports = module.exports = app;
