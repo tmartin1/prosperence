@@ -2,6 +2,17 @@
 
 angular.module('prosperenceApp')
 .controller('DashboardCtrl', function ($scope, $state, CalcsService, Auth) {
+  $scope.plan = Auth.getCurrentUser().plan;
+
+  // Calculates and return the total of a given group.
+  $scope.sumGroup = function(group) {
+    var total = 0;
+    for (var key in group) {
+      if (typeof group[key] === 'number') total += group[key];
+      else total += group[key]['amount'];
+    }
+    return total;
+  };
 
   // Defines initial view conditions for my-plan and settings.
   $scope.myPlanView = $scope.myPlanView || getPath('my-plan/net-worth/net-worth.html');

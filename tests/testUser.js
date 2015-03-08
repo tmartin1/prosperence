@@ -60,26 +60,22 @@ var testUser = {
         { name: 'Spouse Rollover IRA', amount: 17000, tax: 'pretax' }
       ],
     },
-    // contributions objects must be the name of the user's fixed or variable assets.
+    // contributions objects must be the name of the user's fixed or variable assets and stored as monthly contributions.
     contributions: {
       'User 401k': {
         amount: 1000,
-        frequency: 'monthly', // 'weekly', 'biweekly', 'twice per month', 'monthly', or 'annualy'
         type: 'employer' // 'employer', 'individual', or 'non-retirement'
       },
       'User Roth IRA': {
         amount: 100,
-        frequency: 'monthly',
         type: 'employer'
       },
       'Spouse 401k': {
-        amount: 100,
-        frequency: 'weekly',
+        amount: 400,
         type: 'employer'
       },
       'Some Other Savings Account': {
         amount: 50,
-        frequency: 'monthly',
         type: 'non-retirement'
       }
     },
