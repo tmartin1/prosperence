@@ -2,8 +2,9 @@
 
 var MarketHistory = require('./market-history.model');
 var config = require('../../config/environment');
-var request = require('request');
+// var request = require('request');
 var Promise = require('bluebird');
+var request = require('request-promise');
 // TODO: make api request dynamic to current date.
 var currentDate = new Date();
 var api = "http://globalindiceshistorical.xignite.com/xglobalindiceshistorical.json/GetHistoricalIndexValues?Identifier=SPX.INDCBSX&IdentifierType=Symbol&StartDate=4/1/1950&EndDate=3/1/2015&_Token=E208B2F5497C4880B593EBFC90856142";
@@ -12,45 +13,49 @@ var api = "http://globalindiceshistorical.xignite.com/xglobalindiceshistorical.j
 // TODO: Refactor so it doesn't rebuild entire array every month but just adds new month.
 var getMonthlyReturns = function(req, res) {
   // return new Promise (function(resolve, reject) {
-  //   if (!lastQueryMonth || lastQueryMonth.getFullMonth !== new Date.getFullMonth()) {
-  //     var options = {
-  //       "url": api,
-  //       "json": true
-  //     };
-  //     // Send request to Xignite to retreive market data.
-  //     request(options, function(error, message, res) {
-  //       if(!error) {
-  //         // build data array of historic performance.
-  //         var data = [];
-  //         var temp =0;
-  //         var month = res.values[0].date.split('/')[0];
-  //         for (var i=0; i<res.values.length; i++) {
-  //           // Generate total change over the current month.
-  //           if (res.values[i].date.split('/')[0] === month) {
-  //             temp += res.values[i].ChangeFromPreviousClose;
-  //           }
-  //           // When month changes, push temp to data and reset temp to zero.
-  //           else {
-  //             data.push(temp);
-  //             temp = 0;
-  //             var month = res.values[i].date.split('/')[0];
-  //           }
-  //         }
-  //       } else {
-  //         console.log(error);
-  //       }
-  //     });
-  //     MarketHistory.monthlyReturns = data;
-  //   }
-  //   return MarketHistory.monthlyReturns;
-  // }
+    if (!lastQueryMonth || lastQueryMonth.getFullMonth !== new Date.getFullMonth()) {
+      var options = {
+        "url": api,
+        "json": true
+      };
+      // Send request to Xignite to retreive market data.
+      request(options, function(error, message, res) {
+        if(!error) {
+          // build data array of historic performance.
+          var data = [];
+          var temp =0;
+          var month = res.Values[0].Date.split('/')[0];
+          for (var i=0; i<res.Values.length; i++) {
+            // Generate total change over the current month.
+            if (res.Values[i].Date.split('/')[0] === month) {
+              temp += res.Values[i].ChangeFromPreviousClose;
+            }
+            // When month changes, push temp to data and reset temp to zero.
+            else {
+              data.push(temp);
+              temp = 0;
+              var month = res.Values[i].Date.split('/')[0];
+            }
+          }
+        } else {
+          console.log(error);
+        }
+      }).then(
+        function(rsp) {
+          MarketHistory.monthlyReturns = rsp;
+        }
+      );
+    }
+    return MarketHistory.monthlyReturns;
+  // });
 };
 
 var lastQueryMonth;
 // Get array of monthly market performance from 1950 to today.
 exports.index = function(req, res) {
   // If last query > 1 month ago, re-query
-  return getMonthlyReturns(req, res)
+  var proGetMonthlyReturns = Promise.promisify(getMonthlyReturns);
+  return proGetMonthlyReturns(req, res)
     .then(function(rsp) {
       return res.json(200, rsp);
     });
