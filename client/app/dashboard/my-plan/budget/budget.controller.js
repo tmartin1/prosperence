@@ -16,6 +16,16 @@ angular.module('prosperenceApp')
     return data;
   };
 
+  // Calculates and return the total of a given group.
+  var sumGroup = function(group) {
+    var total = 0;
+    for (var key in group) {
+      if (typeof group[key] === 'number') total += group[key];
+      else total += group[key]['value'] || group[key]['balance'];
+    }
+    return total;
+  }
+
   // Cash Flow Chart Logic
   var fixedExpenses = $scope.sumGroup(expenses.fixed);
   var flexibleExpenses = $scope.sumGroup(expenses.flexible);
@@ -93,5 +103,47 @@ angular.module('prosperenceApp')
   // hide highcharts.com logo
   $('text[text-anchor=end]').hide();
   // End cash flow pie chart.
+
+
+  // Tax Chart Logic
+  // Build the chart
+  $('#taxContainer').highcharts({
+    chart: {
+      plotBackgroundColor: null,
+      plotBorderWidth: null,
+      plotShadow: false
+    },
+    title: {
+      text: 'Income Tax Analysis'
+    },
+    subtitle: {
+      text: 'click any asset or debt in the legend to add or remove it from the graph'
+    },
+    tooltip: {
+      pointFormat: '<b>{point.percentage:.1f}%</b>'
+    },
+    plotOptions: {
+      pie: {
+        allowPointSelect: true,
+        cursor: 'pointer',
+        dataLabels: {
+            enabled: true
+        },
+        showInLegend: true
+      }
+    },
+    series: [{
+      type: 'pie',
+      data: [
+        [ 'Federal', $scope.plan.taxProjection.projected.federal ],
+        [ 'State and City', $scope.plan.taxProjection.projected.local ],
+        [ 'FICA', sumGroup($scope.plan.taxProjection.projected.fica) ],
+        [ 'AMT', $scope.plan.taxProjection.projected.amt ],
+        [ 'Net Income', $scope.plan.taxProjection.netIncome + savings ]
+      ]
+    }]
+  });
+  // hide highcharts.com logo
+  $('text[text-anchor=end]').hide();
 
 });
