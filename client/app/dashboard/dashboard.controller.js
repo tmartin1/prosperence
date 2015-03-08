@@ -2,7 +2,10 @@
 
 angular.module('prosperenceApp')
 .controller('DashboardCtrl', function ($scope, $state, CalcsService, Auth) {
-  $scope.plan = Auth.getCurrentUser().plan;
+  $scope.user = Auth.getCurrentUser();
+  $scope.plan = $scope.user.plan;
+  // $scope.planelLibrary = $scope.planelLibrary || {};
+  $scope.user.overviewPlanels = $scope.user.overviewPlanels || {};
 
   // Calculates and return the total of a given group.
   $scope.sumGroup = function(group) {
@@ -14,29 +17,24 @@ angular.module('prosperenceApp')
     return total;
   };
 
-  // Add addPlanel and removePlanel to highchart menu.
-  $scope.addToMenu = function(planel) {
-    Highcharts.getOptions().exporting.buttons.contextButton.menuItems.push({
-      text: 'Add to Overview',
-      onclick: $scope.addPlanel(planel)
-    });
-  };
-
-  $scope.test = function() {
-    console.log($scope.overviewPlanels);
-  };
-
   // Add planel to overview.
   $scope.addPlanel = function(planel) {
-    $scope.overviewPlanels.push(planel);
+    if (!$scope.user.overviewPlanels[planel.selector]) {
+      $scope.user.overviewPlanels[planel.userOptions.title.text] = planel.renderTo;
+    }
   };
 
   // Remove planel from overview.
   $scope.removePlanel = function(planel) {
-    //
+    // $scope.user.overviewPlanels[planel.userOptions.title.text] = undefined;
+    delete $scope.user.overviewPlanels[planel.userOptions.title.text];
   };
 
-  $scope.overviewPlanels = [];
+  // If overview is undefined, then load default planels.
+  // if (!$scope.user.overviewPlanels) {
+  //   $scope.user.overviewPlanels = {};
+  //   $scope.addPlanel($scope.planelLibrary['#cashFlowAnalysisContainer']);
+  // }
 
   // Defines initial view conditions for my-plan and settings.
   $scope.myPlanView = $scope.myPlanView || getPath('my-plan/net-worth/net-worth.html');
@@ -129,5 +127,21 @@ angular.module('prosperenceApp')
     sub.active = true;
     $scope[section.setView] = sub.view;
   };
+
+  // Update the chart menu with add/remove from overview options.
+  $scope.updateChartMenu = function() {
+    if (Highcharts.getOptions().exporting.buttons.contextButton.menuItems[0].text !== 'Add to Overview') {
+      Highcharts.getOptions().exporting.buttons.contextButton.menuItems.shift();
+      Highcharts.getOptions().exporting.buttons.contextButton.menuItems.unshift({
+        text: 'Remove from Overview',
+        onclick: function() { $scope.removePlanel(this) }
+      });
+      Highcharts.getOptions().exporting.buttons.contextButton.menuItems.unshift({
+        text: 'Add to Overview',
+        onclick: function() { $scope.addPlanel(this) }
+      });
+    }
+  };
+  $scope.updateChartMenu();
 
 });

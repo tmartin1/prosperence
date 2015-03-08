@@ -12,7 +12,7 @@ angular.module('prosperenceApp')
     return data;
   };
 
-  // Budget Chart Logic
+  // Cash Flow Chart Logic
   var fixedExpenses = $scope.sumGroup(expenses.fixed);
   var flexibleExpenses = $scope.sumGroup(expenses.flexible);
   var savings = $scope.sumGroup($scope.plan.contributions);
@@ -88,15 +88,6 @@ angular.module('prosperenceApp')
   });
   // hide highcharts.com logo
   $('text[text-anchor=end]').hide();
-  // $scope.addToPlanel(cashFlowChart);
-
-  Highcharts.getOptions().exporting.buttons.contextButton.menuItems.push({
-    text: 'Add to Overview',
-    onclick: $scope.addPlanel(cashFlowChart)
-  });
-
   // End cash flow pie chart.
-
-  console.log(Highcharts.getOptions().exporting.buttons.contextButton.menuItems);
 
 });
