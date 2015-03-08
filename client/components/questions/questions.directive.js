@@ -46,7 +46,7 @@ angular.module('prosperenceApp')
         }
       });
     },
-    templateUrl: './components/questions/questionsTemplate.html'
+    templateUrl: 'components/questions/questionsTemplate.html'
   };
 })
 
@@ -116,6 +116,6 @@ angular.module('prosperenceApp')
         $scope.plangroup[$scope.query.bind] = $scope.plangroup[$scope.query.bind] || [makeRow()];
       }
     },
-    templateUrl: './components/questions/questionTemplate.html'
+    templateUrl: 'components/questions/questionTemplate.html'
   };
 });
