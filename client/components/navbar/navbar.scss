@@ -1,5 +1,12 @@
 .navbar-nav > li > p {
-  position: relative;
-  display: block;
-  padding: 10px 15px;
+  display: none;
 }
+
+@media (min-width: 768px) {
+  .navbar-nav > li > p {
+    display: block;
+    padding-top: 1px;
+  }
+}
+
+
