@@ -14,6 +14,30 @@ angular.module('prosperenceApp')
     return total;
   };
 
+  // Add addPlanel and removePlanel to highchart menu.
+  $scope.addToMenu = function(planel) {
+    Highcharts.getOptions().exporting.buttons.contextButton.menuItems.push({
+      text: 'Add to Overview',
+      onclick: $scope.addPlanel(planel)
+    });
+  };
+
+  $scope.test = function() {
+    console.log($scope.overviewPlanels);
+  };
+
+  // Add planel to overview.
+  $scope.addPlanel = function(planel) {
+    $scope.overviewPlanels.push(planel);
+  };
+
+  // Remove planel from overview.
+  $scope.removePlanel = function(planel) {
+    //
+  };
+
+  $scope.overviewPlanels = [];
+
   // Defines initial view conditions for my-plan and settings.
   $scope.myPlanView = $scope.myPlanView || getPath('my-plan/net-worth/net-worth.html');
   $scope.settingsView = $scope.settingsView || getPath('settings/basic/basic.html');

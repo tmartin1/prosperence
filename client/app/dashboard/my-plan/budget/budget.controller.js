@@ -55,15 +55,15 @@ angular.module('prosperenceApp')
   }];
 
   // Create the chart
-  $('#cashFlowAnalysisContainer').highcharts({
+  var cashFlowChart = $('#cashFlowAnalysisContainer').highcharts({
     chart: {
       type: 'pie'
     },
     title: {
-      text: 'Budget Breakdown'
+      text: 'Cashflow Analysis'
     },
     subtitle: {
-      text: 'click each section to see a detailed breakdown'
+      text: 'click on a section to see a detailed breakdown'
     },
     plotOptions: {
       series: {
@@ -88,6 +88,15 @@ angular.module('prosperenceApp')
   });
   // hide highcharts.com logo
   $('text[text-anchor=end]').hide();
+  // $scope.addToPlanel(cashFlowChart);
+
+  Highcharts.getOptions().exporting.buttons.contextButton.menuItems.push({
+    text: 'Add to Overview',
+    onclick: $scope.addPlanel(cashFlowChart)
+  });
+
   // End cash flow pie chart.
+
+  console.log(Highcharts.getOptions().exporting.buttons.contextButton.menuItems);
 
 });
