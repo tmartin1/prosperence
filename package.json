@@ -5,6 +5,7 @@
   "dependencies": {
     "aws-sdk": "^2.1.15",
     "body-parser": "~1.5.0",
+    "bower": "*",
     "compass": "^0.1.0",
     "composable-middleware": "^0.3.0",
     "compression": "~1.0.1",
@@ -83,9 +84,10 @@
     "node": ">=0.10.35"
   },
   "scripts": {
-    "start": "node server/app.js",
+    "start": "grunt serve",
     "test": "grunt test",
-    "update-webdriver": "node node_modules/grunt-protractor-runner/node_modules/protractor/bin/webdriver-manager update"
+    "update-webdriver": "node node_modules/grunt-protractor-runner/node_modules/protractor/bin/webdriver-manager update",
+    "postinstall": "./node_modules/bower/bin/bower install"
   },
   "private": true
 }

@@ -58,9 +58,12 @@
       <script src="bower_components/angular-ui-select/dist/select.js"></script>
       <script src="bower_components/angular-utils-pagination/dirPagination.js"></script>
       <script src="bower_components/angular-local-storage/dist/angular-local-storage.js"></script>
+<<<<<<< HEAD
+      <script src="bower_components/highcharts.com/bower-info.js"></script>
+=======
       <script src="bower_components/angular-youtube-mb/src/angular-youtube-embed.js"></script>
       <script src="bower_components/youtube-iframe-api/youtube.iframe-api.js"></script>
-      <script src="bower_components/highcharts.com/bower-info.js"></script>
+>>>>>>> 557738f1cea7d0c4f1cc17a23d2a25360e101abc
       <!-- endbower -->
     <!-- endbuild -->
 

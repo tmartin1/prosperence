@@ -35,45 +35,45 @@
         <!--<hr>-->
       <ul class="nav nav-tabs nav-pills nav-stacked">
         <!--navigation buttons-->
-        <li role="presentation" ui-sref-active="active"><a ui-sref="university.welcome">Welcome</a></li>
+        <li role="presentation" ui-sref-active="active"><a ui-sref="university.courses">All Courses</a></li>
         <li role="presentation" ui-sref-active="active"><a ui-sref="university.favorites">Favorites</a></li>
         <li role="presentation" ui-sref-active="active"><a ui-sref="university.recommended">Recommended</a></li>
-        <li role="presentation" ui-sref-active="active"><a ui-sref="university.courses">All Courses</a></li>
-        <hr>
 
         <!--facet filters-->
-        <li ng-repeat="(facet,object) in courses.facets" ng-if="courses.results.length">
-          <h5 class="facet-title" ng-bind="facet | uppercase"></h5>
-          <ul class="facet-list">
-            <li ng-repeat="item in object.buckets | limitTo: clickLimit">
-              <a href data-ng-click="doSearchByFilter(facet, item.value)" ng-show="item.value">
-                <input type="checkbox" ng-model="checked[item.value]">
-                <span ng-if="facet !=='minutes'" ng-bind-html="item.value | trust" class="facetText"></span>
-                <span ng-if="facet ==='minutes'" class="facetText">{{item.value | currency:'$'}}</span>
-                ({{item.count | number}})
-              </a>
-            </li>
+        <div>
+          <hr>
+          <li ng-repeat="(facet,object) in courses.facets" ng-if="courses.results.length">
+            <h5 class="facet-title" ng-bind="facet | uppercase" {{$state.current.name}}></h5>
+            <ul class="facet-list">
+              <li ng-repeat="item in object.buckets | limitTo: clickLimit">
+                <a href data-ng-click="doSearchByFilter(facet, item.value)" ng-show="item.value">
+                  <input type="checkbox" ng-model="checked[item.value]">
+                  <span ng-bind-html="item.label | trust" class="facetText"></span>
+                  ({{item.count | number}})
+                </a>
+              </li>
 
-            <div ng-show='object.buckets.length > 5'>
-              <a href='#' ng-if='showMoreFacets' ng-click='showMoreFacetLinks(object.buckets.length)' class="show-more-link">
-                Show more
-              </a>
+              <div ng-show='object.buckets.length > 5'>
+                <a href='#' ng-if='showMoreFacets' ng-click='showMoreFacetLinks(object.buckets.length)' class="show-more-link">
+                  Show more
+                </a>
 
-              <a href='#' ng-if='!showMoreFacets' ng-click='showLessFacetLinks()' class="show-more-link">
-                Show less
-              </a>
-            </div>
+                <a href='#' ng-if='!showMoreFacets' ng-click='showLessFacetLinks()' class="show-more-link">
+                  Show less
+                </a>
+              </div>
 
-          </ul>
-        </li>
+            </ul>
+          </li>
 
-        <!--duration range filter-->
-        <li class="minutes-filter">
-          <h5 class="facet-title">Minutes</h5>
-          <input type="text" ng-model="startMinutesFilter">  to  <input type="text" ng-model="endMinutesFilter">
-          <a ng-click='doMinutesSort()' class="facet-button">Go</a>
-        </li>
-        </br>
+          <!--duration range filter-->
+          <li class="minutes-filter">
+            <h5 class="facet-title">Minutes</h5>
+            <input type="text" ng-model="startMinutesFilter">  to  <input type="text" ng-model="endMinutesFilter">
+            <a ng-click='doMinutesSort()' class="facet-button">Go</a>
+          </li>
+          </br>
+        </div>
 
       </ul>
     </div>

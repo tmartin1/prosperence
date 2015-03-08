@@ -1,7 +1,7 @@
 'use strict';
 
 angular.module('prosperenceApp')
-.controller('UniversityCtrl', ['$scope', 'search', '$rootScope', function($scope, search, $rootScope) {
+.controller('UniversityCtrl', ['$scope', '$rootScope', '$state', 'search',  function($scope, $rootScope, $state, search) {
   $scope.facetFields = "";
   $scope.filterFields = "";
   $scope.selectedItems = [];
@@ -16,17 +16,17 @@ angular.module('prosperenceApp')
   $scope.showMoreFacets = true;
   $scope.startMinutesFilter = 0;
   $scope.endMinutesFilter = 0;
+  $scope.$state = $state;
 
-  $scope.doSearch = function(searchTerm, pageNumber) {
+  $scope.doSearch = function (searchTerm, pageNumber, filterFields) {
     pageNumber = pageNumber || 0;
+    filterFields = filterFields || null;
     $scope.searchTerm = searchTerm;
-
-    search.doSearch(searchTerm, pageNumber, null, null, function(newCourses) {
+    search.doSearch(searchTerm, pageNumber, filterFields, null, function (newCourses) {
       newCourses = search.processFacets(newCourses);
       $rootScope.$broadcast('courses-updated', {
         newCourses: newCourses
       });
-      search.fromNavBar = true;
     });
   };
 
@@ -37,26 +37,37 @@ angular.module('prosperenceApp')
     });
   };
 
-  //when enter pressed, trigger search if no suggestions given
-  $rootScope.$on('keypress', function(onEvent, keypressEvent) {
-    var keyCode = keypressEvent.which;
+  // Search by facet filter.
+  $scope.doSearchByFilter = function(term, value) {
+    $scope.checked[value] = !$scope.checked[value];
 
-    if(keyCode === 13 && $scope.searchTerm) {
-      $scope.doSearch($scope.searchTerm);
+    if($scope.checked[value]) {
+      $scope.filterFields.push({
+        term: term,
+        value: value
+      });
+    } else {
+      $scope.filterFields.forEach(function(filter, i) {
+        if(filter.value === value) {
+          $scope.filterFields.splice(i, 1);
+        }
+      })
     }
-  });
+
+    $scope.doSearch($scope.searchTerm, 0, $scope.filterFields);
+  };
 
   // Function to sort by minutes
   $scope.doMinutesSort = function() {
     //remove existing minutes filter, if exists
     $scope.filterFields.forEach(function(filter, i) {
-      if(filter.term === 'minutes') {
+      if(filter.term === 'duration') {
         $scope.filterFields.splice(i, 1);
       }
     });
 
     // filter by minutes range
-    $scope.doSearchByFilter('minutes', '[' + $scope.startMinutesFilter + ',' + $scope.endMinutesFilter + ']');
+    $scope.doSearchByFilter('duration', '[' + ($scope.startMinutesFilter * 60) + ',' + ($scope.endMinutesFilter * 60) + ']');
   };
 
   //ajax call to show more favorite records
@@ -93,6 +104,14 @@ angular.module('prosperenceApp')
     $scope.courses.results = [];
     $scope.courses.totalCount = 0;
     $scope.searchInProgress = true;
-  })
+  });
 
+  //when enter pressed, trigger search if no suggestions given
+  $rootScope.$on('keypress', function(onEvent, keypressEvent) {
+    var keyCode = keypressEvent.which;
+
+    if(keyCode === 13 && $scope.searchTerm) {
+      $scope.doSearch($scope.searchTerm);
+    }
+  });
 }]);
