@@ -10,6 +10,7 @@ module.exports = function(app) {
   app.use('/api/users', require('./api/user'));
 
   app.use('/auth', require('./auth'));
+  app.use('/api/market-history', require('./api/market-history'));
   app.use('/api/search', require('./api/search'));
   app.use('/calcs/retire', require('./calcs/retire'));
   app.use('/calcs/tax', require('./calcs/tax'));

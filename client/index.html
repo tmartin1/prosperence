@@ -21,10 +21,12 @@
     <link rel="stylesheet" href="app/app.css">
       <!-- injector:css -->
       <link rel="stylesheet" href="app/app.css">
+      <link rel="stylesheet" href="app/dashboard/dashboard.css">
       <link rel="stylesheet" href="app/main/main.css">
       <link rel="stylesheet" href="app/plan-builder/plan-builder.css">
       <link rel="stylesheet" href="app/university/courses/courses.css">
       <link rel="stylesheet" href="app/university/university.css">
+      <link rel="stylesheet" href="components/navbar/navbar.css">
       <link rel="stylesheet" href="components/questions/questions.css">
       <!-- endinjector -->
     <!-- endbuild -->
@@ -48,7 +50,6 @@
       <script src="bower_components/jquery/dist/jquery.js"></script>
       <script src="bower_components/angular/angular.js"></script>
       <script src="bower_components/angular-resource/angular-resource.js"></script>
-      <script src="bower_components/angular-cookies/angular-cookies.js"></script>
       <script src="bower_components/angular-sanitize/angular-sanitize.js"></script>
       <script src="bower_components/angular-bootstrap/ui-bootstrap-tpls.js"></script>
       <script src="bower_components/lodash/dist/lodash.compat.js"></script>
@@ -60,6 +61,7 @@
       <script src="bower_components/angular-local-storage/dist/angular-local-storage.js"></script>
       <script src="bower_components/angular-youtube-mb/src/angular-youtube-embed.js"></script>
       <script src="bower_components/youtube-iframe-api/youtube.iframe-api.js"></script>
+      <script src="bower_components/highcharts.com/bower-info.js"></script>
       <!-- endbower -->
     <!-- endbuild -->
 
@@ -107,6 +109,7 @@
           <script src="app/university/recommended/recommended.controller.js"></script>
           <script src="app/university/university.controller.js"></script>
           <script src="app/university/university.js"></script>
+          <script src="components/angular-cookies/angular-cookies.js"></script>
           <script src="components/auth/auth.service.js"></script>
           <script src="components/auth/user.service.js"></script>
           <script src="components/filters/trust.filter.js"></script>
@@ -116,5 +119,13 @@
           <script src="components/questions/questions.directive.js"></script>
           <!-- endinjector -->
         <!-- endbuild -->
+
+      <!-- manually added scripts -->
+      <script src="http://code.highcharts.com/highcharts.js"></script>
+      <script src="http://code.highcharts.com/modules/data.js"></script>
+      <script src="http://code.highcharts.com/modules/drilldown.js"></script>
+      <script src="http://code.highcharts.com/highcharts-more.js"></script>
+      <script src="http://code.highcharts.com/modules/exporting.js"></script>
+
 </body>
 </html>

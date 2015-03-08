@@ -11,11 +11,13 @@ angular.module('prosperenceApp')
     type: 'table',
     fields: [{
       label: 'Asset Name',
+      value: 'name',
       type: 'text',
       textAlign: 'left',
       required: true
     }, {
       label: 'Value',
+      value: 'amount',
       type: 'number',
       textAlign: 'right',
       required: true
@@ -28,11 +30,13 @@ angular.module('prosperenceApp')
     type: 'table',
     fields: [{
       label: 'Asset Name',
+      value: 'name',
       type: 'text',
       textAlign: 'left',
       required: true
     }, {
       label: 'Value',
+      value: 'amount',
       type: 'number',
       textAlign: 'right',
       required: true
@@ -45,11 +49,13 @@ angular.module('prosperenceApp')
     type: 'table',
     fields: [{
       label: 'Asset Name',
+      value: 'name',
       type: 'text',
       textAlign: 'left',
       required: true
     }, {
       label: 'Value',
+      value: 'amount',
       type: 'number',
       textAlign: 'right',
       required: true

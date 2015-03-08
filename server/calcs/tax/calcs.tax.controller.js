@@ -7,16 +7,17 @@ var finance = require('../finance');
 
 // Requires a plan object as a parameter
 // Appends a taxProjection object to the plan and returns that same object.
-exports.projection = function(plan) {
+exports.projection = function(user) {
+  var plan = user.plan;
   // Define or reset plan.taxProjection to empty object before starting the calculations.
-  plan.taxProjection = {};
+  user.plan.taxProjection = {};
 
   // Calculate projection results.
   var result = {};
 
   // The order of the following calculations must be preserved for the calculations to function properly. Edit with care.
-  result.householdGross = (plan.grossAnnualIncome || 0) + (plan.spouseGrossAnnualIncome || 0);
-  result.pretaxContributions = (plan.user401kContribution || 0) + (plan.spouse401kContribution || 0);
+  result.householdGross = sumGroup(plan.income);
+  result.pretaxContributions = sumGroup(plan.contributions, 'type', 'employer');
   result.agi = result.householdGross - result.pretaxContributions;
 
   // Deductions calculations
@@ -51,12 +52,29 @@ exports.projection = function(plan) {
   result.projected.fica.ss = ssCalc();
   medicareCalc();
 
-  result.netIncome = result.netIncome - result.projected.federal - result.projected.amt - result.projected.local - result.projected.fica.ss - result.projected.fica.medicare - result.projected.fica.addlMedicare;
+  result.netIncome = result.householdGross - result.projected.federal - result.projected.amt - result.projected.local - result.projected.fica.ss - result.projected.fica.medicare - result.projected.fica.addlMedicare;
 
-  plan.taxProjection = result;
+  user.plan.taxProjection = result;
   return result;
 
   // Helper functions for tax calculations.
+
+  // Sum and return the total values of an object.
+  function sumGroup(obj, check, condition) {
+    if (typeof obj !== 'object') return null;
+    condition = condition || true;
+    var total = 0;
+    for (var key in obj) {
+      if (!check) {
+        total += obj[key].amount || obj[key];
+      } else {
+        if (obj[check] === condition) {
+          total += obj[key].amount || obj[key];
+        }
+      }
+    }
+    return total;
+  }
 
   // Get variable from federal variable module.
   function getVar(target) {
@@ -65,8 +83,8 @@ exports.projection = function(plan) {
       return null;
     }
     // Check to see if requested variable depends on marital status.
-    if (target[plan.filingStatus]) {
-      return target[plan.filingStatus];
+    if (target[plan.tax.filingStatus]) {
+      return target[plan.tax.filingStatus];
     } else {
       return target;
     }
@@ -74,13 +92,13 @@ exports.projection = function(plan) {
 
   // Calculate approximate property tax for primary residence.
   function propertyTax() {
-    return ( plan.mortgage.homeValue * local.statePropertyTax[plan.stateResident] );
+    return ( plan.mortgage.homeValue * local.statePropertyTax[user.personal.residentAddress.state] );
   }
 
   // Calculate state income tax liability.
   function stateTax() {
-    var agi = result.agi || ( ((plan.grossAnnualIncome || 0) + (plan.spouseGrossAnnualIncome || 0)) - ((plan.user401kContribution || 0) + (plan.spouse401kContribution || 0)) );
-    return ( agi * local.stateIncomeTax[plan.stateResident] );
+    var agi = result.agi || (sumGroup(plan.income) - sumGroup(plan.contributions, 'type', 'employer'));
+    return ( agi * local.stateIncomeTax[user.personal.residentAddress.state] );
     // TODO: Calculate state income tax marginally, rather than just by highest marginal.
   }
 
@@ -90,6 +108,14 @@ exports.projection = function(plan) {
     // Create an amortization schedule. Takes four parameters: principle amount, months, interest rate (percent), start date (Date object).
     // Returns an array of payment objects { principle, interest, payment, paymentToPrincipal, paymentToInterest, date }
     var amortTable = finance.calculateAmortization(plan.mortgage.initialBalance, plan.mortgage.currentTerm*12, plan.mortgage.currentRate*100, plan.mortgage.startDate);
+
+    // Check and fix data formatting for non multi-nested date objects.
+    if (plan.mortgage.startDate === 'string') {
+      var temp = plan.mortgage.startDate.split('-');
+      // Create new date obj from above string.
+      var newdate = new Date(temp[0], temp[1], temp[2].slice(0,2));
+      plan.mortgage.startDate = newdate;
+    }
 
     // Total up how much of the payment will go to interest over the current year.
     var current = new Date(new Date().getFullYear(), 0); // Date object for current year.
@@ -105,15 +131,15 @@ exports.projection = function(plan) {
   // Determine the user's maximum allowable deduction (greater between standard and itemized).
   function maxDeduction() {
     var itemizedDeductions = 0;
-    for (var x in result.deductions.itemized) {
-      if (x !== 'miscDeduction') {
-        itemizedDeductions += result.deductions.itemized[x];
+    for (var key in result.deductions.itemized) {
+      if (key !== 'miscDeduction') {
+        itemizedDeductions += result.deductions.itemized[key];
       }
     }
     // Calculations for itemized deduction phaseout.
     var agiOverLimit = Math.max( 0, result.agi - getVar(federal.deduction.phaseoutStart) );
     // Pease reduction floor for misc. deductions.
-    var peaseFloor = result.agi > federal.deduction.phaseoutStart ? Math.min(plan.otherDeductions, 0.02 * result.agi) : 0;
+    var peaseFloor = result.agi > federal.deduction.phaseoutStart ? Math.min(plan.tax.otherDeductions, 0.02 * result.agi) : 0;
     var personalReduction = agiOverLimit * federal.deduction.itemizedReductionRate;
     var maxReduction = 0.8 * itemizedDeductions;
     var reducedItemizedDeductions = itemizedDeductions - peaseFloor - Math.min( personalReduction, maxReduction );
@@ -124,7 +150,7 @@ exports.projection = function(plan) {
   // Determine potential exemptions, reductions, and final exemption value.
   function exemptionCalc() {
     // Determine potential exemptions
-    result.exemptions.claimed = getVar(federal.exemption.personal) * plan.dependents;
+    result.exemptions.claimed = getVar(federal.exemption.personal) * plan.tax.dependents;
 
     // Calculate exemption reduction
     var agiOverLimit = Math.max( 0, result.agi - getVar(federal.exemption.phaseoutStart) );
@@ -168,15 +194,15 @@ exports.projection = function(plan) {
 
   // Calculations for Alternative Minimum Tax.
   function amtCalc() {
-    var amtExemption = Math.max( 0, getVar(federal.amt.maxExemption) - ( getVar(federal.amt.exemptionReductionRate) * (result.agi - getVar(federal.amt.exemptionPhaseOut)) ) );
-    var taxableIncome = result.agi - amtExemption;
+    var amtExemption = Math.max( 0, getVar(federal.amt.maxExemption) - (getVar(federal.amt.exemptionReductionRate) * (result.agi - getVar(federal.amt.exemptionPhaseOut)) ) );
+    var taxableIncome = result.agi || (sumGroup(plan.income) - sumGroup(plan.contributions, 'type', 'employer') - amtExemption);
     var maxAmtLiability = (federal.amt.minRate * Math.min(federal.amt.breakpoint, taxableIncome))+(federal.amt.maxRate * Math.max(0, taxableIncome - federal.amt.breakpoint));
     return Math.max(0, maxAmtLiability - result.projected.federal);
   }
 
   // Calculate the Social Security tax.
   function ssCalc() {
-    var gross = result.householdGross || ( (plan.grossAnnualIncome || 0) + (plan.spouseGrossAnnualIncome || 0)) - ((plan.user401kContribution || 0) + (plan.spouse401kContribution || 0) );
+    var gross = result.householdGross || sumGroup(plan.income);
     var taxable = Math.min( gross, federal.fica.ssWageBase );
     return ( taxable * federal.fica.ssTax );
   }

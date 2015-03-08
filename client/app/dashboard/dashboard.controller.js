@@ -2,6 +2,44 @@
 
 angular.module('prosperenceApp')
 .controller('DashboardCtrl', function ($scope, $state, CalcsService, Auth) {
+  $scope.user = Auth.getCurrentUser();
+  $scope.plan = $scope.user.plan;
+  // $scope.planelLibrary = $scope.planelLibrary || {};
+  $scope.user.overviewPlanels = $scope.user.overviewPlanels || {};
+
+  // Calculates and return the total of a given group.
+  $scope.sumGroup = function(group) {
+    var total = 0;
+    for (var key in group) {
+      if (typeof group[key] === 'number') total += group[key];
+      else total += group[key]['amount'];
+    }
+    return total;
+  };
+
+  // Add planel to overview.
+  $scope.addPlanel = function(planel) {
+    if (!$scope.user.overviewPlanels[planel.selector]) {
+      $scope.user.overviewPlanels[planel.userOptions.title.text] = planel.renderTo;
+    }
+    console.log(planel.renderTo);
+  };
+
+  // Remove planel from overview.
+  $scope.removePlanel = function(planel) {
+    // If state = overview, Remove element from DOM
+    if ($state.current.name === 'dashboard.overview') {
+      $('#' + planel.renderTo.id).remove();
+    }
+    // Remove element from overviewPlanels object.
+    delete $scope.user.overviewPlanels[planel.userOptions.title.text];
+  };
+
+  // If overview is undefined, then load default planels.
+  // if (!$scope.user.overviewPlanels) {
+  //   $scope.user.overviewPlanels = {};
+  //   $scope.addPlanel($scope.planelLibrary['#cashFlowAnalysisContainer']);
+  // }
 
   // Defines initial view conditions for my-plan and settings.
   $scope.myPlanView = $scope.myPlanView || getPath('my-plan/net-worth/net-worth.html');
@@ -25,9 +63,9 @@ angular.module('prosperenceApp')
       title: 'Budget',
       view: getPath('my-plan/budget/budget.html')
     }, {
-      title: 'Insurance',
-      view: getPath('my-plan/insurance/insurance.html')
-    }, {
+    //   title: 'Insurance',
+    //   view: getPath('my-plan/insurance/insurance.html')
+    // }, {
       title: 'Retirement',
       view: getPath('my-plan/retire/retire.html')
     }, {
@@ -94,5 +132,21 @@ angular.module('prosperenceApp')
     sub.active = true;
     $scope[section.setView] = sub.view;
   };
+
+  // Update the chart menu with add/remove from overview options.
+  $scope.updateChartMenu = function() {
+    if (Highcharts.getOptions().exporting.buttons.contextButton.menuItems[0].text !== 'Add to Overview') {
+      Highcharts.getOptions().exporting.buttons.contextButton.menuItems.shift();
+      Highcharts.getOptions().exporting.buttons.contextButton.menuItems.unshift({
+        text: 'Remove from Overview',
+        onclick: function() { $scope.removePlanel(this) }
+      });
+      Highcharts.getOptions().exporting.buttons.contextButton.menuItems.unshift({
+        text: 'Add to Overview',
+        onclick: function() { $scope.addPlanel(this) }
+      });
+    }
+  };
+  $scope.updateChartMenu();
 
 });

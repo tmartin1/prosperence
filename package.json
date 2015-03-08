@@ -4,6 +4,7 @@
   "main": "server.js",
   "dependencies": {
     "aws-sdk": "^2.1.15",
+    "bluebird": "^2.9.13",
     "body-parser": "~1.5.0",
     "bower": "*",
     "compass": "^0.1.0",
@@ -61,6 +62,8 @@
     "open": "~0.0.4",
     "passport": "~0.2.0",
     "passport-local": "~0.1.6",
+    "request": "^2.53.0",
+    "request-promise": "^0.4.0",
     "serve-favicon": "~2.0.1",
     "time-grunt": "~0.3.1"
   },
