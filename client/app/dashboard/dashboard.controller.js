@@ -22,11 +22,16 @@ angular.module('prosperenceApp')
     if (!$scope.user.overviewPlanels[planel.selector]) {
       $scope.user.overviewPlanels[planel.userOptions.title.text] = planel.renderTo;
     }
+    console.log(planel.renderTo);
   };
 
   // Remove planel from overview.
   $scope.removePlanel = function(planel) {
-    // $scope.user.overviewPlanels[planel.userOptions.title.text] = undefined;
+    // If state = overview, Remove element from DOM
+    if ($state.current.name === 'dashboard.overview') {
+      $('#' + planel.renderTo.id).remove();
+    }
+    // Remove element from overviewPlanels object.
     delete $scope.user.overviewPlanels[planel.userOptions.title.text];
   };
 
