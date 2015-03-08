@@ -24,7 +24,7 @@ angular.module('prosperenceApp')
       else total += group[key]['value'] || group[key]['balance'];
     }
     return total;
-  }
+  };
 
   // Cash Flow Chart Logic
   var fixedExpenses = $scope.sumGroup(expenses.fixed);

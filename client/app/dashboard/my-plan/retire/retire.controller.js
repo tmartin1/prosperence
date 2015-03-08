@@ -2,12 +2,35 @@
 
 angular.module('prosperenceApp')
 .controller('RetireCtrl', function ($scope, User, Auth) {
+
+  $scope.plan = $scope.user.plan;
+
   // Retirement Chart Logic
   var ranges = [];
   var averages = [];
 
+  // Calculates and return the total of a given group.
+  var sumGroup = function(group) {
+    var total = 0;
+    for (var key in group) {
+      if (typeof group[key] === 'number') total += group[key];
+      else total += group[key]['amount'] || group[key];
+    }
+    return total;
+  };
+
+  var variableAssets = sumGroup($scope.plan.assets.variable);
+  var savings = $scope.sumGroup($scope.plan.contributions);
+
+
   // Calculate user age for start point.
   function calculateAge(birthday) { // birthday is a date
+    if (typeof birthday === 'string') {
+      var temp = birthday.split('-');
+      // Create new date obj from above string.
+      var newdate = new Date(temp[0], temp[1], temp[2].slice(0,2));
+      birthday = newdate;
+    }
     var ageDifMs = Date.now() - birthday.getTime();
     var ageDate = new Date(ageDifMs); // miliseconds from epoch
     return Math.abs(ageDate.getUTCFullYear() - 1970);
