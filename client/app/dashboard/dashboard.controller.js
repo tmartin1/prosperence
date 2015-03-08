@@ -63,9 +63,9 @@ angular.module('prosperenceApp')
       title: 'Budget',
       view: getPath('my-plan/budget/budget.html')
     }, {
-      title: 'Insurance',
-      view: getPath('my-plan/insurance/insurance.html')
-    }, {
+    //   title: 'Insurance',
+    //   view: getPath('my-plan/insurance/insurance.html')
+    // }, {
       title: 'Retirement',
       view: getPath('my-plan/retire/retire.html')
     }, {
