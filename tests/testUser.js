@@ -68,7 +68,7 @@ var testUser = {
       },
       'User Roth IRA': {
         amount: 100,
-        type: 'employer'
+        type: 'individual'
       },
       'Spouse 401k': {
         amount: 400,
