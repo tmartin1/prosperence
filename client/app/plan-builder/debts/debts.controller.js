@@ -13,16 +13,19 @@ angular.module('prosperenceApp')
     type: 'table',
     fields: [{
       label: 'Liability Name',
+      value: 'name',
       type: 'text',
       textAlign: 'left',
       required: true
     }, {
       label: 'Interest Rate',
+      value: 'rate',
       type: 'number',
       textAlign: 'right',
       required: true
     }, {
       label: 'Balance',
+      value: 'amount',
       type: 'number',
       textAlign: 'right',
       required: true
@@ -34,16 +37,19 @@ angular.module('prosperenceApp')
     type: 'table',
     fields: [{
       label: 'Liability Name',
+      value: 'name',
       type: 'text',
       textAlign: 'left',
       required: true
     }, {
       label: 'Interest Rate',
+      value: 'rate',
       type: 'number',
       textAlign: 'right',
       required: true
     }, {
       label: 'Balance',
+      value: 'amount',
       type: 'number',
       textAlign: 'right',
       required: true
@@ -55,16 +61,19 @@ angular.module('prosperenceApp')
     type: 'table',
     fields: [{
       label: 'Liability Name',
+      value: 'name',
       type: 'text',
       textAlign: 'left',
       required: true
     }, {
       label: 'Interest Rate',
+      value: 'rate',
       type: 'number',
       textAlign: 'right',
       required: true
     }, {
       label: 'Balance',
+      value: 'amount',
       type: 'number',
       textAlign: 'right',
       required: true
