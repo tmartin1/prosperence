@@ -5,13 +5,4 @@ angular.module('prosperenceApp')
   if(Auth.isLoggedIn()) {
     $state.go('dashboard.overview');
   }
-
-  debugger;
-  CalcsService.getMarketHistory()
-  .then(function(rsp) {
-    console.log(rsp);
-  },
-  function(err) {
-    console.log(err);
-  });
 });

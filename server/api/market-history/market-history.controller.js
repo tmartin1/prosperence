@@ -2,7 +2,6 @@
 
 var MarketHistory = require('./market-history.model');
 var config = require('../../config/environment');
-// var request = require('request');
 var Promise = require('bluebird');
 var request = require('request-promise');
 // TODO: make api request dynamic to current date.
@@ -12,7 +11,7 @@ var api = "http://globalindiceshistorical.xignite.com/xglobalindiceshistorical.j
 // Populate monthly returns
 // TODO: Refactor so it doesn't rebuild entire array every month but just adds new month.
 var getMonthlyReturns = function(req, res) {
-  // return new Promise (function(resolve, reject) {
+  return new Promise (function(resolve, reject) {
     if (!lastQueryMonth || lastQueryMonth.getFullMonth !== new Date.getFullMonth()) {
       var options = {
         "url": api,
@@ -42,22 +41,29 @@ var getMonthlyReturns = function(req, res) {
         }
       }).then(
         function(rsp) {
-          MarketHistory.monthlyReturns = rsp;
+          MarketHistory.monthlyReturns = rsp.Values;
+          resolve(MarketHistory.monthlyReturns);
+        }
+      ).catch(
+        function(err) {
+          console.log("request failed ----- ", err)
         }
       );
+    } else {
+      resolve(MarketHistory.monthlyReturns);
     }
-    return MarketHistory.monthlyReturns;
-  // });
+  });
 };
 
 var lastQueryMonth;
 // Get array of monthly market performance from 1950 to today.
+
 exports.index = function(req, res) {
   // If last query > 1 month ago, re-query
-  var proGetMonthlyReturns = Promise.promisify(getMonthlyReturns);
-  return proGetMonthlyReturns(req, res)
+
+  getMonthlyReturns(req, res)
     .then(function(rsp) {
-      return res.json(200, rsp);
+      res.json(200, rsp);
     });
 };
 //
