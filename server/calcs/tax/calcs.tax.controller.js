@@ -194,8 +194,8 @@ exports.projection = function(user) {
 
   // Calculations for Alternative Minimum Tax.
   function amtCalc() {
-    var amtExemption = Math.max( 0, getVar(federal.amt.maxExemption) - ( getVar(federal.amt.exemptionReductionRate) * (result.agi - getVar(federal.amt.exemptionPhaseOut)) ) );
-    var taxableIncome = (result.agi || (sumGroup(plan.income) - sumGroup(plan.contributions, 'type', 'employer')) - amtExemption;
+    var amtExemption = Math.max( 0, getVar(federal.amt.maxExemption) - (getVar(federal.amt.exemptionReductionRate) * (result.agi - getVar(federal.amt.exemptionPhaseOut)) ) );
+    var taxableIncome = result.agi || (sumGroup(plan.income) - sumGroup(plan.contributions, 'type', 'employer') - amtExemption);
     var maxAmtLiability = (federal.amt.minRate * Math.min(federal.amt.breakpoint, taxableIncome))+(federal.amt.maxRate * Math.max(0, taxableIncome - federal.amt.breakpoint));
     return Math.max(0, maxAmtLiability - result.projected.federal);
   }
