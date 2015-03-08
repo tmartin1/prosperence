@@ -20,6 +20,12 @@ angular.module('prosperenceApp')
       $scope.queries[0].isOpen = true;
       $scope.queries[0].isEnabled = true;
 
+      // Enable the next accordion section each time the user moves to a new section.
+      $scope.enableNext = function(index) {
+        if (typeof index === 'number' && $scope.queries[index+1]) {
+          $scope.queries[index + 1].isEnabled = true;
+        }
+      };
       // TODO: Previously enabled sections should remain enables if the user goes back.
 
       // Advances the focus of the user to the next fillable field when 'enter' is pressed.
