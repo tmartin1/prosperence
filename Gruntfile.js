@@ -39,13 +39,13 @@ module.exports = function(grunt) {
       },
       dev: {
         options: {
-          script: 'server/app.js',
+          script: 'server.js',
           debug: true
         }
       },
       prod: {
         options: {
-          script: 'dist/server/app.js'
+          script: 'dist/server.js'
         }
       }
     },
@@ -89,7 +89,7 @@ module.exports = function(grunt) {
       },
       sass: {
         files: [
-          '<%= settings.client %>/{app,components}/**/*.{scss,sass}'
+          '<%= settings.client %>/{app,components}/**/*.{scss,sass}',
         ],
         tasks: ['sass', 'autoprefixer']
       },
@@ -199,7 +199,7 @@ module.exports = function(grunt) {
     // Use nodemon to run server in debug mode with an initial breakpoint
     nodemon: {
       debug: {
-        script: 'server/app.js',
+        script: 'server.js',
         options: {
           nodeArgs: ['--debug-brk'],
           env: {
@@ -370,7 +370,8 @@ module.exports = function(grunt) {
           dest: '<%= settings.dist %>',
           src: [
             'package.json',
-            'server/**/*'
+            'server/**/*',
+            'server.js'
           ]
         }]
       },
@@ -514,7 +515,7 @@ module.exports = function(grunt) {
         options: {
           transform: function(filePath) {
             filePath = filePath.replace('/client/app/', '');
-            filePath = filePath.replace('/client/components/', '');
+            filePath = filePath.replace('/client/components/', '../components/');
             return '@import \'' + filePath + '\';';
           },
           starttag: '// injector',

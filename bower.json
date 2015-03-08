@@ -15,7 +15,12 @@
     "font-awesome": ">=4.1.0",
     "lodash": "~2.4.1",
     "angular-ui-router": "~0.2.10",
-    "c3": "~0.4.9"
+    "c3": "~0.4.9",
+    "angular-ui-select": "*",
+    "angular-utils-pagination": "*",
+    "angular-local-storage": "~0.1.5",
+    "angular-youtube-mb": "~1.0.0",
+    "youtube-iframe-api": "~0.0.1"
   },
   "devDependencies": {
     "angular-mocks": ">=1.2.*",

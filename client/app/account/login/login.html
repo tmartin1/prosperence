@@ -1,4 +1,4 @@
-<div class="container">
+<div style="width:100%; padding:20px;">
   <div class="row">
     <div class="col-sm-12">
       <h1>Login</h1>
@@ -6,6 +6,7 @@
       <p>Admin account is <code>admin@admin.com</code> / <code>admin</code></p>
     </div>
     <div class="col-sm-12">
+
       <form class="form" name="form" ng-submit="login(form)" novalidate>
 
         <div class="form-group">
@@ -33,13 +34,12 @@
           <button class="btn btn-inverse btn-lg btn-login" type="submit">
             Login
           </button>
-          <a class="btn btn-default btn-lg btn-register" href="/signup">
+          <a class="btn btn-default btn-lg btn-register" ng-click="toggleRegister()">
             Register
           </a>
         </div>
-
       </form>
+      
     </div>
   </div>
-  <hr>
 </div>

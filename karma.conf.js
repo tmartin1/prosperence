@@ -20,6 +20,11 @@ module.exports = function(config) {
       'client/bower_components/angular-bootstrap/ui-bootstrap-tpls.js',
       'client/bower_components/lodash/dist/lodash.compat.js',
       'client/bower_components/angular-ui-router/release/angular-ui-router.js',
+      'client/bower_components/angular-ui-select/dist/select.js',
+      'client/bower_components/angular-utils-pagination/dirPagination.js',
+      'client/bower_components/angular-local-storage/dist/angular-local-storage.js',
+      'client/bower_components/angular-youtube-mb/src/angular-youtube-embed.js',
+      'client/bower_components/youtube-iframe-api/youtube.iframe-api.js',
       'client/app/app.js',
       'client/app/**/*.js',
       'client/components/**/*.js',
@@ -29,7 +34,7 @@ module.exports = function(config) {
 
     preprocessors: {
       '**/*.jade': 'ng-jade2js',
-      '**/*.html': 'html2js',
+      '**/*.html': 'html2js'
     },
 
     ngHtml2JsPreprocessor: {

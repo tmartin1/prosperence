@@ -1,0 +1,39 @@
+<!-- For table entry questions -->
+<form>
+  <table>
+
+    <!-- Build column headers -->
+    <tr>
+      <th ng-repeat="field in query.fields"
+          style="text-align:{{field.textAlign}}">
+        <label>{{ field.label }}</label>
+      </th>
+      <th></th> <!-- Spaceholder for row delete button -->
+    </tr>
+
+    <!-- Load existing items if present -->
+    <tr ng-repeat="items in plangroup[query.bind]">
+      <td ng-repeat="field in query.fields" style="padding-right:8px;">
+        <input ng-model="plangroup[query.bind][$parent.$index][field.label]"
+               type="{{field.type}}"
+               class="form-control"
+               style="margin:4px auto; text-align:{{field.textAlign}}"
+               ng-required="{{field.required}}"
+               ng-required="query.required" />
+      </td>
+      <td>
+        <button class="btn"
+                style="padding:2px 4px;"
+                ng-click="deleteRow($index, query.bind)">
+                <i class="fa fa-times"></i>
+        </button>
+      </td>
+    </tr>
+  </table>
+</form><br>
+
+<!-- Allow new items to be added -->
+<button class="btn btn-primary"
+        ng-click="addRow(query.bind)">
+        Add More
+</button>

@@ -14,11 +14,18 @@
     <!-- build:css(client) app/vendor.css -->
       <!-- bower:css -->
       <link rel="stylesheet" href="bower_components/c3/c3.css" />
+      <link rel="stylesheet" href="bower_components/angular-ui-select/dist/select.css" />
       <!-- endbower -->
     <!-- endbuild -->
     <!-- build:css({.tmp,client}) app/app.css -->
     <link rel="stylesheet" href="app/app.css">
       <!-- injector:css -->
+      <link rel="stylesheet" href="app/app.css">
+      <link rel="stylesheet" href="app/main/main.css">
+      <link rel="stylesheet" href="app/plan-builder/plan-builder.css">
+      <link rel="stylesheet" href="app/university/courses/courses.css">
+      <link rel="stylesheet" href="app/university/university.css">
+      <link rel="stylesheet" href="components/questions/questions.css">
       <!-- endinjector -->
     <!-- endbuild -->
   </head>
@@ -30,19 +37,7 @@
 
     <!-- Add your site or application content here -->
     <div ui-view=""></div>
-
-    <div ng-include="'components/footer/footer.html'"></div>
-    
-    <!-- Google Analytics: change UA-XXXXX-X to be your site's ID -->
-    <script>
-      (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
-      (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
-      m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
-      })(window,document,'script','//www.google-analytics.com/analytics.js','ga');
-
-      ga('create', 'UA-XXXXX-X');
-      ga('send', 'pageview');
-    </script>
+    <pr-keypress-events></pr-keypress-events>
 
     <!--[if lt IE 9]>
     <script src="bower_components/es5-shim/es5-shim.js"></script>
@@ -60,6 +55,11 @@
       <script src="bower_components/angular-ui-router/release/angular-ui-router.js"></script>
       <script src="bower_components/d3/d3.js"></script>
       <script src="bower_components/c3/c3.js"></script>
+      <script src="bower_components/angular-ui-select/dist/select.js"></script>
+      <script src="bower_components/angular-utils-pagination/dirPagination.js"></script>
+      <script src="bower_components/angular-local-storage/dist/angular-local-storage.js"></script>
+      <script src="bower_components/angular-youtube-mb/src/angular-youtube-embed.js"></script>
+      <script src="bower_components/youtube-iframe-api/youtube.iframe-api.js"></script>
       <!-- endbower -->
     <!-- endbuild -->
 
@@ -68,36 +68,52 @@
           <!-- injector:js -->
           <script src="app/about/about.controller.js"></script>
           <script src="app/about/about.js"></script>
-          <script src="app/account/account.js"></script>
-          <script src="app/account/login/login.controller.js"></script>
-          <script src="app/account/settings/settings.controller.js"></script>
-          <script src="app/account/signup/signup.controller.js"></script>
           <script src="app/admin/admin.controller.js"></script>
           <script src="app/admin/admin.js"></script>
+          <script src="app/dashboard/dashboard.controller.js"></script>
+          <script src="app/dashboard/dashboard.js"></script>
+          <script src="app/dashboard/my-plan/budget/budget.controller.js"></script>
+          <script src="app/dashboard/my-plan/insurance/insurance.controller.js"></script>
+          <script src="app/dashboard/my-plan/more/more.controller.js"></script>
+          <script src="app/dashboard/my-plan/my-plan.controller.js"></script>
+          <script src="app/dashboard/my-plan/net-worth/net-worth.controller.js"></script>
+          <script src="app/dashboard/my-plan/retire/retire.controller.js"></script>
+          <script src="app/dashboard/overview/overview.controller.js"></script>
+          <script src="app/dashboard/planels/planel.directive.js"></script>
+          <script src="app/dashboard/progress/progress.controller.js"></script>
+          <script src="app/dashboard/settings/basic/basic.controller.js"></script>
+          <script src="app/dashboard/settings/notifications/notifications.controller.js"></script>
+          <script src="app/dashboard/settings/security/security.controller.js"></script>
+          <script src="app/dashboard/settings/settings.controller.js"></script>
+          <script src="app/dashboard/university/university.controller.js"></script>
           <script src="app/main/main.controller.js"></script>
           <script src="app/main/main.js"></script>
-          <script src="app/my-plan/my-plan.controller.js"></script>
-          <script src="app/my-plan/my-plan.js"></script>
-          <script src="app/plan-builder/msa/msa.controller.js"></script>
-          <script src="app/plan-builder/nws/nws.controller.js"></script>
+          <script src="app/plan-builder/assets/assets.controller.js"></script>
+          <script src="app/plan-builder/basics/basics.controller.js"></script>
+          <script src="app/plan-builder/debts/debts.controller.js"></script>
+          <script src="app/plan-builder/goals/goals.controller.js"></script>
+          <script src="app/plan-builder/insurances/insurances.controller.js"></script>
           <script src="app/plan-builder/plan-builder.controller.js"></script>
           <script src="app/plan-builder/plan-builder.js"></script>
-          <script src="app/plan-builder/retire/retire.controller.js"></script>
-          <script src="app/plan-builder/risk/risk.controller.js"></script>
+          <script src="app/plan-builder/savings/savings.controller.js"></script>
+          <script src="app/plan-builder/spending/spending.controller.js"></script>
           <script src="app/plan-builder/tax/tax.controller.js"></script>
+          <script src="app/pr-keypress/pr-keypress.directive.js"></script>
+          <script src="app/search/facet.factory.js"></script>
+          <script src="app/search/search.service.js"></script>
+          <script src="app/services/calcsService.js"></script>
           <script src="app/university/courses/courses.controller.js"></script>
           <script src="app/university/favorites/favorites.controller.js"></script>
-          <script src="app/university/paths/paths.controller.js"></script>
-          <script src="app/university/progress/progress.controller.js"></script>
-          <script src="app/university/resources/resources.controller.js"></script>
+          <script src="app/university/recommended/recommended.controller.js"></script>
           <script src="app/university/university.controller.js"></script>
           <script src="app/university/university.js"></script>
-          <script src="app/university/welcome/welcome.controller.js"></script>
           <script src="components/auth/auth.service.js"></script>
           <script src="components/auth/user.service.js"></script>
+          <script src="components/filters/trust.filter.js"></script>
           <script src="components/modal/modal.service.js"></script>
           <script src="components/mongoose-error/mongoose-error.directive.js"></script>
           <script src="components/navbar/navbar.controller.js"></script>
+          <script src="components/questions/questions.directive.js"></script>
           <!-- endinjector -->
         <!-- endbuild -->
 </body>

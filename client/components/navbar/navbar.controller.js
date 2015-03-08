@@ -1,45 +1,115 @@
 'use strict';
 
 angular.module('prosperenceApp')
-  .controller('NavbarCtrl', function($scope, $state, $location, Auth) {
-
+  .controller('NavbarCtrl', function($scope, $state, $location, Auth, $modal) {
     $scope.isCollapsed = true;
     $scope.isLoggedIn = Auth.isLoggedIn;
     $scope.isAdmin = Auth.isAdmin;
     $scope.getCurrentUser = Auth.getCurrentUser;
 
     $scope.menu = [{
-      'title': 'Home',
+      'title': 'Prosperence',
       'link': 'main',
-      'shown': true
+      'style': 'font-size:18px;',
+      'shown': '!isLoggedIn()'
+    }, {
+      'title': 'Prosperence',
+      'link': 'dashboard.overview',
+      'style': 'font-size:18px;',
+      'shown': 'isLoggedIn()',
+      'abstractLink': 'dashboard'
     }, {
       'title': 'About',
       'link': 'about',
       'shown': true
     }, {
-      'title': 'My Plan',
-      'link': 'my-plan',
-      'shown': 'isLoggedIn()'
-    }, {
       'title': 'Start Planning',
       'link': 'plan-builder.start',
-      'shown': '!isLoggedIn()',
+      'shown': '!getCurrentUser().planBuilderComplete',
       'abstractLink': 'plan-builder'
     }, {
-      'title': 'University of Prosperence',
-      'class': 'fa fa-graduation-cap',
-      'link': 'university.welcome',
+      'title': 'University',
+      'icon': 'fa fa-graduation-cap',
+      'link': 'university.courses',
       'shown': true,
       'abstractLink': 'university'
     }, ];
+
+    $scope.openLoginModal = function(goToSignUp) {
+      $scope.modalInstance = $modal.open({
+        templateUrl: 'components/navbar/partials/loginModal.html',
+        size: 'lg',
+        controller: 'loginController',
+        resolve: {
+          goToSignUp: function() {
+            return goToSignUp
+          }
+        }
+      });
+    }
 
     $scope.logout = function() {
       Auth.logout();
       $location.path('/');
     };
 
-        // Sets active class on sidebar.
+    // Sets active class on sidebar.
     $scope.isActive = function(viewLocation) {
       return $state.includes(viewLocation);
+    };
+  })
+  .controller('loginController', function($scope, $modalInstance, Auth, $location, goToSignUp) {
+    $scope.showSignUp = goToSignUp;
+    $scope.toggleRegister = function(newPage) {
+      $scope.showSignUp = !$scope.showSignUp;
+    };
+
+    //login logic
+    $scope.user = {};
+    $scope.errors = {};
+
+    $scope.login = function(form) {
+      $scope.submitted = true;
+
+      if (form.$valid) {
+        Auth.login({
+          email: $scope.user.email,
+          password: $scope.user.password
+        })
+          .then(function() {
+            $modalInstance.close();
+          })
+          .
+          catch (function(err) {
+          $scope.errors.other = err.message;
+        });
+      }
+    };
+
+    //signup logic
+    $scope.register = function(form) {
+      $scope.submitted = true;
+
+      if (form.$valid) {
+        Auth.createUser({
+          name: $scope.user.name,
+          email: $scope.user.email,
+          password: $scope.user.password
+        })
+          .then(function() {
+            $modalInstance.close();
+          })
+          .
+          catch (function(err) {
+          err = err.data;
+          $scope.errors = {};
+
+          // Update validity of form fields that match the mongoose errors
+          angular.forEach(err.errors, function(error, field) {
+            form[field].$setValidity('mongoose', false);
+            $scope.errors[field] = error.message;
+          });
+        });
+      }
     };
   });

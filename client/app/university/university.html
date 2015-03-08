@@ -2,34 +2,82 @@
   <div class="container">
     <h1>University of Prosperence</h1>
     <br>
-    <div class="input-group">
-      <input type="text" class="form-control" placeholder="Search for a specific tutorial or other resource.">
-      <span class="input-group-btn">
-        <button class="btn btn-default" type="button">Go!</button>
-      </span>
+
+    <div class="input-group nav-search">
+      <ui-select ng-model="suggestedCourse.selected"
+                 theme="bootstrap"
+                 reset-search-input="true"
+                 on-select="doSearch($item.title)"
+                 title="Search">
+        <ui-select-match placeholder="Search...">{{$select.selected.value}}</ui-select-match>
+        <ui-select-choices repeat="suggestedCourse.title as suggestedCourse in suggestedCourses track by $index"
+                           refresh="doSuggestor($select.search)"
+                           refresh-delay="0">
+          <div ng-bind-html="suggestedCourse.title | highlight: $select.search"></div>
+        </ui-select-choices>
+      </ui-select>
+          <span class="input-group-addon" id="basic-addon1 search" ng-click="doSearch(searchTerm)">
+            <span class="glyphicon glyphicon-search"></span>
+          </span>
     </div>
+
   </div>
 </header>
 
 <div class="container-fluid">
   <div class="row-fluid">
-    
+
     <!--Sidebar content-->
     <div class="col-sm-2">
       <h2>Sidebar</h2>
+        <!--<li role="presentation" ui-sref-active="active"><a ui-sref="university.paths">Paths</a></li>-->
+        <!--<li role="presentation" ui-sref-active="active"><a ui-sref="university.resources">Resources</a></li>-->
+        <!--<hr>-->
       <ul class="nav nav-tabs nav-pills nav-stacked">
-        <!-- TODO: Make links disabled until previous sections are completed (allow user to go back and forth between completed sections and the one they're currently working on) -->
-        <li role="presentation" ui-sref-active="active"><a ui-sref="university.welcome">Welcome</a></li>
-        <li role="presentation" ui-sref-active="active"><a ui-sref="university.paths">Paths</a></li>
+        <!--navigation buttons-->
         <li role="presentation" ui-sref-active="active"><a ui-sref="university.courses">All Courses</a></li>
-        <li role="presentation" ui-sref-active="active"><a ui-sref="university.resources">Resources</a></li>
-        <hr>
         <li role="presentation" ui-sref-active="active"><a ui-sref="university.favorites">Favorites</a></li>
-        <li role="presentation" ui-sref-active="active"><a ui-sref="university.progress">In Progress</a></li>
-        <br>
+        <li role="presentation" ui-sref-active="active"><a ui-sref="university.recommended">Recommended</a></li>
+
+        <!--facet filters-->
+        <div>
+          <hr>
+          <li ng-repeat="(facet,object) in courses.facets" ng-if="courses.results.length">
+            <h5 class="facet-title" ng-bind="facet | uppercase" {{$state.current.name}}></h5>
+            <ul class="facet-list">
+              <li ng-repeat="item in object.buckets | limitTo: clickLimit">
+                <a href data-ng-click="doSearchByFilter(facet, item.value)" ng-show="item.value">
+                  <input type="checkbox" ng-model="checked[item.value]">
+                  <span ng-bind-html="item.label | trust" class="facetText"></span>
+                  ({{item.count | number}})
+                </a>
+              </li>
+
+              <div ng-show='object.buckets.length > 5'>
+                <a href='#' ng-if='showMoreFacets' ng-click='showMoreFacetLinks(object.buckets.length)' class="show-more-link">
+                  Show more
+                </a>
+
+                <a href='#' ng-if='!showMoreFacets' ng-click='showLessFacetLinks()' class="show-more-link">
+                  Show less
+                </a>
+              </div>
+
+            </ul>
+          </li>
+
+          <!--duration range filter-->
+          <li class="minutes-filter">
+            <h5 class="facet-title">Minutes</h5>
+            <input type="text" ng-model="startMinutesFilter">  to  <input type="text" ng-model="endMinutesFilter">
+            <a ng-click='doMinutesSort()' class="facet-button">Go</a>
+          </li>
+          </br>
+        </div>
+
       </ul>
     </div>
-    
+
     <!--Body content-->
     <div class="col-sm-10">
       <div ui-view></div>

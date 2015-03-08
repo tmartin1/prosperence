@@ -4,13 +4,13 @@
 
 1. Fork the dev branch of the prosperence repository.
 1. From your personal fork, create a new branch for the specific issue that you are working on.
-1. Make commits to your feature branch. If the issue you are working on is logged in our Issues, prefix each commit with the issue number in parenthesis:
-  - "(#88) Fixed flux capacitor time warp directive."
+1. Make commits to your feature branch with meaningful comments. Use present tense for commit comments.
+  - "Fix flux capacitor time warp directive."
 1. When you're ready to make a pull request with your new feature or fix, please ensure the following before submitting:
   - If you are adding a new feature, make sure to have meaningful tests in the feature.spec.js file.
   - Run 'grunt test' from the command line and make sure all tests are passing.
   - Follow the style guide, located here: [STYLE-GUIDE.md](STYLE-GUIDE.md).
-  - Include a relevant and meaninful description of your changes, include screen shots if appropriate.
+  - Include a relevant and meaninful description of your changes, include screen shots if you made changes to the interface.
   - Submit a [pull request][] to the dev branch of prosperence.
 1. Your pull request will be reviewed by an admin or owner and determine if the request can be merged in. If your code reviewer requests you make a change you don't understand, don't be afraid to ask clarifying questions.
 1. Fix any issues raised by your code reviewer and push your fixes/changes to the appropriate branch on your personal fork.
@@ -22,7 +22,7 @@
 Use github’s interface to make a fork of the repo, then add that repo as an upstream remote:
 
 ```
-git remote add upstream https://github.com/prosperence/prosperence.git
+$ git remote add upstream https://github.com/prosperence/prosperence.git
 ```
 
 ### Checkout the dev branch, if not there already
@@ -32,13 +32,15 @@ These commands will help you do this:
 ``` bash
 
 # Creates your branch and brings you there
-git checkout -b `dev`
+$ git checkout -b `dev`
 ```
 
 ### Make commits to your feature branch. 
 
-Prefix each commit with the issue number
-  - (#2) Added a new feature
+```
+$ git add [FILENAME]
+$git commit -m "Add [FEATURE] to [DO_SOMETHING]
+```
 
 #### Commit Message Guidelines
 
@@ -59,7 +61,7 @@ changes to the dev branch into yours by running this command
 from your branch:
 
 ```
-git pull upstream dev
+$ git pull upstream dev
 ```
 
 If there are conflicting changes, git will start yelling at you part way
@@ -69,17 +71,6 @@ by checking all of the files git says have been changed in both histories
 and picking the versions you want. Be aware that these changes will show
 up in your pull request, so try and incorporate upstream changes as much
 as possible.
-
-Once you are done fixing conflicts for a specific commit, run:
-
-```
-git commit -m '<YOUR_MESSAGE>'
-```
-
-Once, you'll have entered your message in quotes, the merging process will continue.
-Once you are done fixing all conflicts you should run the existing tests to make sure
-you didn’t break anything, then run your new tests (there are new tests, right?) and
-make sure they work also.
 
 If merging broke anything, fix it, then repeat the above process until
 you get here again and nothing is broken and all the tests pass.

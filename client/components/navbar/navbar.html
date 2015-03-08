@@ -5,13 +5,11 @@
         class="navbar-toggle"
         type="button"
         ng-click="isCollapsed = !isCollapsed">
-
         <span class="sr-only">Toggle navigation</span>
         <span class="icon-bar"></span>
         <span class="icon-bar"></span>
         <span class="icon-bar"></span>
       </button>
-      <a href="/" class="navbar-brand">Prosperence</a>
     </div>
     <div
       collapse="isCollapsed"
@@ -19,16 +17,19 @@
       id="navbar-main">
 
       <ul class="nav navbar-nav">
-        <li ng-repeat="item in menu" ng-class="{active: isActive(item.abstractLink || item.link)}">
-            <a ng-show="{{item.shown}}" ui-sref="{{item.link}}"><span class="{{item.class}}"></span> {{item.title}} </a>
+        <li ng-repeat="item in menu" ng-class="{active: isActive(item.abstractLink || item.link)}" style="{{item.style}}">
+          <a ng-show="{{item.shown}}" ui-sref="{{item.link}}">
+            <span class="{{item.icon}}" style="{{item.style}}"></span>
+            <span> {{item.title}} </span>
+          </a>
+        </li>
         <li ng-show="isAdmin()" ng-class="{active: isActive('/admin')}"><a href="/admin">Admin</a></li>
       </ul>
 
       <ul class="nav navbar-nav navbar-right">
-        <li ng-hide="isLoggedIn()" ng-class="{active: isActive('/signup')}"><a href="/signup">Sign up</a></li>
-        <li ng-hide="isLoggedIn()" ng-class="{active: isActive('/login')}"><a href="/login">Login</a></li>
-        <li ng-show="isLoggedIn()"><p class="navbar-text">Hello {{ getCurrentUser().name }}</p> </li>
-        <li ng-show="isLoggedIn()" ng-class="{active: isActive('/settings')}"><a href="/settings"><span class="glyphicon glyphicon-cog"></span></a></li>
+        <li ng-hide="isLoggedIn()" ng-class="{active: isActive('/signup')}"><a ng-click="openLoginModal(true)">Sign up</a></li>
+        <li ng-hide="isLoggedIn()" ng-class="{active: isActive('/login')}"><a ng-click="openLoginModal()">Login</a></li>
+        <li ng-show="isLoggedIn()"><p class="navbar-text">Hello {{ getCurrentUser().personal.firstName }}</p> </li>
         <li ng-show="isLoggedIn()" ng-class="{active: isActive('/logout')}"><a href="" ng-click="logout()">Logout</a></li>
       </ul>
     </div>

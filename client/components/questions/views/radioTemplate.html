@@ -1,0 +1,17 @@
+<!-- For radio option questions -->
+<div ng-repeat="option in query.options">
+  <div class="radio">
+
+    <input type="radio"
+           value="{{option.value}}"
+           id="radio-{{option}}"
+           ng-model="planGroup[query.bind]"
+           ng-required="query.required" />
+
+    <label for="radio-{{option}}" class="pad-left-sm">
+      {{ option.text }}
+    </label>
+
+    <br>
+  </div>
+</div>

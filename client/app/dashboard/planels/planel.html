@@ -1,0 +1,20 @@
+<!-- Planel template, essentially a wrapper to allow the element to be added/removed from the dashboard overview -->
+<div>
+
+  <button ng-if="isntOnOverview"
+          class="btn btn-mini"
+          style="float:right"
+          ng-click="addToOverview">
+          <i class="fa fa-plus"></i>
+  </button>
+
+  <button ng-if="isOnOverview"
+          class="btn btn-mini"
+          style="float:right"
+          ng-click="removeFromOverview">
+          <i class="fa fa-times"></i>
+  </button>
+
+  <div ng-include="prarms.template"><div>
+
+</div>

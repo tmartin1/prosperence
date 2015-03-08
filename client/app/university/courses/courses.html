@@ -1,7 +1,38 @@
-<div class="col-md-12">
-  <div class="row">
-    <br>
-    <h1>All Courses</h1>
-    <p>Incredible content</p>
+<div class="row-fluid video-courses">
+
+  <!-- Start video courses catalog -->
+  <div id="catalog-photos" class="col-md-10">
+    <div class="col-md-4" ng-repeat="course in courses.results track by $index"
+         dir-paginate="course in courses.results | itemsPerPage: 12 track by $index" total-items="courses.totalCount">
+      <div class="thumbnail">
+
+        <div class="embed-responsive embed-responsive-16by9">
+          <!-- use 'player' to reference player object. -->
+          <youtube-video video-id="course.youtube_id"></youtube-video>-->
+        </div>
+
+        <div class="caption">
+          <h4 ng-if="course.title.length >= 100">{{course.title.substr(0,75)}}...</h4>
+          <h4 ng-if="course.title.length < 100">{{course.title}}</h4>
+
+          <p>{{course.minutes}} minutes</p>
+        </div>
+      </div>
+    </div>
+
+    <div class="row-fluid" style="min-height:500px" ng-if="!searchInProgress && !courses.results">
+      Your search for<b> {{query}} </b>did not match any documents...
+      <br/><br/>
+      * Suggestions: Make sure all words are spelled correctly.</br>
+      * Use similar words or synonyms.</br>
+      * Try more general keywords.
+    </div>
+
+    <!--pagination-->
+    <dir-pagination-controls on-page-change="fetchPage(searchTerm, newPageNumber)"
+                             template-url="bower_components/angular-utils-pagination/dirPagination.tpl.html">
+    </dir-pagination-controls>
   </div>
+
 </div>
+<!-- End course info -->

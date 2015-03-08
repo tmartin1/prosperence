@@ -1,0 +1,12 @@
+<!-- For button questions -->
+<!-- TODO: Define exact purpose of button option, invoking functions? Or like radio options? -->
+<div style="min-width:500px">
+  <div ng-repeat="option in query.options">
+
+    <button class="btn" style="width:100%" ng-click="option.value()" ng-required="query.required">
+      {{option.text}}
+    </button>
+
+    <br>
+  </div>
+</div>
