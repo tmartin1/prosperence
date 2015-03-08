@@ -1,64 +1,64 @@
 'use strict';
 
 angular.module('prosperenceApp')
-.controller('NavbarCtrl', function($scope, $state, $location, Auth, $modal) {
+  .controller('NavbarCtrl', function($scope, $state, $location, Auth, $modal) {
+    $scope.isCollapsed = true;
+    $scope.isLoggedIn = Auth.isLoggedIn;
+    $scope.isAdmin = Auth.isAdmin;
+    $scope.getCurrentUser = Auth.getCurrentUser;
 
-  $scope.isCollapsed = true;
-  $scope.isLoggedIn = Auth.isLoggedIn;
-  $scope.isAdmin = Auth.isAdmin;
-  $scope.getCurrentUser = Auth.getCurrentUser;
+    $scope.menu = [{
+      'title': 'Prosperence',
+      'link': 'main',
+      'style': 'font-size:18px;',
+      'shown': '!isLoggedIn()'
+    }, {
+      'title': 'Prosperence',
+      'link': 'dashboard.overview',
+      'style': 'font-size:18px;',
+      'shown': 'isLoggedIn()',
+      'abstractLink': 'dashboard'
+    }, {
+      'title': 'About',
+      'link': 'about',
+      'shown': true
+    }, {
+      'title': 'Start Planning',
+      'link': 'plan-builder.start',
+      'shown': '!getCurrentUser().planBuilderComplete',
+      'abstractLink': 'plan-builder'
+    }, {
+      'title': 'University',
+      'icon': 'fa fa-graduation-cap',
+      'link': 'university.courses',
+      'shown': true,
+      'abstractLink': 'university'
+    }, ];
 
-  $scope.menu = [{
-    'title': 'Prosperence',
-    'link': 'main',
-    'style': 'font-size:18px;',
-    'shown': true
-  }, {
-    'title': 'About',
-    'link': 'about',
-    'shown': true
-  }, {
-    'title': 'Start Planning',
-    'link': 'plan-builder.start',
-    'shown': '!getCurrentUser().planBuilderComplete',
-    'abstractLink': 'plan-builder'
-  }, {
-    'title': 'Dashboard',
-    'link': 'dashboard.overview',
-    'shown': 'isLoggedIn()',
-    'abstractLink': 'dashboard'
-  }, {
-    'title': 'University',
-    'icon': 'fa fa-graduation-cap',
-    'link': 'university.welcome',
-    'shown': true,
-    'abstractLink': 'university'
-  }, ];
-
-  $scope.openLoginModal = function(goToSignUp) {
-    $scope.modalInstance = $modal.open({
-      templateUrl: 'components/navbar/partials/loginModal.html',
-      size: 'lg',
-      controller: 'loginController',
-      resolve: {
-        goToSignUp: function() {
-          return goToSignUp
+    $scope.openLoginModal = function(goToSignUp) {
+      $scope.modalInstance = $modal.open({
+        templateUrl: 'components/navbar/partials/loginModal.html',
+        size: 'lg',
+        controller: 'loginController',
+        resolve: {
+          goToSignUp: function() {
+            return goToSignUp
+          }
         }
-      }
-    });
-  }
+      });
+    }
 
-  $scope.logout = function() {
-    Auth.logout();
-    $location.path('/');
-  };
+    $scope.logout = function() {
+      Auth.logout();
+      $location.path('/');
+    };
 
-  // Sets active class on sidebar.
-  $scope.isActive = function(viewLocation) {
-    return $state.includes(viewLocation);
-  };
-  
-}).controller('loginController', function($scope, $modalInstance, Auth, $location, goToSignUp) {
+    // Sets active class on sidebar.
+    $scope.isActive = function(viewLocation) {
+      return $state.includes(viewLocation);
+    };
+  })
+  .controller('loginController', function($scope, $modalInstance, Auth, $location, goToSignUp) {
     $scope.showSignUp = goToSignUp;
     $scope.toggleRegister = function(newPage) {
       $scope.showSignUp = !$scope.showSignUp;
@@ -71,15 +71,16 @@ angular.module('prosperenceApp')
     $scope.login = function(form) {
       $scope.submitted = true;
 
-      if(form.$valid) {
+      if (form.$valid) {
         Auth.login({
           email: $scope.user.email,
           password: $scope.user.password
         })
-        .then( function() {
-          $modalInstance.close();
-        })
-        .catch( function(err) {
+          .then(function() {
+            $modalInstance.close();
+          })
+          .
+          catch (function(err) {
           $scope.errors.other = err.message;
         });
       }
@@ -89,16 +90,17 @@ angular.module('prosperenceApp')
     $scope.register = function(form) {
       $scope.submitted = true;
 
-      if(form.$valid) {
+      if (form.$valid) {
         Auth.createUser({
           name: $scope.user.name,
           email: $scope.user.email,
           password: $scope.user.password
         })
-        .then( function() {
-          $modalInstance.close();
-        })
-        .catch( function(err) {
+          .then(function() {
+            $modalInstance.close();
+          })
+          .
+          catch (function(err) {
           err = err.data;
           $scope.errors = {};
 
@@ -110,5 +112,4 @@ angular.module('prosperenceApp')
         });
       }
     };
-  }
-);
+  });

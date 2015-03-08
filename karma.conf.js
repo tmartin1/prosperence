@@ -23,6 +23,8 @@ module.exports = function(config) {
       'client/bower_components/angular-ui-select/dist/select.js',
       'client/bower_components/angular-utils-pagination/dirPagination.js',
       'client/bower_components/angular-local-storage/dist/angular-local-storage.js',
+      'client/bower_components/angular-youtube-mb/src/angular-youtube-embed.js',
+      'client/bower_components/youtube-iframe-api/youtube.iframe-api.js',
       'client/app/app.js',
       'client/app/**/*.js',
       'client/components/**/*.js',

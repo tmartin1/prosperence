@@ -11,17 +11,19 @@
   </div> -->
 
   <!-- For select option questions -->
-  <select ng-if="item.type === 'select'" ng-model="plangroup[item.bind]" class="dropdown">
-    <option ng-repeat="option in item.options" value="{{option.value || option}}" class="item">{{ option.text || option }}</option>
+  <select ng-if="item.type === 'select'"
+          ng-model="plangroup[item.bind]"
+          class="dropdown"
+          ng-required="item.required">
+    <option ng-repeat="option in item.options" value="{{option.value || option}}" class="item">
+      {{ option.text || option }}
+    </option>
   </select>
 
   <!-- For table entry questions -->
   <div ng-if="item.type === 'table'">
     <form class="">
-      <table ng-class="{ 'two fields': item.fields.length === 2,
-                         'three fields': item.fields.length === 3,
-                         'four fields': item.fields.length === 4,
-                         'five fields': item.fields.length === 5 }">
+      <table ng-class="">
 
         <!-- Build column headers -->
         <tr>
@@ -40,7 +42,8 @@
               style="padding:5px">
             <input ng-model="subitem[field.label]"
                    type="{{field.type}}"
-                   style="text-align:{{field.textAlign}}"/>
+                   style="text-align:{{field.textAlign}}"
+                   ng-required="subitem.required" />
           </td>
           <td>
             <button class="btn"
@@ -62,11 +65,13 @@
   <!-- For date objects -->
   <input ng-if="item.type === 'date'"
          type="date"
-         ng-model="plangroup[item.bind]" />
+         ng-model="plangroup[item.bind]"
+         ng-required="item.required" />
 
    <!-- For everything else -->
    <input ng-if="['select','checkbox','radio','button','table','multi','review','date'].indexOf(item.type) === -1"
           type="{{item.type}}"
-          ng-model="plangroup[item.bind]" />
+          ng-model="plangroup[item.bind]"
+          ng-required="item.required" />
   <br><br>
 </div>

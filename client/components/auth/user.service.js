@@ -17,6 +17,12 @@ angular.module('prosperenceApp')
       params: {
         id:'me'
       }
+    },
+    updatePlan: {
+      method: 'PUT',
+      params: {
+        controller:'plan'
+      }
     }
   });
 });

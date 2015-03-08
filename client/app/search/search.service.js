@@ -34,6 +34,16 @@ angular.module('prosperenceApp')
   };
 
   search.processFacets = function(results) {
+    // map facet name to facet label
+    for(var key in results.facets){
+      if(key === "category"){
+        results.facets.category.buckets.forEach(function(facetTerm){
+          facetTerm.label = facet[facetTerm.value]
+        });
+      }
+    }
+
+    // if facets stored in local storage, use the facets unless overridden by immediate search request
     if(localStorageService.get("search.facets")) {
       var localFacets = localStorageService.get("search.facets");
 

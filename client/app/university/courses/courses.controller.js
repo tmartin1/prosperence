@@ -17,26 +17,6 @@ angular.module('prosperenceApp')
   $scope.startMinutesFilter = 0;
   $scope.endMinutesFilter = 0;
 
-  // Search by facet filter.
-  $scope.doSearchByFilter = function(term, value) {
-    $scope.checked[value] = !$scope.checked[value];
-
-    if($scope.checked[value]) {
-      $scope.filterFields.push({
-        term: term,
-        value: value
-      });
-    } else {
-      $scope.filterFields.forEach(function(filter, i) {
-        if(filter.value === value) {
-          $scope.filterFields.splice(i, 1);
-        }
-      })
-    }
-
-    $scope.doSearch($scope.searchTerm, 0, $scope.filterFields);
-  };
-
   $scope.doSearch = function(searchTerm, pageNumber, filterFields) {
     pageNumber = pageNumber || 0;
     filterFields = filterFields || null;
