@@ -8,6 +8,9 @@ angular.module('prosperenceApp')
 
   var expenses = $scope.plan.expenses;
 
+  // Array of charts to display on the budget page.
+  $scope.budgetCharts = [];
+
   var buildData = function(obj) {
     var data = [];
     for (var key in obj) {
@@ -112,11 +115,12 @@ angular.module('prosperenceApp')
   // hide highcharts.com logo
   $('text[text-anchor=end]').hide();
   // End cash flow pie chart.
+  $scope.budgetCharts.push(cashFlowChart);
 
 
   // Tax Chart Logic
   // Build the chart
-  $('#taxContainer').highcharts({
+  var taxBreakdownChart = $('#taxContainer').highcharts({
     chart: {
       plotBackgroundColor: null,
       plotBorderWidth: null,
@@ -155,5 +159,6 @@ angular.module('prosperenceApp')
   });
   // hide highcharts.com logo
   $('text[text-anchor=end]').hide();
+  $scope.budgetCharts.push(taxBreakdownChart);
 
 });
