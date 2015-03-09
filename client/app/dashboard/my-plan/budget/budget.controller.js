@@ -53,6 +53,11 @@ angular.module('prosperenceApp')
     name: 'Long-Term Savings',
     visible: true,
     y: (savings / totalCashFlowOut) * 100
+  }, {
+    drilldown: null,
+    name: 'Unallocated Income',
+    visible: true,
+    y: ($scope.plan.taxProjection.netIncome / 12)/100
   }];
   var drillDownSlices = [{
     name: 'Fixed Expenses',
@@ -83,7 +88,11 @@ angular.module('prosperenceApp')
       series: {
         dataLabels: {
           enabled: true,
-          format: '{point.name}'
+          format: '{point.name}',
+          distance: 5,
+          style: {
+            'text-decoration': 'none'
+          }
         }
       }
     },
@@ -116,9 +125,6 @@ angular.module('prosperenceApp')
     title: {
       text: 'Income Tax Analysis'
     },
-    subtitle: {
-      text: 'click any asset or debt in the legend to add or remove it from the graph'
-    },
     tooltip: {
       pointFormat: '<b>{point.percentage:.1f}%</b>'
     },
@@ -127,10 +133,14 @@ angular.module('prosperenceApp')
         allowPointSelect: true,
         cursor: 'pointer',
         dataLabels: {
-            enabled: true
+          distance: 5,
+          enabled: true
         },
         showInLegend: true
       }
+    },
+    legend: {
+      enabled: false
     },
     series: [{
       type: 'pie',
