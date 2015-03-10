@@ -37,9 +37,16 @@
   height: 400px;
   margin-top: 10px;
 
-  // line-height: 150px;
+  line-height: 150px;
   color: white;
   font-weight: bold;
   font-size: 1em;
   text-align: left;
+}
+
+.highchart-planel {
+  min-width: 310px;
+  max-width: 500px;
+  height: 400px;
+  margin: 10px auto;
 }

@@ -1,13 +1,9 @@
 <!-- Budget view template within My-Plan -->
 
-<div ng-controller="BudgetCtrl">
-  <div class="flex-container">
-    <div class="flex-item" id="cashFlowAnalysisContainer" style="min-width: 310px; max-width: 500px; height: 400px; margin: 0 auto"></div>
-    <div class="flex-item" id="taxContainer" style="min-width: 310px; max-width: 500px; height: 400px; margin: 0 auto"></div>
-  </div>
-  <div class="row">
-    <p>
-      MSA
-    </p>
+<div ng-controller="BudgetCtrl" class="row flex-container">
+  <div class="flex-item highchart-planel" id="cashFlowAnalysisContainer"></div>
+  <div class="flex-item highchart-planel" id="taxContainer"></div>
+  <div class="flex-item">
+    <p>MSA</p>
   </div>
 </div>
