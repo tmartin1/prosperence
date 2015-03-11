@@ -6,11 +6,16 @@ angular.module('prosperenceApp')
   $scope.plan = $scope.user.plan;
   $scope.defaultOverviewPlanels = [];
 
-
   // Returns the full path of the input within ./dashboard/.
   $scope.getPath = function(localPath) {
     return 'app/dashboard/' + localPath;
-  }
+  };
+
+  // Object to keep ALL planel names and locations organized.
+  $scope.planelLibrary = {
+    'cash-flow-chart': $scope.getPath('planels/cash-flow-chart/cash-flow-chart.html'),
+    'income-tax-chart': $scope.getPath('planels/income-tax-chart/income-tax-chart.html')
+  };
 
   // Calculates and return the total of a given group.
   $scope.sumGroup = function(group) {
