@@ -8,9 +8,8 @@ The user can customize their dashboard in three ways:<br>
 -->
 
 <div class="container">
-  <div id="overviewPlanelContainer" class="row">
-    <!-- Append saved planels to this element -->
-  </div>
+  <div class="flex-item highchart-planel" ng-repeat="planel in user.overviewPlanels" ng-include="planelLibrary[planel]"></div>
 </div>
 
+<button class="btn pull-right" ng-click="resetDefaultOverviewPlanels()">Reset to Default</button>
 <button class="btn pull-right" ng-click="">Customize</button>
