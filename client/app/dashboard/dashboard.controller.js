@@ -20,7 +20,8 @@ angular.module('prosperenceApp')
   $scope.planelLibrary = {
     'cash-flow-chart': $scope.getPlanelPath('cash-flow-chart'),
     'income-tax-chart': $scope.getPlanelPath('income-tax-chart'),
-    'net-worth-chart': $scope.getPlanelPath('net-worth-chart')
+    'net-worth-chart': $scope.getPlanelPath('net-worth-chart'),
+    'retirement-savings-growth-chart': $scope.getPlanelPath('retirement-savings-growth-chart')
   };
 
   // Calculates and return the total of a given group.
