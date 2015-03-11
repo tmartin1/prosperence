@@ -1,7 +1,8 @@
 <!-- Budget view template within My-Plan -->
 
 <div ng-controller="BudgetCtrl" class="row flex-container">
-  <div class="flex-item highchart-planel" id="cashFlowAnalysisContainer"></div>
+  <!-- <div class="flex-item highchart-planel" id="cashFlowAnalysisContainer"></div> -->
+  <div class="flex-item highchart-planel" ng-include="'app/dashboard/planels/cash-flow-chart/cash-flow-chart.html'"></div>
   <div class="flex-item highchart-planel" id="taxContainer"></div>
   <div class="flex-item">
     <p>MSA</p>

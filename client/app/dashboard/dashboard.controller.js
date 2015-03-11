@@ -5,7 +5,7 @@ angular.module('prosperenceApp')
   $scope.user = Auth.getCurrentUser();
   $scope.plan = $scope.user.plan;
   // $scope.planelLibrary = $scope.planelLibrary || {};
-  $scope.user.overviewPlanels = $scope.user.overviewPlanels || {};
+  $scope.defaultOverviewPlanels = [];
 
   // Calculates and return the total of a given group.
   $scope.sumGroup = function(group) {
@@ -15,6 +15,15 @@ angular.module('prosperenceApp')
       else total += group[key]['amount'];
     }
     return total;
+  };
+
+  // Builds an array of data for Highcharts from a plan group.
+  $scope.buildHighchartData = function(obj) {
+    var data = [];
+    for (var key in obj) {
+      data.push({ name:obj[key]['name'] || key, y:obj[key]['amount'] });
+    }
+    return data;
   };
 
   // Add planel to overview.
@@ -36,10 +45,13 @@ angular.module('prosperenceApp')
   };
 
   // If overview is undefined, then load default planels.
-  // if (!$scope.user.overviewPlanels) {
-  //   $scope.user.overviewPlanels = {};
-  //   $scope.addPlanel($scope.planelLibrary['#cashFlowAnalysisContainer']);
-  // }
+  $scope.resetDefaultOverview = function() {
+    $scope.user.overviewPlanels = {};
+    for (var key in $scope.defaultOverviewPlanels) {
+      $scope.user.overviewPlanels[$scope.defaultOverviewPlanels[key].title.text] = $scope.user.overviewPlanels[$scope.defaultOverviewPlanels[key]];
+    }
+  };
+  if (!$scope.user.overviewPlanels) $scope.resetDefaultOverview();
 
   // Defines initial view conditions for my-plan and settings.
   $scope.myPlanView = $scope.myPlanView || getPath('my-plan/net-worth/net-worth.html');
