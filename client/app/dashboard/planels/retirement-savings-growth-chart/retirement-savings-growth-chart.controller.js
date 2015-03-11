@@ -41,7 +41,7 @@ angular.module('prosperenceApp')
   }
   // End placeholder retirement calculations
 
-  $('#retirementSavingsChartContainer').highcharts({
+  $('#retirement-savings-growth-chart').highcharts({
     title: {
       text: 'Retirement Savings Projection'
     },

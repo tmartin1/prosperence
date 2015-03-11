@@ -6,7 +6,7 @@ angular.module('prosperenceApp')
 
   // Tax Chart Logic
   // Build the chart
-  var taxBreakdownChart = $('#incomeTaxChartContainer').highcharts({
+  var taxBreakdownChart = $('#income-tax-chart').highcharts({
     chart: {
       plotBackgroundColor: null,
       plotBorderWidth: null,

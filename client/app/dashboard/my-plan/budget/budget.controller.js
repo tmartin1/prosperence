@@ -1,7 +1,7 @@
 'use strict';
 
 angular.module('prosperenceApp')
-.controller('BudgetCtrl', function ($scope, Auth) {
+.controller('BudgetCtrl', function ($scope, User, Auth) {
   $scope.user = $scope.user || Auth.getCurrentUser();
   $scope.plan = $scope.plan || $scope.user.plan;
 

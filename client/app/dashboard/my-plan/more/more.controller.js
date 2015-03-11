@@ -4,6 +4,9 @@
 'use strict';
 
 angular.module('prosperenceApp')
-.controller('MyPlanMoreCtrl', function ($scope) {
+.controller('MyPlanMoreCtrl', function ($scope, User, Auth) {
+  $scope.user = $scope.user || Auth.getCurrentUser();
+  $scope.plan = $scope.plan || $scope.user.plan;
+
   //
 });

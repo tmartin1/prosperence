@@ -13,7 +13,7 @@ angular.module('prosperenceApp')
   var otherDebts = $scope.sumGroup($scope.plan.debts.other);
 
   // Create the chart
-  $('#netWorthChartContainer').highcharts({
+  $('#net-worth-chart').highcharts({
     chart: {
       type: 'column'
     },

@@ -55,12 +55,25 @@ angular.module('prosperenceApp')
     }]
   }];
 
-
   // Check and set submenu viewability on load/state enter.
   for (var i=0; i<$scope.sidebar.length; i++) {
     if ($state.current.name === $scope.sidebar[i].link && $scope.sidebar[i].submenu) {
       $scope.sidebar[i].submenu.visible = true;
     }
   }
-  
+
+  // Sets visibility of submenus in the sidebar.
+  $scope.showSubmenu = function(selected) {
+    // Reset all submenus to not visible.
+    for (var i=0; i<$scope.sidebar.length; i++) {
+      if ($scope.sidebar[i].submenu) {
+        $scope.sidebar[i].submenu.visible = false;
+      }
+    }
+    // Set selected sidebar submenu to visible.
+    if (!!selected && selected.submenu) {
+      selected.submenu.visible = true;
+    }
+  };
+
 });

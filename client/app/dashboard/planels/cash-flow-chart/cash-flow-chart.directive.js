@@ -53,7 +53,7 @@ angular.module('prosperenceApp')
   }];
 
   // Create the chart
-  var cashFlowChart = $('#cashFlowChartContainer').highcharts({
+  var cashFlowChart = $('#cash-flow-chart').highcharts({
     chart: {
       type: 'pie'
     },
