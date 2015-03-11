@@ -23,6 +23,10 @@ angular.module('prosperenceApp')
     'retirement-savings-growth-chart': $scope.getPlanelPath('retirement-savings-growth-chart')
   };
 
+  /*
+   *  Highcharts logic and helper functions.
+  */
+
   // Calculates and return the total of a given group.
   $scope.sumGroup = function(group) {
     var total = 0;
@@ -42,21 +46,31 @@ angular.module('prosperenceApp')
     return data;
   };
 
+  /*
+   *  Planel/Overview logic and methods.
+  */
+
   // Add planel to overview.
   $scope.addPlanel = function(planel) {
-    if (!$scope.user.overviewPlanels[planel.selector]) {
-      $scope.user.overviewPlanels[planel.userOptions.title.text] = planel.renderTo;
+    if ($scope.user.overviewPlanels.indexOf(planel) === -1) {
+      $scope.user.overviewPlanels.push(planel);
     }
-    console.log(planel.renderTo);
   };
 
   // Remove planel from overview.
   $scope.removePlanel = function(planel) {
-    // Remove element from overviewPlanels object.
-    delete $scope.user.overviewPlanels[planel.userOptions.title.text];
+    var index = $scope.user.overviewPlanels.indexOf(planel);
+    if (index !== -1) {
+      $scope.user.overviewPlanels.splice(index, 1);
+      $scope.$apply();
+    }
   };
 
-  // Defines initial view conditions for my-plan and settings.
+  /*
+   *  Sidebar and submenu logic and methods.
+  */
+
+  // Defines initial view conditions for my-plan and settings if undefined.
   $scope.myPlanView = $scope.myPlanView || $scope.getPath('my-plan/net-worth/net-worth.html');
   $scope.settingsView = $scope.settingsView || $scope.getPath('settings/basic/basic.html');
 
@@ -70,17 +84,16 @@ angular.module('prosperenceApp')
   };
 
   // Update the chart menu with add/remove from overview options.
-  // TODO: Update this for ng-include refactor
   $scope.updateChartMenu = function() {
     if (Highcharts.getOptions().exporting.buttons.contextButton.menuItems[0].text !== 'Add to Overview') {
       Highcharts.getOptions().exporting.buttons.contextButton.menuItems.shift();
       Highcharts.getOptions().exporting.buttons.contextButton.menuItems.unshift({
         text: 'Remove from Overview',
-        onclick: function() { $scope.removePlanel(this) }
+        onclick: function() { $scope.removePlanel(this.renderTo.id) }
       });
       Highcharts.getOptions().exporting.buttons.contextButton.menuItems.unshift({
         text: 'Add to Overview',
-        onclick: function() { $scope.addPlanel(this) }
+        onclick: function() { $scope.addPlanel(this.renderTo.id) }
       });
     }
   };
