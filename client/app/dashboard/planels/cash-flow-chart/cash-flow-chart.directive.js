@@ -3,13 +3,7 @@
 angular.module('prosperenceApp')
 .controller('CashFlowChartCtrl', function ($scope, Auth) {
 
-  $scope.user = Auth.getCurrentUser();
-  $scope.plan = $scope.user.plan;
-
   var expenses = $scope.plan.expenses;
-
-  // Array of charts to display on the budget page.
-  $scope.budgetCharts = [];
 
   // Cash Flow Chart Logic
   var fixedExpenses = $scope.sumGroup(expenses.fixed);
@@ -97,6 +91,5 @@ angular.module('prosperenceApp')
   // hide highcharts.com logo
   $('text[text-anchor=end]').hide();
   // End cash flow pie chart.
-  $scope.budgetCharts.push(cashFlowChart);
 
 });
