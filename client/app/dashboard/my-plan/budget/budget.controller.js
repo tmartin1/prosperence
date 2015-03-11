@@ -8,7 +8,8 @@ angular.module('prosperenceApp')
   // Array of planels to display on the budget page.
   $scope.budgetPlanels = [
     'cash-flow-chart',
-    'income-tax-chart'
+    'income-tax-chart',
+    'cash-flow-analysis' // TODO: Make cash flow analysis planel
   ];
 
 });

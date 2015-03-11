@@ -11,10 +11,16 @@ angular.module('prosperenceApp')
     return 'app/dashboard/' + localPath;
   };
 
+  // Returns the full path of the target planel.
+  $scope.getPlanelPath = function(target) {
+    return $scope.getPath('planels/' + target + '/' + target + '.html');
+  };
+
   // Object to keep ALL planel names and locations organized.
   $scope.planelLibrary = {
-    'cash-flow-chart': $scope.getPath('planels/cash-flow-chart/cash-flow-chart.html'),
-    'income-tax-chart': $scope.getPath('planels/income-tax-chart/income-tax-chart.html')
+    'cash-flow-chart': $scope.getPlanelPath('cash-flow-chart'),
+    'income-tax-chart': $scope.getPlanelPath('income-tax-chart'),
+    'net-worth-chart': $scope.getPlanelPath('net-worth-chart')
   };
 
   // Calculates and return the total of a given group.
