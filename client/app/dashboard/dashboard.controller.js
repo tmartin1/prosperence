@@ -105,4 +105,31 @@ angular.module('prosperenceApp')
   };
   $scope.updateChartMenu();
 
+
+  /*
+   *  Overview defaults and helper functions.
+  */
+
+  // Overview default planels.
+  var defaultOverviewPlanels = [
+    'cash-flow-chart',
+    'income-tax-chart'
+  ];
+
+  // If user hasn't customized their overview yet, set it to the default planels.
+  $scope.user.overviewPlanels = $scope.user.overviewPlanels || defaultOverviewPlanels.slice();
+
+  // Reset overview planels to defaults.
+  $scope.resetDefaultOverviewPlanels = function() {
+    $scope.user.overviewPlanels = defaultOverviewPlanels.slice();
+  };
+
+  // Allow user to drag and drop the planels to customize the overview.
+  $scope.oranizable = false;
+
+  // TODO: Toggle ability to reorganize overview planels.
+  $scope.toggleOrganizability = function() {
+    //
+  };
+
 });

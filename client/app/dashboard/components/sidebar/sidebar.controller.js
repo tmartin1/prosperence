@@ -9,8 +9,8 @@ angular.module('prosperenceApp')
     link: 'dashboard.overview',
     icon: '',
     dropdown: [
-      { text: 'Organize Items', func:'' }, // Allow user to drag & drop overview planels to customize order.
-      { text: 'Reset to Default', func:'' } // Reset overview planels to defaults.
+      { text: 'Organize Items', func: '' }, // Allow user to drag & drop overview planels to customize order.
+      { text: 'Reset to Default', func: $scope.resetDefaultOverviewPlanels } // Reset overview planels to defaults.
     ]
   }, {
     title: 'My Plan',
