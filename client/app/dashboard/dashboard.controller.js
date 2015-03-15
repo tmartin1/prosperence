@@ -5,6 +5,12 @@ angular.module('prosperenceApp')
   $scope.user = Auth.getCurrentUser();
   $scope.plan = $scope.user.plan;
 
+
+  // Return name of current state.
+  $scope.currentState = function() {
+    return $state.current.name;
+  };
+
   // Returns the full path of the input within ./dashboard/.
   $scope.getPath = function(localPath) {
     return 'app/dashboard/' + localPath;
