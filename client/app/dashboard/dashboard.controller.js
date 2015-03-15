@@ -29,6 +29,7 @@ angular.module('prosperenceApp')
     'retirement-savings-growth-chart': $scope.getPlanelPath('retirement-savings-growth-chart')
   };
 
+
   /*
    *  Highcharts logic and helper functions.
   */
@@ -52,6 +53,7 @@ angular.module('prosperenceApp')
     return data;
   };
 
+
   /*
    *  Planel/Overview logic and methods.
   */
@@ -71,6 +73,7 @@ angular.module('prosperenceApp')
       $scope.$apply();
     }
   };
+
 
   /*
    *  Sidebar and submenu logic and methods.
