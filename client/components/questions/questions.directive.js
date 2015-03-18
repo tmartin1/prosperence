@@ -21,15 +21,46 @@ angular.module('prosperenceApp')
       $scope.queries[0].isEnabled = true;
 
       // Enables the next accordion section.
-      $scope.enableNext = function(index) {
+      function enableNext(index) {
         if (typeof index === 'number' && $scope.queries[index+1]) {
           $scope.queries[index + 1].isEnabled = true;
         }
       };
+
+      // Check for validity of inputs on current section.
+      function checkValid() {
+        if ($('.ng-invalid:visible').length === 0) {
+          var index = currentlyOpen();
+          if (index !== null) {
+            $scope.queries[index].isComplete = true;
+            enableNext(index);
+          }
+          return true;
+        }
+        return false;
+      };
+      checkValid();
+
+      // Returns the index of the currently open section.
+      function currentlyOpen() {
+        for (var i=0; i<$scope.queries.length; i++) {
+          if ($scope.queries[i].isOpen) {
+            return i;
+          }
+        }
+        return null;
+      };
+
+      // Open specific question section.
+      $scope.openSection = function(index) {
+        // if ($scope.queries[index])
+      };
+
       // TODO: Previously enabled sections should remain enables if the user goes back.
 
       // Trigger events on keypress.
       $('questions').keypress(function() {
+        checkValid();
         // Advance the focus of the user to the next fillable field when 'enter' is pressed.
         if (event.keyCode === 13) {
           var textboxes = $('input:visible');
@@ -70,7 +101,6 @@ angular.module('prosperenceApp')
 
       // If query is binding to a nested object, recursively track through plan to assign binding.
       var setBinding = function(path) {
-        // debugger;
         if ($scope.plangroup[path[0]] === undefined) {
           if ($scope.query.type === 'table') $scope.plangroup[path[0]] = [];
           else $scope.plangroup[path[0]] = {};

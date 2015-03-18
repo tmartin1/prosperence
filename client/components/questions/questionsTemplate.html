@@ -9,10 +9,11 @@
   <accordion-group ng-repeat="query in queries"
                    is-open="query.isOpen"
                    is-disabled="!query.isEnabled"
+                   ng-click="openSection($index)"
                    ng-class="{ 'enabled-group': query.isEnabled }">
 
   <accordion-heading>
-    <span ng-class="{ 'glyphicon glyphicon-ok': query.isComplete }" style="color:green; padding-right:4px;"></span>
+    <span ng-class="{ 'glyphicon glyphicon-ok': query.isComplete }"style="color:green; padding-right:4px;"></span>
     {{query.title}}
   </accordion-heading>
 
