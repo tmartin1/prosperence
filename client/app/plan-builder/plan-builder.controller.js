@@ -36,8 +36,12 @@ angular.module('prosperenceApp')
   };
   updateRelationals($state.current);
 
-  var queries, index;
+  // Returns true if current section is valid, else false.
+  $scope.isValid = function() {
+    return $('.ng-invalid:visible').length === 0;
+  };
 
+  var queries, index;
   // Move to previous accordion group or section.
   $scope.gotoprevious = function() {
     queries = $scope.$$childHead.queries;
@@ -61,20 +65,19 @@ angular.module('prosperenceApp')
   // Move to next required input field, accordion group or section.
   $scope.gotonext = function() {
     // If there is an empty required field, set focus to that input section and display popover.
-    var firstInvalid = $('.ng-invalid:visible').first();
-    if (firstInvalid.length > 0) {
-      firstInvalid.focus();
+    if (!$scope.isValid()) {
+      $('.ng-invalid:visible').first().focus();
       return;
     }
 
-    // If all required sections are filled in, then move to the next section.
+    // If all required query sections are filled in, move to the next plan-builder section.
     queries = $scope.$$childHead.queries;
     index = order.indexOf($state.current.name);
     if (!queries || !!queries[queries.length-1].isOpen) {
       return $state.go(order[index+1]);
     }
 
-    // If user is on the final section and all sections are valid, move to the next accordion section.
+    // If user is on the final input, move to the next accordion section.
     else {
       var i = 0;
       while (!queries[i].isOpen) {
