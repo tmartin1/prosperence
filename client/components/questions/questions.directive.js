@@ -40,6 +40,7 @@ angular.module('prosperenceApp')
         return false;
       };
       checkValid();
+      $scope.checkValid = checkValid;
 
       // Returns the index of the currently open section.
       function currentlyOpen() {
