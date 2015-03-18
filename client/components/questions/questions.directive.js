@@ -52,8 +52,19 @@ angular.module('prosperenceApp')
       };
 
       // Open specific question section.
-      $scope.openSection = function(index) {
-        // if ($scope.queries[index])
+      $scope.openSection = function(target) {
+        var current = currentlyOpen();
+        if (target === current) return;
+
+        // If target section is before current section, open target section.
+        if (target < current) {
+          return $scope.queries[target].isOpen = true;
+        }
+
+        // If target section is after current section, check for validity before moving.
+        if (target > current) {
+          return $scope.gotonext();
+        }
       };
 
       // TODO: Previously enabled sections should remain enables if the user goes back.
