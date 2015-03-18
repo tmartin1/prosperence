@@ -95,6 +95,7 @@ angular.module('prosperenceApp')
         }
         // Look for date type and fix objects cast as strings.
         for (var key in $scope.query.subqueries) {
+          // Correct date formats.
           if ($scope.query.subqueries[key].type === 'date' && typeof $scope.plangroup[$scope.query.subqueries[key].bind] === 'string') {
             var temp = $scope.plangroup[$scope.query.subqueries[key].bind].split('-');
             // Create new date obj from above string.

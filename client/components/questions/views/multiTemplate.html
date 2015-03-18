@@ -15,7 +15,11 @@
           ng-model="plangroup[item.bind]"
           class="dropdown"
           ng-required="item.required">
-    <option ng-repeat="option in item.options" value="{{option.value || option}}" class="item">
+    <option
+      ng-repeat="option in item.options"
+      ng-value="option.value || option"
+      ng-selected="option.value === plangroup[item.bind]"
+      class="item">
       {{ option.text || option }}
     </option>
   </select>
