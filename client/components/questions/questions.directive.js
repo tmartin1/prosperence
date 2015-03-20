@@ -27,20 +27,15 @@ angular.module('prosperenceApp')
         }
       };
 
-      // Check for validity of inputs on current section.
-      function checkValid() {
-        if ($('.ng-invalid:visible').length === 0) {
-          var index = currentlyOpen();
-          if (index !== null) {
-            $scope.queries[index].isComplete = true;
-            enableNext(index);
+      // Disables the next accordion section.
+      function disableNextSections(index) {
+        if (typeof index === 'number') {
+          while ($scope.queries[index+1]) {
+            $scope.queries[index + 1].isEnabled = false;
+            index++;
           }
-          return true;
         }
-        return false;
       };
-      checkValid();
-      $scope.checkValid = checkValid;
 
       // Returns the index of the currently open section.
       function currentlyOpen() {
@@ -51,6 +46,24 @@ angular.module('prosperenceApp')
         }
         return null;
       };
+
+      // Check for validity of inputs on current section.
+      $scope.checkValid = function() {
+        var index = currentlyOpen();
+        if ($('.ng-invalid:visible').length === 0) {
+          if (index !== null) {
+            $scope.queries[index].isComplete = true;
+            enableNext(index);
+          }
+          return true;
+        }
+        $scope.queries[index].isComplete = false;
+        disableNextSections(index);
+        return false;
+      };
+      $(document).ready(function() {
+        // $scope.checkValid();
+      });
 
       // Open specific question section.
       $scope.openSection = function(target) {
@@ -72,7 +85,7 @@ angular.module('prosperenceApp')
 
       // Trigger events on keypress.
       $('questions').keypress(function() {
-        checkValid();
+        $scope.checkValid();
         // Advance the focus of the user to the next fillable field when 'enter' is pressed.
         if (event.keyCode === 13) {
           var textboxes = $('input:visible');
