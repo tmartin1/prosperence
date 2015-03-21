@@ -1,9 +1,14 @@
-.panel-heading:hover {
-  cursor: pointer;
-}
+.panel-heading {
 
-.enabled-group .panel-heading {
-  background-color: #e0edf4;
+  :hover {
+    cursor: pointer;
+    text-decoration: none;
+  }
+
+  .enabled-group {
+    background-color: #e0edf4;
+  }
+
 }
 
 .double-wide {
