@@ -51,6 +51,7 @@ angular.module('prosperenceApp')
       $scope.checkValid = function() {
         var index = currentlyOpen();
         if (index !== null) {
+          console.log($('.ng-invalid:visible').length)
           if ($('.ng-invalid:visible').length === 0) {
             $scope.queries[index].isComplete = true;
             enableNextQuestion(index);
@@ -78,7 +79,6 @@ angular.module('prosperenceApp')
             $scope.gotonext();
           }
         }
-        $scope.checkValid();
       };
 
       // TODO: Previously enabled sections should remain enables if the user goes back.
