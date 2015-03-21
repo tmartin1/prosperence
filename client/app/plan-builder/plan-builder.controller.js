@@ -41,6 +41,8 @@ angular.module('prosperenceApp')
     return $('.ng-invalid:visible').length === 0;
   };
 
+  // TODO: Check if questions are complete to determine enabled sections.
+
   var queries, index;
   // Move to previous accordion group or section.
   $scope.gotoprevious = function() {
@@ -92,6 +94,7 @@ angular.module('prosperenceApp')
       queries[i+1].isEnabled = true;
       queries[i+1].isOpen = true;
     }
+    $scope.isValid();
   };
 
   // Function to pass to directives that maintains closure access to $scope.user.plan.
