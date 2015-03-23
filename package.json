@@ -89,6 +89,7 @@
   },
   "scripts": {
     "start": "grunt serve:dist --force",
+    "stop": "pkill --signal 80",
     "test": "grunt test",
     "update-webdriver": "node node_modules/grunt-protractor-runner/node_modules/protractor/bin/webdriver-manager update",
     "postinstall": "./node_modules/bower/bin/bower install"
