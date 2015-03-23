@@ -20,16 +20,60 @@ angular.module('prosperenceApp')
       $scope.queries[0].isOpen = true;
       $scope.queries[0].isEnabled = true;
 
-      // Enable the next accordion section each time the user moves to a new section.
-      $scope.enableNext = function(index) {
+      // Enables the next accordion section.
+      function enableNext(index) {
         if (typeof index === 'number' && $scope.queries[index+1]) {
           $scope.queries[index + 1].isEnabled = true;
         }
       };
+
+      // Check for validity of inputs on current section.
+      function checkValid() {
+        if ($('.ng-invalid:visible').length === 0) {
+          var index = currentlyOpen();
+          if (index !== null) {
+            $scope.queries[index].isComplete = true;
+            enableNext(index);
+          }
+          return true;
+        }
+        return false;
+      };
+      checkValid();
+      $scope.checkValid = checkValid;
+
+      // Returns the index of the currently open section.
+      function currentlyOpen() {
+        for (var i=0; i<$scope.queries.length; i++) {
+          if ($scope.queries[i].isOpen) {
+            return i;
+          }
+        }
+        return null;
+      };
+
+      // Open specific question section.
+      $scope.openSection = function(target) {
+        var current = currentlyOpen();
+        if (target === current) return;
+
+        // If target section is before current section, open target section.
+        if (target < current) {
+          return $scope.queries[target].isOpen = true;
+        }
+
+        // If target section is after current section, check for validity before moving.
+        if (target > current) {
+          return $scope.gotonext();
+        }
+      };
+
       // TODO: Previously enabled sections should remain enables if the user goes back.
 
-      // Advances the focus of the user to the next fillable field when 'enter' is pressed.
+      // Trigger events on keypress.
       $('questions').keypress(function() {
+        checkValid();
+        // Advance the focus of the user to the next fillable field when 'enter' is pressed.
         if (event.keyCode === 13) {
           var textboxes = $('input:visible');
           var currentIndex;
@@ -38,14 +82,12 @@ angular.module('prosperenceApp')
           }
           // If there is another input field, move focus to that field.
           if (textboxes[currentIndex + 1] !== undefined) {
-            console.log('advancing to next input');
             var nextBox = textboxes[currentIndex + 1];
             nextBox.focus();
             return nextBox.select();
           }
           // If focus is on final input, invoke gotonext() to check validity and move to the next question or section.
           else {
-            console.log('advancing to next invalid input or question');
             $scope.gotonext();
           }
           event.preventDefault();
@@ -69,10 +111,8 @@ angular.module('prosperenceApp')
     controller: function($scope) {
       if ($scope.query.isComplete) $scope.query.isEnabled = true;
 
-      // TODO: Set binding of nested objects.
       // If query is binding to a nested object, recursively track through plan to assign binding.
       var setBinding = function(path) {
-        // debugger;
         if ($scope.plangroup[path[0]] === undefined) {
           if ($scope.query.type === 'table') $scope.plangroup[path[0]] = [];
           else $scope.plangroup[path[0]] = {};
@@ -97,6 +137,7 @@ angular.module('prosperenceApp')
         }
         // Look for date type and fix objects cast as strings.
         for (var key in $scope.query.subqueries) {
+          // Correct date formats.
           if ($scope.query.subqueries[key].type === 'date' && typeof $scope.plangroup[$scope.query.subqueries[key].bind] === 'string') {
             var temp = $scope.plangroup[$scope.query.subqueries[key].bind].split('-');
             // Create new date obj from above string.

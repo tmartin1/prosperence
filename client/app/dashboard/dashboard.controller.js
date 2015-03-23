@@ -5,6 +5,12 @@ angular.module('prosperenceApp')
   $scope.user = Auth.getCurrentUser();
   $scope.plan = $scope.user.plan;
 
+
+  // Return name of current state.
+  $scope.currentState = function() {
+    return $state.current.name;
+  };
+
   // Returns the full path of the input within ./dashboard/.
   $scope.getPath = function(localPath) {
     return 'app/dashboard/' + localPath;
@@ -20,8 +26,11 @@ angular.module('prosperenceApp')
     'cash-flow-chart': $scope.getPlanelPath('cash-flow-chart'),
     'income-tax-chart': $scope.getPlanelPath('income-tax-chart'),
     'net-worth-chart': $scope.getPlanelPath('net-worth-chart'),
-    'retirement-savings-growth-chart': $scope.getPlanelPath('retirement-savings-growth-chart')
+    'retirement-savings-growth-chart': $scope.getPlanelPath('retirement-savings-growth-chart'),
+    'net-worth-over-time-chart': $scope.getPlanelPath('net-worth-over-time-chart'),
+    'debt-balance-over-time-chart': $scope.getPlanelPath('debt-balance-over-time-chart')
   };
+
 
   /*
    *  Highcharts logic and helper functions.
@@ -46,6 +55,7 @@ angular.module('prosperenceApp')
     return data;
   };
 
+
   /*
    *  Planel/Overview logic and methods.
   */
@@ -65,6 +75,7 @@ angular.module('prosperenceApp')
       $scope.$apply();
     }
   };
+
 
   /*
    *  Sidebar and submenu logic and methods.
@@ -98,5 +109,32 @@ angular.module('prosperenceApp')
     }
   };
   $scope.updateChartMenu();
+
+
+  /*
+   *  Overview defaults and helper functions.
+  */
+
+  // Overview default planels.
+  var defaultOverviewPlanels = [
+    'cash-flow-chart',
+    'income-tax-chart'
+  ];
+
+  // If user hasn't customized their overview yet, set it to the default planels.
+  $scope.user.overviewPlanels = $scope.user.overviewPlanels || defaultOverviewPlanels.slice();
+
+  // Reset overview planels to defaults.
+  $scope.resetDefaultOverviewPlanels = function() {
+    $scope.user.overviewPlanels = defaultOverviewPlanels.slice();
+  };
+
+  // Allow user to drag and drop the planels to customize the overview.
+  $scope.oranizable = false;
+
+  // TODO: Toggle ability to reorganize overview planels.
+  $scope.toggleOrganizability = function() {
+    //
+  };
 
 });
