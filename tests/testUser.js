@@ -154,7 +154,7 @@ var testUser = {
     },
     retirementProjection: {
       // TODO: Fill in test retirement projection data.
-    }
+    },
     tax: {
       charitableContributions: 10000,
       dependents: 2,
