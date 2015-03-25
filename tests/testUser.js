@@ -122,11 +122,19 @@ var testUser = {
       spouseGrossAnnual1099: 0,
       spousePayrollDeductions: 400,
     },
-    retirement: {
-      spouseTargetAge: 60,
-      targetAge: 55,
-      targetMonthlyIncome: 8000,
-      pensionMonthlyIncome: 0,
+    insurances: {
+      userHealth: true,
+      spouseHealth: true,
+      userHome: true,
+      userAuto: true,
+      userEmployerLife: 10000,
+      userIndividualLife: 50000,
+      spouseEmployerLife: 10000,
+      spouseIndividualLife: 100000,
+      userEmployerDisability: 2500,
+      userIndividualDisability: 5000,
+      spouseEmployerDisability: 0,
+      spouseIndividualDisability: undefined
     },
     mortgage: {
       homeValue: 500000,
@@ -137,20 +145,15 @@ var testUser = {
       startDate: new Date(2006, 5, 1),
     },
     netWorth: 57000, // Sum of all assets - all liabilities.
-    insurance: {
-      auto: true,
-      disability: 0,
-      employerDisability: undefined,
-      employerLife: 15000,
-      health: true,
-      home: true,
-      life: 0,
-      spouseHealth: true,
-      spouseDisability: 0,
-      spouseEmployerDisability: undefined,
-      spouseEmployerLife: 50000,
-      spouseLife: 10000,
+    retirement: {
+      spouseTargetAge: 60,
+      targetAge: 55,
+      targetMonthlyIncome: 8000,
+      pensionMonthlyIncome: 0,
     },
+    retirementProjection: {
+      // TODO: Fill in test retirement projection data.
+    }
     tax: {
       charitableContributions: 10000,
       dependents: 2,
