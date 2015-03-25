@@ -2,14 +2,12 @@
 
 angular.module('prosperenceApp')
 .controller('SpendingCtrl', function ($scope) {
+  $scope.user.plan.expenses = $scope.user.plan.expenses || {};
 
   // Define the user or plan object that $scope.queries questions should bind to.
   $scope.plangroup = $scope.user.plan;
 
-  // If plan.expenses does not exist, initialize it as an empty object.
-  $scope.user.plan.expenses = $scope.user.plan.expenses || {};
-
-  // Array of question objects to be asked in the 'Cash Flow' section.
+  // Array of question objects to be asked in the 'Spending' section of plan builder.
   $scope.queries = [{
     title: 'Income Information',
     type: 'multi',
@@ -17,11 +15,11 @@ angular.module('prosperenceApp')
     subqueries: [{
       question: 'What is your Gross Annual Income?',
       type: 'number',
-      bind: 'grossAnnualIncome'
+      bind: 'grossAnnualW2'
     }, {
       question: 'What is your spouse\'s Gross Annual Income?',
       type: 'number',
-      bind: 'spouseGrossAnnualIncome',
+      bind: 'spouseGrossAnnualW2',
       condition: 'married'
     }]
   }, {
