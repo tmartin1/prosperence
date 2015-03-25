@@ -3,16 +3,15 @@
 angular.module('prosperenceApp')
 .controller('PlanBuilderCtrl', function($rootScope, $scope, $location, $state, Auth) {
   $scope.isCollapsed = true;
-
   $scope.user = Auth.getCurrentUser() || {};
   $scope.user.personal = $scope.user.personal || {};
   $scope.user.plan = $scope.user.plan || {};
 
   // List of states for location questions.
-  $scope.states = ['AK', 'AL', 'AR', 'AZ', 'CA', 'CO', 'CT', 'DC', 'DE', 'FL', 'GA', 'HI',
-       'IA', 'ID', 'IL', 'IN', 'KS', 'KY', 'LA', 'MA', 'MD', 'ME', 'MI', 'MN', 'MO', 'MS',
-       'MT', 'NC', 'ND', 'NE', 'NH', 'NJ', 'NM', 'NV', 'NY', 'OH', 'OK', 'OR', 'PA', 'RI',
-       'SC', 'SD', 'TN', 'TX', 'UT', 'VA', 'VT', 'WA', 'WI', 'WV', 'WY'];
+  $scope.states = [ 'AK', 'AL', 'AR', 'AZ', 'CA', 'CO', 'CT', 'DC', 'DE', 'FL', 'GA', 'HI',
+        'IA', 'ID', 'IL', 'IN', 'KS', 'KY', 'LA', 'MA', 'MD', 'ME', 'MI', 'MN', 'MO', 'MS',
+        'MT', 'NC', 'ND', 'NE', 'NH', 'NJ', 'NM', 'NV', 'NY', 'OH', 'OK', 'OR', 'PA', 'RI',
+        'SC', 'SD', 'TN', 'TX', 'UT', 'VA', 'VT', 'WA', 'WI', 'WV', 'WY' ];
 
   // Defines the order of how pages are displayed to the user.
   var order = [
@@ -28,7 +27,7 @@ angular.module('prosperenceApp')
   ];
 
   // Sets the title, progress bar, and the 'previous' and 'next' links.
-  var updateRelationals = function(focus) {
+  function updateRelationals(focus) {
     $scope.heading = focus.data.title;
     $scope.currentState = focus.name;
     var index = order.indexOf(focus.name);
@@ -36,12 +35,30 @@ angular.module('prosperenceApp')
   };
   updateRelationals($state.current);
 
+  // Checks a specific query object for completeness. Returns a boolean.
+  function checkQueryComplete(query) {
+    console.log('checking individual query');
+    console.log(query);
+    return true;
+  };
+
+  // TODO: Check if questions are complete to determine enabled sections.
+  // Checks each query object in the current queries object for completeness. Returns boolean.
+  $scope.checkQueriesComplete = function(queries) {
+    console.log('\nIn checkQueriesComplete:');
+    var currentQueries = queries;
+    if (!!currentQueries) {
+      for (var i=0, n=currentQueries.length; i<n; i++) {
+        queries[i].isComplete = checkQueryComplete(currentQueries[i]);
+      }
+    }
+  };
+  // $scope.checkQueriesComplete();
+
   // Returns true if current section is valid, else false.
   $scope.isValid = function() {
     return $('.ng-invalid:visible').length === 0;
   };
-
-  // TODO: Check if questions are complete to determine enabled sections.
 
   var queries, index;
   // Move to previous accordion group or section.
@@ -97,6 +114,30 @@ angular.module('prosperenceApp')
     $scope.isValid();
   };
 
+  // Update page heading and navbar on state change within plan-builder.
+  // From docs: https://github.com/angular-ui/ui-router/wiki#wiki-state-change-events
+  $scope.$on('$stateChangeSuccess',
+    function(event, toState, toParams, fromState, fromParams) {
+      if (order.indexOf(toState.name) >= 0) {
+        updateRelationals(toState);
+      }
+    }
+  );
+
+  // TODO: Save all changes on form inputs.
+  // For now, this is being used for testing purposes.
+  $scope.save = function(route) {
+    console.log('inside $scope.save()');
+
+    console.log('$scope.user.plan');
+    console.log($scope.user.plan);
+
+    // $scope.testBinding();
+  };
+
+  // **********************************************************************************************
+  // THE FOLLOWING IS NOT CURRENTLY FUNCTIONING PROPERLY. TODO: Fix binding for question directive.
+  // **********************************************************************************************
   // Function to pass to directives that maintains closure access to $scope.user.plan.
   // In the HTML this would be used like: <div ng-model="setBinding('[PROPERTY]')"></div>
   var binding = $scope.user;
@@ -141,23 +182,6 @@ angular.module('prosperenceApp')
     console.log('temp after new card added');
     console.log(temp);
     console.log('');
-  };
-
-  // Update page heading and navbar on state change within plan-builder.
-  // From docs: https://github.com/angular-ui/ui-router/wiki#wiki-state-change-events
-  $scope.$on('$stateChangeStart',
-    function(event, toState, toParams, fromState, fromParams) {
-      if (order.indexOf(toState.name) >= 0) updateRelationals(toState);
-    }
-  );
-
-  // TODO: Save all changes on form inputs.
-  // for now, this is being used for testing purposes.
-  $scope.save = function(route) {
-    console.log($scope.user.plan);
-    console.log($scope.currentState);
-    // $scope.testBinding();
-    console.log('saving');
   };
 
 });

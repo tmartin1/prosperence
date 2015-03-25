@@ -51,7 +51,6 @@ angular.module('prosperenceApp')
       $scope.checkValid = function() {
         var index = currentlyOpen();
         if (index !== null) {
-          console.log($('.ng-invalid:visible').length)
           if ($('.ng-invalid:visible').length === 0) {
             $scope.queries[index].isComplete = true;
             enableNextQuestion(index);

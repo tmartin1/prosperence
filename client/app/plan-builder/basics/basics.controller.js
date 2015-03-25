@@ -139,4 +139,6 @@ angular.module('prosperenceApp')
     }]
   }];
 
+  $scope.checkQueriesComplete($scope.queries);
+
 });
