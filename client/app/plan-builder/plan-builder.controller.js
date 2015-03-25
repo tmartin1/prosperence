@@ -49,7 +49,6 @@ angular.module('prosperenceApp')
 
   // Checks a specific query object for completeness. Returns a boolean.
   function checkQueryComplete(query, plangroup) {
-    console.log('checking individual query');
     var complete = true;
     // If multi question, check for group binding, then check subqueries.
     if (query.type === 'multi') {
@@ -111,7 +110,6 @@ angular.module('prosperenceApp')
     if (!queries || !!queries[queries.length-1].isOpen) {
       return $state.go(order[index+1]);
     }
-
     // If user is on the final input, move to the next accordion section.
     else {
       var i = 0;
@@ -132,13 +130,11 @@ angular.module('prosperenceApp')
 
   // Update page heading and navbar on state change within plan-builder.
   // From docs: https://github.com/angular-ui/ui-router/wiki#wiki-state-change-events
-  $scope.$on('$stateChangeSuccess',
-    function(event, toState, toParams, fromState, fromParams) {
-      if (order.indexOf(toState.name) >= 0) {
-        updateRelationals(toState);
-      }
+  $scope.$on('$stateChangeSuccess', function(event, toState, toParams, fromState, fromParams) {
+    if (order.indexOf(toState.name) >= 0) {
+      updateRelationals(toState);
     }
-  );
+  });
 
   // TODO: Save all changes on form inputs.
   // For now, this is being used for testing purposes.
@@ -149,55 +145,6 @@ angular.module('prosperenceApp')
     console.log($scope.user.plan);
 
     // $scope.testBinding();
-  };
-
-  // **********************************************************************************************
-  // THE FOLLOWING IS NOT CURRENTLY FUNCTIONING PROPERLY. TODO: Fix binding for question directive.
-  // **********************************************************************************************
-  // Function to pass to directives that maintains closure access to $scope.user.plan.
-  // In the HTML this would be used like: <div ng-model="setBinding('[PROPERTY]')"></div>
-  var binding = $scope.user;
-  $scope.setBinding = function(target) {
-    // If binding is a single property on the user, then simply apply it.
-    var path = target.split('.');
-    if (path.length === 0) return binding[target];
-
-    // To set the binding for nested objects, accepts an array as a parameter.
-    var setNestedBinding = function(path) {
-      // If target group doesn't exist, create it as an empty object.
-      if (!binding[path[0]]) binding[path[0]] = {};
-      binding = binding[path.shift()];
-      if (path.length > 0) setNestedBinding(path);
-    };
-    setNestedBinding(path);
-
-    return binding;
-  };
-
-  // This currently successfully adds a new credit card to the plan.
-  $scope.testBinding = function() {
-    console.log($scope.user);
-    var temp = $scope.setBinding('plan.debts.creditCards');
-
-    console.log('$scope.user.plan.debts.creditCards');
-    console.log($scope.user.plan.debts.creditCards);
-    console.log('');
-
-    console.log('temp');
-    console.log(temp);
-    console.log('');
-
-    // Push to $scope.user.plan.debts.creditCards
-    $scope.user.plan.debts.creditCards.push({ name: 'VISA', rate: 10.99, amount: 5000 });
-
-    // Relog
-    console.log('$scope.user.plan.debts.creditCards after new card was added');
-    console.log($scope.user.plan.debts.creditCards);
-    console.log('');
-
-    console.log('temp after new card added');
-    console.log(temp);
-    console.log('');
   };
 
 });

@@ -2,6 +2,10 @@
 
 angular.module('prosperenceApp')
 .controller('SpendingCtrl', function ($scope) {
+
+  // Define the user or plan object that $scope.queries questions should bind to.
+  $scope.plangroup = $scope.user.plan;
+
   // If plan.expenses does not exist, initialize it as an empty object.
   $scope.user.plan.expenses = $scope.user.plan.expenses || {};
 
@@ -60,6 +64,6 @@ angular.module('prosperenceApp')
     }]
   }];
 
-  $scope.checkQueriesComplete($scope.queries);
+  $scope.checkQueriesComplete($scope.queries, $scope.plangroup);
 
 });

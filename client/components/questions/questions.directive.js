@@ -192,8 +192,6 @@ angular.module('prosperenceApp')
       };
 
       // If property is empty and input type is a table, start with an empty row.
-      console.log($scope.plangroup)
-      console.log($scope.plangroup[$scope.query.bind])
       if ($scope.query.type === 'table') {
         $scope.plangroup[$scope.query.bind] = $scope.plangroup[$scope.query.bind] || [makeRow()];
       }
