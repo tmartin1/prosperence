@@ -121,7 +121,7 @@ var testUser = {
       shortCapitalGains: 0,
       spouseGrossAnnualW2: 100000,
       spouseGrossAnnual1099: 0,
-      spousePayrollDeductions: 400,
+      spousePayrollDeductions: 400
     },
     insurances: {
       userHealth: true,
