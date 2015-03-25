@@ -51,7 +51,6 @@ angular.module('prosperenceApp')
       $scope.checkValid = function() {
         var index = currentlyOpen();
         if (index !== null) {
-          console.log($('.ng-invalid:visible').length)
           if ($('.ng-invalid:visible').length === 0) {
             $scope.queries[index].isComplete = true;
             enableNextQuestion(index);
@@ -81,8 +80,6 @@ angular.module('prosperenceApp')
         }
       };
 
-      // TODO: Previously enabled sections should remain enables if the user goes back.
-
       // Trigger events on keypress.
       $('questions').keypress(function() {
         $scope.checkValid();
@@ -106,6 +103,9 @@ angular.module('prosperenceApp')
           event.preventDefault();
         }
       });
+
+      // TODO: Previously enabled sections should remain enables if the user goes back.
+
     },
     templateUrl: 'components/questions/questionsTemplate.html'
   };
