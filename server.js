@@ -23,7 +23,7 @@ require('./server/config/express')(app);
 require('./server/routes')(app);
 
 // Start server
-var server = app.listen(process.env.PORT || config.port, function () {
+var server = app.listen(config.port, function () {
   var port = server.address().port;
   console.log('Example app listening on port %s', port)
 });
