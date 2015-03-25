@@ -58,16 +58,36 @@ angular.module('prosperenceApp')
         current = checkQuestionComplete(query.subqueries[i], plangroup);
         if (!current) complete = false;
       }
-    }
-    // If type is not multi, then binding is simple.
-    else {
+    } else {
       complete = checkQuestionComplete(query, plangroup);
     }
     return complete;
   };
 
+  // Checks a specific question for completeness. Returns a boolean.
   function checkQuestionComplete(question, plangroup) {
-    return plangroup[question.bind] !== undefined;
+    var nestedBinding = setNestedBinding(question, plangroup);
+    if (nestedBinding) {
+      return nestedBinding.group[nestedBinding.bind] !== undefined;
+    } else {
+      return plangroup[question.bind] !== undefined;
+    }
+  };
+
+  // Handles cases of nested bindings, e.g. query.bind = 'assets.fixed'
+  function setNestedBinding(question, plangroup) {
+    if (question.bind === undefined || plangroup === undefined) return null;
+    var split = question.bind.split('.');
+    if (split.length === 1) return null;
+    var newBinding = {
+      group: plangroup,
+      bind: null
+    };
+    while (split.length > 1) {
+      newBinding.group = newBinding.group[split.shift()];
+    }
+    newBinding.bind = split.pop();
+    return newBinding;
   };
 
   // Returns true if current section is valid, else false.
