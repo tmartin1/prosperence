@@ -21,6 +21,7 @@ var testUser = {
       state: 'CA'
     },
     married: true,
+    differentWorkResidence: false,
     spouseFirstName: 'Spouse',
     spouseLastName: 'User',
     spouseBirthdate: new Date(1989, 8, 6),
