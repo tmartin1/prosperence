@@ -35,25 +35,41 @@ angular.module('prosperenceApp')
   };
   updateRelationals($state.current);
 
-  // Checks a specific query object for completeness. Returns a boolean.
-  function checkQueryComplete(query) {
-    console.log('checking individual query');
-    console.log(query);
-    return true;
-  };
-
-  // TODO: Check if questions are complete to determine enabled sections.
   // Checks each query object in the current queries object for completeness. Returns boolean.
-  $scope.checkQueriesComplete = function(queries) {
-    console.log('\nIn checkQueriesComplete:');
-    var currentQueries = queries;
-    if (!!currentQueries) {
-      for (var i=0, n=currentQueries.length; i<n; i++) {
-        queries[i].isComplete = checkQueryComplete(currentQueries[i]);
+  $scope.checkQueriesComplete = function(queries, plangroup) {
+    if (!!queries) {
+      for (var i=0, n=queries.length; i<n; i++) {
+        queries[i].isComplete = checkQueryComplete(queries[i], plangroup);
+        if (queries[i].isComplete && queries[i+1]) {
+          queries[i+1].isEnabled = true;
+        }
       }
     }
   };
-  // $scope.checkQueriesComplete();
+
+  // Checks a specific query object for completeness. Returns a boolean.
+  function checkQueryComplete(query, plangroup) {
+    console.log('checking individual query');
+    var complete = true;
+    // If multi question, check for group binding, then check subqueries.
+    if (query.type === 'multi') {
+      plangroup = plangroup[query.bind] || plangroup;
+      var current = null;
+      for (var i=0, n=query.subqueries.length; i<n; i++) {
+        current = checkQuestionComplete(query.subqueries[i], plangroup);
+        if (!current) complete = false;
+      }
+    }
+    // If type is not multi, then binding is simple.
+    else {
+      complete = checkQuestionComplete(query, plangroup);
+    }
+    return complete;
+  };
+
+  function checkQuestionComplete(question, plangroup) {
+    return plangroup[question.bind] !== undefined;
+  };
 
   // Returns true if current section is valid, else false.
   $scope.isValid = function() {

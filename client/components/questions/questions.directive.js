@@ -80,8 +80,6 @@ angular.module('prosperenceApp')
         }
       };
 
-      // TODO: Previously enabled sections should remain enables if the user goes back.
-
       // Trigger events on keypress.
       $('questions').keypress(function() {
         $scope.checkValid();
@@ -105,6 +103,9 @@ angular.module('prosperenceApp')
           event.preventDefault();
         }
       });
+
+      // TODO: Previously enabled sections should remain enables if the user goes back.
+
     },
     templateUrl: 'components/questions/questionsTemplate.html'
   };
@@ -191,6 +192,8 @@ angular.module('prosperenceApp')
       };
 
       // If property is empty and input type is a table, start with an empty row.
+      console.log($scope.plangroup)
+      console.log($scope.plangroup[$scope.query.bind])
       if ($scope.query.type === 'table') {
         $scope.plangroup[$scope.query.bind] = $scope.plangroup[$scope.query.bind] || [makeRow()];
       }

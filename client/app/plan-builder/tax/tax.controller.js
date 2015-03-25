@@ -29,4 +29,7 @@ angular.module('prosperenceApp')
       bind:'otherDeductions'
     }]
   }];
+
+  $scope.checkQueriesComplete($scope.queries);
+
 });

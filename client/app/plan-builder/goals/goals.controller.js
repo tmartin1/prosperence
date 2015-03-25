@@ -19,4 +19,7 @@ angular.module('prosperenceApp')
       bind: 'pensionIncome'
     }]
   }];
+
+  $scope.checkQueriesComplete($scope.queries);
+
 });

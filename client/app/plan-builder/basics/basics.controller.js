@@ -5,6 +5,8 @@ angular.module('prosperenceApp')
   $scope.user.plan = $scope.user.plan || {};
   $scope.user.personal = $scope.user.personal || {};
 
+  $scope.plangroup = $scope.user.personal;
+
   // Array of question objects to be asked in the 'Personal Info' section.
   $scope.queries = [{
     title: 'Personal Information',
@@ -139,6 +141,6 @@ angular.module('prosperenceApp')
     }]
   }];
 
-  $scope.checkQueriesComplete($scope.queries);
+  $scope.checkQueriesComplete($scope.queries, $scope.plangroup);
 
 });
