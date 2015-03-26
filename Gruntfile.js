@@ -51,7 +51,7 @@ module.exports = function(grunt) {
     },
     open: {
       server: {
-        url: 'http://localhost:<%= express.options.port %>'
+        url: 'http://127.0.0.1:<%= express.options.port %>'
       }
     },
     watch: {
@@ -573,7 +573,7 @@ module.exports = function(grunt) {
 
   grunt.registerTask('serve', function(target) {
     if (target === 'dist') {
-      return grunt.task.run(['build', 'env:all', 'env:prod', 'express:prod']);
+      return grunt.task.run(['build', 'env:all', 'env:prod', 'express:prod', 'wait', 'open', 'express-keepalive']);
     }
 
     if (target === 'debug') {
