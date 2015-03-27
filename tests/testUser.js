@@ -37,8 +37,8 @@ var testUser = {
     },
     hasChildren: true,
     children: [
-      { name: 'Child 1 Name', birthdate: new Date(2013, 3, 17) },
-      { name: 'Child 2 Name', birthdate: new Date(2015, 2, 14) }
+      { name: 'Child 1 Name', birthdate: new Date(2013, 2, 17) },
+      { name: 'Child 2 Name', birthdate: new Date(2015, 3, 14) }
     ],
   },
   // The plan property will contain the majority of the user's plan data.

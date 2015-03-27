@@ -93,10 +93,12 @@ angular.module('prosperenceApp')
       required: true,
       fields: [{
         label: 'Child Name',
+        value: 'name',
         type: 'text',
         textAlign: 'left'
       }, {
         label: 'Child Birthdate',
+        value: 'birthdate',
         type: 'date',
         textAlign: 'left'
       }],
