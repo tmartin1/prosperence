@@ -40,9 +40,7 @@ angular.module('prosperenceApp')
       // Returns the index of the currently open section.
       function currentlyOpen() {
         for (var i=0; i<$scope.queries.length; i++) {
-          if ($scope.queries[i].isOpen) {
-            return i;
-          }
+          if ($scope.queries[i].isOpen) return i;
         }
         return null;
       };
@@ -103,9 +101,6 @@ angular.module('prosperenceApp')
           event.preventDefault();
         }
       });
-
-      // TODO: Previously enabled sections should remain enables if the user goes back.
-
     },
     templateUrl: 'components/questions/questionsTemplate.html'
   };
@@ -142,30 +137,25 @@ angular.module('prosperenceApp')
         setBinding($scope.query.bind.split('.'));
       }
 
+      // Check and fix data formatting for non multi-nested date objects.
+      var fixDate = function(query) {
+        if (query.type === 'date' && typeof $scope.plangroup[query.bind] === 'string') {
+          var temp = $scope.plangroup[query.bind].split('-');
+          $scope.plangroup[query.bind] = new Date(temp[0], temp[1], temp[2].slice(0,2));
+        }
+      };
+      fixDate($scope.query);
+
       // Handle special conditions for multi type questions.
       if ($scope.query.type === 'multi') {
         // If a binding is defined for a multi question object, reset binding to the subgroup.
         if ($scope.query.bind) {
           $scope.plangroup = $scope.plangroup[$scope.query.bind];
         }
-        // Look for date type and fix objects cast as strings.
+        // Check for and correct date formats.
         for (var key in $scope.query.subqueries) {
-          // Correct date formats.
-          if ($scope.query.subqueries[key].type === 'date' && typeof $scope.plangroup[$scope.query.subqueries[key].bind] === 'string') {
-            var temp = $scope.plangroup[$scope.query.subqueries[key].bind].split('-');
-            // Create new date obj from above string.
-            var newdate = new Date(temp[0], temp[1], temp[2].slice(0,2));
-            $scope.plangroup[$scope.query.subqueries[key].bind] = newdate;
-          }
+          fixDate($scope.query.subqueries[key]);
         }
-      }
-
-      // Check and fix data formatting for non multi-nested date objects.
-      if ($scope.query.type === 'date' && typeof $scope.plangroup[$scope.query.bind] === 'string') {
-        var temp = $scope.plangroup[$scope.query.bind].split('-');
-        // Create new date obj from above string.
-        var newdate = new Date(temp[0], temp[1], temp[2].slice(0,2));
-        $scope.plangroup[$scope.query.bind] = newdate;
       }
 
       // Creates a new row for the input table.
@@ -183,12 +173,6 @@ angular.module('prosperenceApp')
       };
       $scope.deleteRow = function(index, property) {
         $scope.plangroup[property].splice(index, 1);
-      };
-      $scope.isEnabled = function(title) {
-        return $scope.sections.enabled[title];
-      };
-      $scope.isComplete = function(title) {
-        return $scope.sections.complete[title];
       };
 
       // If property is empty and input type is a table, start with an empty row.
