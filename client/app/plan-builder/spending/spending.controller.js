@@ -61,6 +61,7 @@ angular.module('prosperenceApp')
       type: 'number'
     }]
   }];
+  $scope.setQueries($scope.queries);
 
   $scope.checkQueriesComplete($scope.queries, $scope.plangroup);
 

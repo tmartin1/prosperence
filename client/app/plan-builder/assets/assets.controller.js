@@ -114,6 +114,7 @@ angular.module('prosperenceApp')
       condition: 'hasMortgage'
     }]
   }];
+  $scope.setQueries($scope.queries);
 
   $scope.checkQueriesComplete($scope.queries, $scope.plangroup);
 
