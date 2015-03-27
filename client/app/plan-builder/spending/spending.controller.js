@@ -20,21 +20,21 @@ angular.module('prosperenceApp')
       question: 'What is your spouse\'s Gross Annual Income?',
       type: 'number',
       bind: 'spouseGrossAnnualW2',
-      condition: 'married'
+      condition: $scope.user.personal.married
     }]
   }, {
     title: 'Payroll Deductions',
     type: 'multi',
-    bind: 'expenses',
+    bind: 'income',
     subqueries: [{
-      question: "Enter the total deductions from your paycheck (not including retirement contributions):",
+      question: 'Enter the total deductions from your paycheck (not including retirement contributions):',
       bind: 'userPayrollDeductions',
       type:'number'
     }, {
-      question: "Enter the total deductions from your spouce's paycheck (not including retirement contributions):",
+      question: 'Enter the total deductions from your spouce\'s paycheck (not including retirement contributions):',
       bind: 'spousePayrollDeductions',
       type: 'number',
-      condition: 'married'
+      condition: $scope.user.personal.married
     }]
   }, {
     title: 'Fixed Expenses',

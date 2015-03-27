@@ -1,6 +1,6 @@
 <!-- For multi-question slides -->
 
-<div ng-repeat="item in query.subqueries" ng-if="plangroup[item.condition] === true || item.condition === undefined">
+<div ng-repeat="item in query.subqueries" ng-if="item.condition === undefined || item.condition === true || plangroup[item.condition] === true">
   <label>{{ item.question }}</label>
   <!-- TODO: For select, checkbox, radio, button, table, multi, and review questions -->
   <!-- <div
