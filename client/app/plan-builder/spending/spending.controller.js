@@ -43,9 +43,13 @@ angular.module('prosperenceApp')
     question: 'Fixed expenses are the ones that you would consider necessary to get by (mortgage payments, groceries, utilities, child care expenses, etc.).',
     fields: [{
       label: 'Fixed Expense Name',
+      value: 'name',
+      textAlign: 'left',
       type: 'text'
     }, {
       label: 'Monthly Expense',
+      value: 'amount',
+      textAlign: 'right',
       type: 'number'
     }]
   }, {
@@ -55,9 +59,13 @@ angular.module('prosperenceApp')
     question: 'Flexible expenses are the ones that you could live without if you needed to (travel, dining out, etc.) As you may not travel every month, try to approximate by taking your annual travel expense and dividing it by twelve.',
     fields: [{
       label: 'Flexible Expense Name',
+      value: 'name',
+      textAlign: 'left',
       type: 'text'
     }, {
       label: 'Monthly Expense',
+      value: 'amount',
+      textAlign: 'right',
       type: 'number'
     }]
   }];
