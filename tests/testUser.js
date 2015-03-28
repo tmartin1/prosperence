@@ -61,28 +61,36 @@ var testUser = {
         { name: 'Spouse Rollover IRA', amount: 17000, tax: 'pretax' }
       ],
     },
-    contributions: [{
+    contributions: {
+      reserves: [{
+        name: 'Some Other Savings Account',
+        amount: 50,
+        frequency: 'Weekly',
+        type: 'non-retirement'
+      }],
+      earlyRetirement: [{
+        name: 'Brokerage Account',
+        amount: 250,
+        frequency: 'Weekly',
+        type: 'non-retirement'
+      }],
+      retirement: [{
         name: 'User 401k', // contributions objects must be the name of the user's fixed or variable assets.
         amount: 1000,
-        frequency: 'monthly',
+        frequency: 'Monthly',
         type: 'employer' // 'employer', 'individual', or 'non-retirement'
       }, {
         name: 'User Roth IRA',
         amount: 100,
-        frequency: 'weekly',
+        frequency: 'Weekly',
         type: 'individual'
       }, {
         name: 'Spouse 401k',
         amount: 400,
-        frequency: 'monthly',
+        frequency: 'Monthly',
         type: 'employer'
-      }, {
-        name: 'Some Other Savings Account',
-        amount: 50,
-        frequency: 'weekly',
-        type: 'non-retirement'
-      }
-    ],
+      }]
+    },
     debts: {
       creditCards: [
         { name: 'VISA', rate: 10.99, amount: 5000 },
