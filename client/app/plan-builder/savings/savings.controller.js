@@ -14,13 +14,17 @@ angular.module('prosperenceApp')
     question: 'Please enter your non-retirement account contributions.',
     fields: [{
       label: 'Account Name', // These should be the same as their ER or non-retirement variable asset account names.
+      value: 'name',
       type: 'text'
     }, {
       label: 'Contribution',
+      value: 'contribution',
       type: 'number'
     }, {
       label: 'Frequency',
-      type: 'number' // TODO: This should be a select option.
+      value: 'frequency',
+      type: 'select',
+      options: ['Weekly', 'Monthly', 'Semi-Annually', 'Anunally']
     }]
   }, {
     title: 'Retirement Savings',
@@ -29,13 +33,17 @@ angular.module('prosperenceApp')
     question: 'Please enter your retirement account contributions.',
     fields: [{
       label: 'Account Name', // These should be the same as their retirement account names from variable assets.
+      value: 'name',
       type: 'text'
     }, {
       label: 'Contribution',
+      value: 'contribution',
       type: 'number'
     }, {
       label: 'Frequency',
-      type: 'number' // TODO: This should be a select option.
+      value: 'frequency',
+      type: 'select',
+      options: ['Weekly', 'Monthly', 'Semi-Annually', 'Anunally']
     }]
   }];
   $scope.setQueries($scope.queries);
