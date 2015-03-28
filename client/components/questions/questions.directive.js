@@ -119,20 +119,6 @@ angular.module('prosperenceApp')
     controller: function($scope) {
       if ($scope.query.isComplete) $scope.query.isEnabled = true;
 
-
-      // Compares the first input parameter with all other parameters passed in. Not deep compare.
-      $scope.compare = function(base) {
-        console.log(base)
-        var args = Array.prototype.slice.apply(arguments);
-        for (var i=1, n=args.length; i<n; i++) {
-          if (base === args[i]) {
-            console.log(base, args[i])
-            return true;
-          }
-        }
-        return false;
-      };
-
       // If query is binding to a nested object, recursively track through plan to assign binding.
       var setBinding = function(path) {
         if ($scope.plangroup[path[0]] === undefined) {
@@ -164,6 +150,17 @@ angular.module('prosperenceApp')
       };
       $scope.deleteRow = function(index, property) {
         $scope.plangroup[property].splice(index, 1);
+      };
+
+      // Compares the first input parameter with all other parameters passed in. Not deep compare.
+      $scope.compare = function(base) {
+        var args = Array.prototype.slice.apply(arguments);
+        for (var i=1, n=args.length; i<n; i++) {
+          if (base === args[i]) {
+            return true;
+          }
+        }
+        return false;
       };
 
       // Check and fix data formatting for non multi-nested date objects.
