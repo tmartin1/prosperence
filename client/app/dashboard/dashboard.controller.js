@@ -38,6 +38,8 @@ angular.module('prosperenceApp')
   // Overview default planels.
   var defaultOverviewPlanels = [
     'cash-flow-chart',
+    'net-worth-over-time-chart',
+    'debt-balance-over-time-chart',
     'income-tax-chart'
   ];
 
