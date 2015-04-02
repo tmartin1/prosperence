@@ -1,7 +1,7 @@
 'use strict';
 
 angular.module('prosperenceApp')
-.controller('NavbarCtrl', function($scope, $state, $location, Auth, $modal) {
+.controller('NavbarCtrl', function($scope, $state, Auth, $modal) {
   $scope.isCollapsed = true;
   $scope.isLoggedIn = Auth.isLoggedIn;
   $scope.isAdmin = Auth.isAdmin;
@@ -33,7 +33,7 @@ angular.module('prosperenceApp')
     'link': 'university.courses',
     'shown': true,
     'abstractLink': 'university'
-  }, ];
+  }];
 
   $scope.openLoginModal = function(goToSignUp) {
     $scope.modalInstance = $modal.open({
@@ -46,11 +46,11 @@ angular.module('prosperenceApp')
         }
       }
     });
-  }
+  };
 
   $scope.logout = function() {
     Auth.logout();
-    $location.path('/');
+    $state.go('main');
   };
 
   // Sets active class on sidebar.
@@ -58,7 +58,7 @@ angular.module('prosperenceApp')
     return $state.includes(viewLocation);
   };
 })
-.controller('loginController', function($scope, $state, $modalInstance, Auth, $location, goToSignUp) {
+.controller('loginController', function($scope, $state, $modalInstance, Auth, goToSignUp) {
   $scope.showSignUp = goToSignUp;
   $scope.toggleRegister = function(newPage) {
     $scope.showSignUp = !$scope.showSignUp;
@@ -101,7 +101,6 @@ angular.module('prosperenceApp')
       .catch (function(err) {
         err = err.data;
         $scope.errors = {};
-
         // Update validity of form fields that match the mongoose errors.
         angular.forEach(err.errors, function(error, field) {
           form[field].$setValidity('mongoose', false);
