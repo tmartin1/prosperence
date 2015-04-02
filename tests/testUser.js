@@ -65,7 +65,7 @@ var testUser = {
       reserves: [{
         name: 'Some Other Savings Account',
         amount: 50,
-        frequency: 'Weekly',
+        frequency: 'Weekly', // 'Weekly', 'Monthly', 'Semi-Annually', 'Annually'
         type: 'non-retirement'
       }],
       earlyRetirement: [{
@@ -78,7 +78,7 @@ var testUser = {
         name: 'User 401k', // contributions objects must be the name of the user's fixed or variable assets.
         amount: 1000,
         frequency: 'Monthly',
-        type: 'employer' // 'employer', 'individual', or 'non-retirement'
+        type: 'employer' // 'employer', 'individual', 'non-retirement'
       }, {
         name: 'User Roth IRA',
         amount: 100,

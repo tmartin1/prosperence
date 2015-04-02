@@ -36,12 +36,39 @@ angular.module('prosperenceApp')
    *  Highcharts logic and helper functions.
   */
 
-  // Calculates and return the total of a given group.
+  // Normalizes a given input number to an approximate monthly frequency.
+  var normalizeMonthly = {
+    'Weekly': function(num) {
+      return ( num * 52 / 12 );
+    },
+    'Monthly': function(num) {
+      return num;
+    },
+    'Semi-Annually': function(num) {
+      return ( num * 2 / 12 );
+    },
+    'Annually': function(num) {
+      return ( num / 12 );
+    }
+  };
+
+  // Calculate and return the total contributions by group.
+  // Check for and adjust for varying frequency (normailize to monthly) if needed.
+  $scope.normalizeContributions = function() {
+
+  };
+
+  // Calculate and return the total of a given group.
   $scope.sumGroup = function(group) {
     var total = 0;
     for (var key in group) {
-      if (typeof group[key] === 'number') total += group[key];
-      else total += group[key]['amount'];
+      if (typeof group[key] === 'number') {
+        total += group[key];
+      } else if (!!normalizeMonthly[group[key]['frequency']]) {
+        total += normalizeMonthly[group[key]['frequency']](group[key]['amount']);
+      } else {
+        total += group[key]['amount'];
+      }
     }
     return total;
   };
