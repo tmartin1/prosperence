@@ -22,7 +22,6 @@ angular.module('prosperenceApp')
   }
   var savings = $scope.sumGroup(savingsData);
 
-
   // Calculate user age for start point.
   function calculateAge(birthday) { // birthday is a date
     if (typeof birthday === 'string') {

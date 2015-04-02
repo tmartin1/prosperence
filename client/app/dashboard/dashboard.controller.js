@@ -5,6 +5,9 @@ angular.module('prosperenceApp')
   $scope.user = Auth.getCurrentUser();
   $scope.plan = $scope.user.plan;
 
+  /*
+   *  Overview defaults and helper functions.
+  */
 
   // Return name of current state.
   $scope.currentState = function() {
@@ -31,6 +34,28 @@ angular.module('prosperenceApp')
     'debt-balance-over-time-chart': $scope.getPlanelPath('debt-balance-over-time-chart')
   };
 
+  // Overview default planels.
+  var defaultOverviewPlanels = [
+    'cash-flow-chart',
+    'income-tax-chart'
+  ];
+
+  // If user hasn't customized their overview yet, set it to the default planels.
+  $scope.user.overviewPlanels = $scope.user.overviewPlanels || defaultOverviewPlanels.slice();
+
+  // Reset overview planels to defaults.
+  $scope.resetDefaultOverviewPlanels = function() {
+    $scope.user.overviewPlanels = defaultOverviewPlanels.slice();
+  };
+
+  // Allow user to drag and drop the planels to customize the overview.
+  $scope.oranizable = false;
+
+  // TODO: Toggle ability to reorganize overview planels.
+  $scope.toggleOrganizability = function() {
+    //
+  };
+
 
   /*
    *  Highcharts logic and helper functions.
@@ -50,12 +75,6 @@ angular.module('prosperenceApp')
     'Annually': function(num) {
       return ( num / 12 );
     }
-  };
-
-  // Calculate and return the total contributions by group.
-  // Check for and adjust for varying frequency (normailize to monthly) if needed.
-  $scope.normalizeContributions = function() {
-
   };
 
   // Calculate and return the total of a given group.
@@ -136,32 +155,5 @@ angular.module('prosperenceApp')
     }
   };
   $scope.updateChartMenu();
-
-
-  /*
-   *  Overview defaults and helper functions.
-  */
-
-  // Overview default planels.
-  var defaultOverviewPlanels = [
-    'cash-flow-chart',
-    'income-tax-chart'
-  ];
-
-  // If user hasn't customized their overview yet, set it to the default planels.
-  $scope.user.overviewPlanels = $scope.user.overviewPlanels || defaultOverviewPlanels.slice();
-
-  // Reset overview planels to defaults.
-  $scope.resetDefaultOverviewPlanels = function() {
-    $scope.user.overviewPlanels = defaultOverviewPlanels.slice();
-  };
-
-  // Allow user to drag and drop the planels to customize the overview.
-  $scope.oranizable = false;
-
-  // TODO: Toggle ability to reorganize overview planels.
-  $scope.toggleOrganizability = function() {
-    //
-  };
 
 });
