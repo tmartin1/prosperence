@@ -94,16 +94,28 @@ var testUser = {
     debts: {
       creditCards: [
         { name: 'VISA', rate: 10.99, amount: 5000 },
-        { name: 'Chase Credit Card', rate: 15.99, amount: 4000 },
+        { name: 'Chase Credit Card', rate: 15.99, amount: 4000 }
       ],
       other: [
         { name: 'Auto Loan', rate: 0.9, amount: 35000 },
-        { name: 'Disney Wedding Loan', rate: 9.5, amount: 41000 }
+        { name: 'Speedboat Loan', rate: 9.5, amount: 41000 }
       ],
       studentLoans: [
         { name: 'Federal Stafford', rate: 6.8, amount: 150000 },
         { name: 'Federal Perkins', rate: 5.0, amount: 50000 }
       ],
+    },
+    // TODO: Add debt reduction projection logic to server process.
+    debtProjection: {
+      debts: [ // Debts in order of repayment priority.
+        { name: 'VISA', rate: 10.99, amount: 5000, minPay: 50 },
+        { name: 'Chase Credit Card', rate: 15.99, amount: 4000, minPay: 100 },
+        { name: 'Auto Loan', rate: 0.9, amount: 35000, minPay: 75 },
+        { name: 'Speedboat Loan', rate: 9.5, amount: 41000, minPay: 150 },
+        { name: 'Federal Stafford', rate: 6.8, amount: 150000, minPay: 100 },
+        { name: 'Federal Perkins', rate: 5.0, amount: 50000, minPay: 150 }
+      ],
+      schedule: {}
     },
     expenses: {
       fixed: [

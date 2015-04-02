@@ -27,11 +27,12 @@ angular.module('prosperenceApp')
   // Object to keep ALL planel names and locations organized.
   $scope.planelLibrary = {
     'cash-flow-chart': $scope.getPlanelPath('cash-flow-chart'),
+    'debt-balance-over-time-chart': $scope.getPlanelPath('debt-balance-over-time-chart'),
+    'debt-reduction-chart': $scope.getPlanelPath('debt-reduction-chart'),
     'income-tax-chart': $scope.getPlanelPath('income-tax-chart'),
     'net-worth-chart': $scope.getPlanelPath('net-worth-chart'),
     'retirement-savings-growth-chart': $scope.getPlanelPath('retirement-savings-growth-chart'),
-    'net-worth-over-time-chart': $scope.getPlanelPath('net-worth-over-time-chart'),
-    'debt-balance-over-time-chart': $scope.getPlanelPath('debt-balance-over-time-chart')
+    'net-worth-over-time-chart': $scope.getPlanelPath('net-worth-over-time-chart')
   };
 
   // Overview default planels.
