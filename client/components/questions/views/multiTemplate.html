@@ -1,6 +1,7 @@
 <!-- For multi-question slides -->
 
-<div ng-repeat="item in query.subqueries" ng-if="item.condition === undefined || item.condition === true || plangroup[item.condition] === true">
+<div ng-repeat="item in query.subqueries"
+     ng-show="item.condition === undefined || item.condition === true || plangroup[item.condition] === true">
   <label>{{ item.question }}</label>
   <!-- TODO: For select, checkbox, radio, button, table, multi, and review questions -->
   <!-- <div
@@ -15,9 +16,9 @@
           class="dropdown"
           ng-required="item.required">
     <option ng-repeat="option in item.options"
-            ng-value="option.value || option"
-            ng-selected="option.value === plangroup[item.bind]"
-            class="item">
+            ng-value="getOptionValue(option)"
+            class="item"
+            ng-selected="option.value === plangroup[item.bind] || option === plangroup[item.bind]">
             {{ option.text || option }}
     </option>
   </select>

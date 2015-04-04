@@ -103,6 +103,7 @@ angular.module('prosperenceApp')
         textAlign: 'left'
       }],
       condition: 'hasChildren'
+      // condition: $scope.user.personal.hasChildren
     }]
   }, {
     title: 'Residence and Work Location',

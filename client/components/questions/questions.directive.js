@@ -175,6 +175,13 @@ angular.module('prosperenceApp')
         return false;
       };
 
+      // Returns the value of a select option. Options can be defined in two ways:
+      // Either as a value or and an object with a text and value property.
+      $scope.getOptionValue = function(option) {
+        if (option.value !== undefined) return option.value;
+        return option;
+      };
+
       // Check and fix data formatting for non multi-nested date objects.
       var fixDate = function(str) {
         var temp = str.split('-');
