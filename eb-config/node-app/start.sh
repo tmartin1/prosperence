@@ -1,12 +1,12 @@
 #!/usr/bin/env bash
 cd /tmp
 
-rm -rf prosperence; true
+rm -rf prosperence
 
-git clone https://github.com/prosperence/prosperence.git
+git clone https://github.com/scottrice10/prosperence.git
 
 cd prosperence
-git checkout master
+git checkout dev
 
 npm install --unsafe-perm
 npm start
