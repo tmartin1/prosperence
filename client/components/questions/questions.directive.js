@@ -137,16 +137,28 @@ angular.module('prosperenceApp')
       }
 
       // Creates a new row for the input table.
-      var makeRow = function() {
+      var makeRow = function(property) {
         var row = {};
-        for (var i=0, n=$scope.query.fields.length; i<n; i++) {
-          row[$scope.query.fields[i].label] = '';
+        // Add row for table nested in multi type question.
+        if ($scope.query.type === 'multi') {
+          for (var i=0, n=$scope.query.subqueries.length; i<n; i++) {
+            if ($scope.query.subqueries[i].bind === property) {
+              // console.log($scope.query.subqueries[i].fields.length)
+              for (var j=0, n=$scope.query.subqueries[i].fields.length; j<n; j++) {
+                row[$scope.query.subqueries[i].fields[j].label] = '';
+              }
+            }
+          }
+        } else {
+          for (var i=0, n=$scope.query.fields.length; i<n; i++) {
+            row[$scope.query.fields[i].label] = '';
+          }
         }
         return row;
       };
       $scope.addRow = function(property) {
         $scope.plangroup[property] = $scope.plangroup[property] || [];
-        $scope.plangroup[property].push(makeRow());
+        $scope.plangroup[property].push(makeRow(property));
       };
       $scope.deleteRow = function(index, property) {
         $scope.plangroup[property].splice(index, 1);

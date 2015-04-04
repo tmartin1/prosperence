@@ -60,11 +60,22 @@ angular.module('prosperenceApp')
   function checkQuestionComplete(question, plangroup) {
     var nestedBinding = setNestedBinding(question, plangroup);
     if (nestedBinding) {
+      nestedBinding.group = nestedBinding.group || {};
       return nestedBinding.group[nestedBinding.bind] !== undefined;
     } else {
       return plangroup[question.bind] !== undefined;
     }
   };
+  /*
+  function checkQuestionComplete(question, plangroup) {
+    var nestedBinding = setNestedBinding(question, plangroup);
+    if (nestedBinding && setNestedBinding[plangroup]) {
+      return nestedBinding[plangroup][nestedBinding.bind] !== undefined;
+    } else {
+      return plangroup[question.bind] !== undefined;
+    }
+  };
+  */
 
   // Handles cases of nested bindings, e.g. query.bind = 'assets.fixed'
   function setNestedBinding(question, plangroup) {
