@@ -1,12 +1,12 @@
 <!-- For multi-question slides -->
 
 <div ng-repeat="item in query.subqueries"
-     ng-show="item.condition === undefined || item.condition === true || plangroup[item.condition] === true">
+     ng-show="isShown(item)">
   <label>{{ item.question }}</label>
   <!-- TODO: For select, checkbox, radio, button, table, multi, and review questions -->
   <!-- <div
     ng-if = "['select','checkbox','radio','button','table','multi','review'].indexOf(item.type) !== -1"
-    query = "item",
+    query = "item"
     ng-include = "'components/questions/views/'+item.type+'Template.html'">
   </div> -->
 

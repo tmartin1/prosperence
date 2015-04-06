@@ -103,7 +103,6 @@ angular.module('prosperenceApp')
         textAlign: 'left'
       }],
       condition: 'hasChildren'
-      // condition: $scope.user.personal.hasChildren
     }]
   }, {
     title: 'Residence and Work Location',
@@ -120,7 +119,7 @@ angular.module('prosperenceApp')
     }, {
       question: 'Do you work in a different state than you live?',
       type: 'select',
-      bind: 'sameWorkResidence',
+      bind: 'differentWorkResidence',
       required: true,
       options: [{
         text: 'Yes',
@@ -134,14 +133,14 @@ angular.module('prosperenceApp')
       type: 'text',
       bind: 'workAddress.city',
       required: true,
-      condition: 'sameWorkResidence'
+      condition: 'differentWorkResidence'
     }, {
       question: 'In which state do you work?',
       type: 'select',
       bind: 'workAddress.state',
       required: true,
       options: $scope.states,
-      condition: 'workAddress.state'
+      condition: 'differentWorkResidence'
     }]
   }];
   $scope.setQueries($scope.queries);

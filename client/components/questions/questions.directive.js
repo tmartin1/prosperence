@@ -10,6 +10,7 @@ angular.module('prosperenceApp')
 .directive('questions', function() {
   return {
     restrict: 'E',
+    // transclude: true,
     scope: {
       queries: '=',
       plangroup: '=',
@@ -117,6 +118,7 @@ angular.module('prosperenceApp')
       plangroup: '='
     },
     controller: function($scope) {
+      console.log($scope.query)
       if ($scope.query.isComplete) $scope.query.isEnabled = true;
 
       // If query is binding to a nested object, recursively track through plan to assign binding.
@@ -178,9 +180,29 @@ angular.module('prosperenceApp')
       // Returns the value of a select option. Options can be defined in two ways:
       // Either as a value or and an object with a text and value property.
       $scope.getOptionValue = function(option) {
-        if (option.value !== undefined) return option.value;
-        return option;
+        if (option.value !== undefined) {
+          return option.value;
+        } else {
+          return option;
+        }
       };
+
+      // Returns true if question is shown or false if not.
+      // Item is only passed in for multi questions, otherwise, check query.
+      $scope.isShown = function(item) {
+        var qc = $scope.query.condition;
+        var queryCondition = qc === undefined || qc === true || qc === 'true' ||
+                             $scope.plangroup[qc] === true || $scope.plangroup[qc] === 'true';
+        // If item or item.condition are undefined, check query condition only.
+        if (!item || item.condition === undefined) {
+          return !!queryCondition;
+        }
+        // If item is defined, then check item.
+        var ic = item.condition;
+        var itemCondition = ic === undefined || ic === true || ic === 'true' ||
+                            $scope.plangroup[ic] === true || $scope.plangroup[ic] === 'true';
+        return !!itemCondition;
+      }
 
       // Check and fix data formatting for non multi-nested date objects.
       var fixDate = function(str) {
