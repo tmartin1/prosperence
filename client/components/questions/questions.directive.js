@@ -180,11 +180,7 @@ angular.module('prosperenceApp')
       // Returns the value of a select option. Options can be defined in two ways:
       // Either as a value or and an object with a text and value property.
       $scope.getOptionValue = function(option) {
-        if (option.value !== undefined) {
-          return option.value;
-        } else {
-          return option;
-        }
+        return option.value === undefined ? option : option.value;
       };
 
       // Returns true if question is shown or false if not.
