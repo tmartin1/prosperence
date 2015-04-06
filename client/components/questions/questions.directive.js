@@ -118,7 +118,6 @@ angular.module('prosperenceApp')
       plangroup: '='
     },
     controller: function($scope) {
-      console.log($scope.query)
       if ($scope.query.isComplete) $scope.query.isEnabled = true;
 
       // If query is binding to a nested object, recursively track through plan to assign binding.
