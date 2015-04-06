@@ -1,13 +1,13 @@
 'use strict';
 
 angular.module('prosperenceApp')
-.controller('PlanBuilderCtrl', function($rootScope, $scope, $location, $state, Auth) {
+.controller('PlanBuilderCtrl', function($scope, $location, $state, Auth) {
   $scope.isCollapsed = true;
   $scope.user = Auth.getCurrentUser() || {};
   $scope.user.personal = $scope.user.personal || {};
   $scope.user.plan = $scope.user.plan || {};
-  // null = not enabled, false = enabled but not complete, true = complete.
   $scope.user.builderProgress = $scope.user.builderProgress || {
+    // null = not enabled, false = enabled but not complete, true = complete.
     'plan-builder.start': true,
     'plan-builder.basics': false,
     'plan-builder.assets': null,
@@ -37,7 +37,7 @@ angular.module('prosperenceApp')
     return !!$scope.user.builderProgress[target];
   };
 
-  // Array of plan builder sections in order of progress.
+  // Array of plan builder sections in order.
   $scope.sections = [
     { text: 'Introduction', state: 'plan-builder.start' },
     { text: 'Personal Info', state: 'plan-builder.basics' },
@@ -57,7 +57,6 @@ angular.module('prosperenceApp')
 
   // Move to previous accordion group or section.
   $scope.gotoprevious = function() {
-    // queries = $scope.$$childHead.queries;
     if (!queries || !!queries[0].isOpen) {
       $state.go($scope.sections[currentSectionIndex-1].state);
     } else {
@@ -65,7 +64,7 @@ angular.module('prosperenceApp')
       var i = queries.length-1;
       while (!queries[i].isOpen) {
         i--;
-        // Edge case: if all sections are closed.
+        // Edge case: If all sections are closed go to previous state.
         if (i < 0) {
           return $state.go($scope.sections[currentSectionIndex-1].state);
         }
@@ -94,7 +93,7 @@ angular.module('prosperenceApp')
       var i = 0;
       while (!queries[i].isOpen) {
         i++;
-        // Edge case: if all sections are closed.
+        // Edge case: If all sections are closed, go to next state.
         if (i >= queries.length) {
           return $state.go($scope.sections[currentSectionIndex+1].state);
         }
@@ -132,7 +131,7 @@ angular.module('prosperenceApp')
     }
   });
 
-  // TODO: Save all changes on form inputs.
+  // TODO: Save all changes for plan-builder inputs.
   // For now, this is being used for testing purposes.
   $scope.save = function(route) {
   };
