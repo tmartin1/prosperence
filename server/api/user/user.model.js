@@ -14,13 +14,16 @@ var UserSchema = new Schema({
   provider: String,
   salt: String,
   builderProgress: {
-    assets:     { type: Boolean, default: false },
-    debts:      { type: Boolean, default: false },
-    spending:   { type: Boolean, default: false },
-    savings:    { type: Boolean, default: false },
-    insurances: { type: Boolean, default: false },
-    tax:        { type: Boolean, default: false },
-    goals:      { type: Boolean, default: false }
+    // null = not enabled, false = enabled but not complete, true = complete.
+    'plan-builder.start':      { type: Boolean, default: true },
+    'plan-builder.basics':     { type: Boolean, default: false },
+    'plan-builder.assets':     { type: Boolean, default: null },
+    'plan-builder.debts':      { type: Boolean, default: null },
+    'plan-builder.spending':   { type: Boolean, default: null },
+    'plan-builder.savings':    { type: Boolean, default: null },
+    'plan-builder.insurances': { type: Boolean, default: null },
+    'plan-builder.tax':        { type: Boolean, default: null },
+    'plan-builder.goals':      { type: Boolean, default: null }
   },
   personal: {},
   plan: {}
