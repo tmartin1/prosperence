@@ -6,6 +6,15 @@ angular.module('prosperenceApp')
   $scope.user = Auth.getCurrentUser() || {};
   $scope.user.personal = $scope.user.personal || {};
   $scope.user.plan = $scope.user.plan || {};
+  $scope.user.builderProgress = $scope.user.builderProgress || {
+    assets: false,
+    debts: false,
+    spending: false,
+    savings: false,
+    insurances: false,
+    tax: false,
+    goals: false
+  };
   var currentSectionIndex = currentSectionIndex || 0;
   var queries;
 
@@ -15,16 +24,20 @@ angular.module('prosperenceApp')
         'MT', 'NC', 'ND', 'NE', 'NH', 'NJ', 'NM', 'NV', 'NY', 'OH', 'OK', 'OR', 'PA', 'RI',
         'SC', 'SD', 'TN', 'TX', 'UT', 'VA', 'VT', 'WA', 'WI', 'WV', 'WY' ];
 
+  var stateEnabled = function(state) {
+    return !!$scope.user.builderProgress[state];
+  };
+
   $scope.sections = [
-    { text: 'Introduction', enabled: true, state: 'plan-builder.start' },
-    { text: 'Personal Info', enabled: true, state: 'plan-builder.basics' },
-    { text: 'Assets', enabled: true, state: 'plan-builder.assets' },
-    { text: 'Debts', enabled: true, state: 'plan-builder.debts' },
-    { text: 'Spending', enabled: true, state: 'plan-builder.spending' },
-    { text: 'Savings', enabled: true, state: 'plan-builder.savings' },
-    { text: 'Insurances', enabled: true, state: 'plan-builder.insurances' },
-    { text: 'Taxes', enabled: true, state: 'plan-builder.tax' },
-    { text: 'Goals', enabled: true, state: 'plan-builder.goals' }
+    { text: 'Introduction', state: 'plan-builder.start', enabled: true },
+    { text: 'Personal Info', state: 'plan-builder.basics', enabled: true },
+    { text: 'Assets', state: 'plan-builder.assets', enabled: stateEnabled('assets') },
+    { text: 'Debts', state: 'plan-builder.debts', enabled: stateEnabled('debts') },
+    { text: 'Spending', state: 'plan-builder.spending', enabled: stateEnabled('spending') },
+    { text: 'Savings', state: 'plan-builder.savings', enabled: stateEnabled('savings') },
+    { text: 'Insurances', state: 'plan-builder.insurances', enabled: stateEnabled('insurances') },
+    { text: 'Taxes', state: 'plan-builder.tax', enabled: stateEnabled('tax') },
+    { text: 'Goals', state: 'plan-builder.goals', enabled: stateEnabled('goals') }
   ];
 
   // Checks each query object in the current queries object for completeness. Returns boolean.
@@ -95,7 +108,6 @@ angular.module('prosperenceApp')
 
   // Returns true if current section is valid, else false.
   $scope.isValid = function() {
-    console.log($('.ng-invalid:visible').first())
     return $('.ng-invalid:visible').length === 0;
   };
 
@@ -122,22 +134,16 @@ angular.module('prosperenceApp')
 
   // Move to next required input field, accordion group or section.
   $scope.gotonext = function() {
-    console.log('going to next')
     // If there is an empty required field, set focus to that input section and display popover.
     if (!$scope.isValid()) {
-      console.log('invalid input')
       $('.ng-invalid:visible').first().focus();
       return;
     }
     // If all required query sections are filled in, move to the next plan-builder section.
-    // queries = $scope.$$childHead.queries;
-    // var accordions = $('.panel');
-    // console.log(queries)
     if (!queries || queries[queries.length-1].isOpen) {
-      console.log('going to next state', $scope.sections[currentSectionIndex+1].state)
+      $scope.sections[currentSectionIndex+1].enabled = true;
       $state.go($scope.sections[currentSectionIndex+1].state);
     } else {
-      console.log('opening next accordion section')
       // Else move to next accordion section.
       var i = 0;
       while (!queries[i].isOpen) {
@@ -152,6 +158,21 @@ angular.module('prosperenceApp')
       queries[i+1].isEnabled = true;
       queries[i+1].isOpen = true;
     }
+  };
+
+  // Transition to target state if enable, else go to last enabled state.
+  $scope.goToState = function(target) {
+    var lastState;
+    for (var i=0, n=$scope.sections.length; i<n; i++) {
+      if ($scope.sections[i].enabled) {
+        lastState = $scope.sections[i].state;
+        if ($scope.sections[i].state === target) {
+          $state.go(target);
+          return;
+        }
+      }
+    }
+    $state.go(lastState);
   };
 
   // Provides $scope access to substate queries objects.
@@ -174,8 +195,6 @@ angular.module('prosperenceApp')
   // TODO: Save all changes on form inputs.
   // For now, this is being used for testing purposes.
   $scope.save = function(route) {
-    console.log('inside $scope.save()');
-    console.log(queries);
   };
 
 });

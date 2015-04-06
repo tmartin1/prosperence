@@ -5,8 +5,6 @@ var Schema = mongoose.Schema;
 var crypto = require('crypto');
 
 var UserSchema = new Schema({
-  personal: {},
-  // name: String,
   email: { type: String, lowercase: true },
   role: {
     type: String,
@@ -15,6 +13,16 @@ var UserSchema = new Schema({
   hashedPassword: String,
   provider: String,
   salt: String,
+  builderProgress: {
+    assets:     { type: Boolean, default: false },
+    debts:      { type: Boolean, default: false },
+    spending:   { type: Boolean, default: false },
+    savings:    { type: Boolean, default: false },
+    insurances: { type: Boolean, default: false },
+    tax:        { type: Boolean, default: false },
+    goals:      { type: Boolean, default: false }
+  },
+  personal: {},
   plan: {}
 });
 
