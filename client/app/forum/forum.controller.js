@@ -1,9 +1,11 @@
 'use strict';
 
 angular.module('prosperenceApp')
-.controller('ForumCtrl', function ($scope, $http, socket, Auth) {
+.controller('ForumCtrl', function ($scope, $rootScope, $http, socket, Auth) {
+  $scope.user = Auth.getCurrentUser();
   $scope.currentQuestions = [];
 
+  // Get list of questions from the database.
   $http.get('/api/questions').success(function(currentQuestions) {
     $scope.currentQuestions = currentQuestions;
     socket.syncUpdates('question', $scope.currentQuestions);
@@ -11,15 +13,21 @@ angular.module('prosperenceApp')
 
   $scope.categories = [ 'Debt Management', 'Insurance Planning', 'Retirement Savings', 'etc.' ];
 
+  // Submit a new question.
   $scope.addQuestion = function() {
-    if($scope.newQuestion === '') {
-      return;
+    // If user is not logged in, show login modal.
+    if (!Auth.isLoggedIn()) {
+      return $rootScope.openLoginModal();
     }
-    $http.post('/api/questions', {
-      text: $scope.newQuestion,
-      author: Auth.getCurrentUser()
-    });
-    $scope.newQuestion = '';
+    // Only non-advisors can post questions.
+    if (!Auth.isAdvisor()) {
+      if($scope.newQuestion === '') return;
+      $http.post('/api/questions', {
+        text: $scope.newQuestion,
+        author: Auth.getCurrentUser()
+      });
+      $scope.newQuestion = '';
+    }
   };
 
   $scope.deleteQuestion = function(question) {

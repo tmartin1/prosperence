@@ -42,10 +42,7 @@ angular.module('prosperenceApp')
       return deferred.promise;
     },
 
-    /**
-     * Delete access token and user info
-     * @param  {Function}
-     */
+    // Delete access token and user info. Param is {Function}.
     logout: function() {
       $cookieStore.remove('token');
       currentUser = {};
@@ -95,6 +92,7 @@ angular.module('prosperenceApp')
       }).$promise;
     },
 
+    // Update the current user plan object.
     updatePlan: function(newPlan, callback) {
       var cb = callback || angular.noop;
 
@@ -107,23 +105,17 @@ angular.module('prosperenceApp')
       }).$promise;
     },
 
-    /**
-     * Gets all available info on authenticated user
-     * @return {Object} user
-     */
+    // Get all available info on authenticated user. Returns {Object} user.
     getCurrentUser: function() {
       return currentUser;
     },
 
-    /**
-     * Check if a user is logged in
-     * @return {Boolean}
-     */
+    // Check if a user is logged in. Returns {Boolean}.
     isLoggedIn: function() {
       return currentUser.hasOwnProperty('role');
     },
 
-    // Waits for currentUser to resolve before checking if user is logged in
+    // Waits for currentUser to resolve before checking if user is logged in.
     isLoggedInAsync: function(cb) {
       if(currentUser.hasOwnProperty('$promise')) {
         currentUser.$promise.then(function() {
@@ -138,15 +130,17 @@ angular.module('prosperenceApp')
       }
     },
 
-    /**
-     * Check if a user is an admin
-     * @return {Boolean}
-     */
+    // Check if a user is an advisor. Returns {Boolean}.
+    isAdvisor: function() {
+      return currentUser.isAdvisor === true;
+    },
+
+    // Check if a user is an admin. Returns {Boolean}.
     isAdmin: function() {
       return currentUser.role === 'admin';
     },
 
-    // Get auth token
+    // Get auth token.
     getToken: function() {
       return $cookieStore.get('token');
     },

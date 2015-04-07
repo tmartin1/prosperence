@@ -1,7 +1,7 @@
 'use strict';
 
 angular.module('prosperenceApp')
-.controller('NavbarCtrl', function($scope, $state, Auth, $modal) {
+.controller('NavbarCtrl', function($scope, $rootScope, $state, Auth, $modal) {
   $scope.isCollapsed = true;
   $scope.isLoggedIn = Auth.isLoggedIn;
   $scope.isAdmin = Auth.isAdmin;
@@ -55,6 +55,7 @@ angular.module('prosperenceApp')
       }
     });
   };
+  $rootScope.openLoginModal = $scope.openLoginModal;
 
   $scope.logout = function() {
     Auth.logout();
