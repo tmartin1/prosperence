@@ -24,9 +24,9 @@ describe('User Model', function() {
     });
   });
 
-  it('should begin with one user (test)', function(done) {
+  it('should begin with zero users', function(done) {
     User.find({}, function(err, users) {
-      users.should.have.length(1);
+      users.should.have.length(0);
       done();
     });
   });
