@@ -28,7 +28,11 @@ angular.module('prosperenceApp')
         $http.get('/api/users/me')
         .success(function(user) {
           currentUser = user;
-          $state.go('dashboard.overview');
+          if ($state.current.name === 'main') {
+            $state.go('dashboard.overview');
+          } else {
+            $state.go($state.current, {}, { reload: true }); //second parameter is for $stateParams.
+          }
         });
         deferred.resolve(data);
         return cb();
@@ -81,7 +85,6 @@ angular.module('prosperenceApp')
      */
     changePassword: function(oldPassword, newPassword, callback) {
       var cb = callback || angular.noop;
-
       return User.changePassword({ id: currentUser._id }, {
         oldPassword: oldPassword,
         newPassword: newPassword
@@ -95,7 +98,6 @@ angular.module('prosperenceApp')
     // Update the current user plan object.
     updatePlan: function(newPlan, callback) {
       var cb = callback || angular.noop;
-
       return User.updatePlan({ id: currentUser._id }, {
         newPlan: newPlan
       }, function(user) {
