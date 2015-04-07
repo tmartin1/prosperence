@@ -29,6 +29,7 @@ var UserSchema = new Schema({
     'plan-builder.tax':        { type: Boolean, default: null },
     'plan-builder.goals':      { type: Boolean, default: null }
   },
+  starredQuestions: {}, // Object of question ID strings that the user has starred.
   personal: {},
   plan: {}
 });

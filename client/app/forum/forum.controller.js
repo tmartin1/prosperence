@@ -3,6 +3,7 @@
 angular.module('prosperenceApp')
 .controller('ForumCtrl', function ($scope, $rootScope, $http, socket, Auth) {
   $scope.user = Auth.getCurrentUser();
+  $scope.user.starredQuestions = $scope.user.starredQuestions || {};
   $scope.currentQuestions = [];
 
   // Get list of questions from the database.
