@@ -1,6 +1,6 @@
 <ul class="nav nav-tabs nav-stacked" ng-repeat="question in currentQuestions | orderBy:'-rating'">
   <li>
-    <a href="#" tooltip="{{question.info}}">
+    <a href="#" ng-click="viewQuestion(question)">
       <div class="question-rating">{{ question.rating }}</div>
       <span class="question-search-title">{{ question.text }}</span>
       <div class="question-replies">{{ question.responses.length }} answers</div>

@@ -17,7 +17,7 @@ angular.module('prosperenceApp')
     controller: 'QuestionSearchCtrl'
   })
   .state('forum.view', {
-    url: '/view',
+    url: '/view/:questionId',
     templateUrl: 'app/forum/view/view.html',
     controller: 'QuestionViewCtrl'
   });
