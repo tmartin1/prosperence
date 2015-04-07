@@ -30,25 +30,7 @@
 
     <!-- Main Content -->
     <div class="col-sm-10" style="margin-top: 16px">
-      <ul class="nav nav-tabs nav-stacked" ng-repeat="question in currentQuestions | orderBy:'-rating'">
-        <li>
-          <a href="#" tooltip="{{question.info}}">
-            <div class="question-rating">{{ question.rating }}</div>
-            <span class="question-search-title">{{ question.text }}</span>
-            <div class="question-replies">{{ question.responses.length }} answers</div>
-          </a>
-        </li>
-      </ul>
-      <br>
-      <form class="question-form">
-        <label>Can't find your question? Ask it here!</label>
-        <p class="input-group">
-          <input type="text" class="form-control" placeholder="Enter your question here." ng-model="newQuestion">
-          <span class="input-group-btn">
-            <button type="submit" class="btn btn-primary" ng-click="addQuestion()">Submit Question</button>
-          </span>
-        </p>
-      </form>
+      <div ui-view></div>
     </div>
 
   </div>

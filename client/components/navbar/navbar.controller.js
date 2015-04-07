@@ -33,8 +33,9 @@ angular.module('prosperenceApp')
     'shown': true
   }, {
     'title': 'Forum',
-    'link': 'forum',
-    'shown': true
+    'link': 'forum.search',
+    'shown': true,
+    'abstractLink': 'forum'
   }, {
     'title': 'University',
     'icon': 'fa fa-graduation-cap',
