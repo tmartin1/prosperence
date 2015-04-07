@@ -1,15 +1,13 @@
 'use strict';
 
 angular.module('prosperenceApp')
-.controller('QuestionViewCtrl', function ($scope, $state, $http, socket) {
+.controller('QuestionViewCtrl', function ($scope, $state, $http) {
+  $scope.currentQuestion = $scope.currentQuestion || {};
 
-  // Catch question object from state transition params.
-  $scope.$on('$stateChangeSuccess', function(event, toState, toParams, fromState, fromParams) {
-    if (toState.name === 'forum.view') {
-      $scope.currentQuestion = $http.get('/api/questions/'+toParams.questionId).success(function(currentQuestion) {
-        $scope.currentQuestion = currentQuestion;
-      });
-    }
+  // Retreive the question object from the database.
+  $http.get('/api/questions/' + $state.params.questionId)
+  .success(function(currentQuestion) {
+    $scope.currentQuestion = currentQuestion;
   });
 
   $scope.goBack = function() {

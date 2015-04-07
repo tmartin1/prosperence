@@ -30,6 +30,16 @@ angular.module('prosperenceApp')
     }
   };
 
+  // Increment rating of question or comment by one.
+  $scope.upVote = function(item) {
+    return item.rating++;
+  };
+
+  // Decrement rating of question or comment by one.
+  $scope.downVote = function(item) {
+    return item.rating--;
+  };
+
   $scope.deleteQuestion = function(question) {
     $http.delete('/api/questions/' + question._id);
   };
