@@ -88,7 +88,7 @@ Question.find({}).remove(function() {
       rating: 12
     }]
   }, {
-    text: 'How can I protect my estate from potential lawsuites?',
+    text: 'How can I protect my estate from potential lawsuits?',
     author: 'Example User',
     rating: 4,
     comments: [{
