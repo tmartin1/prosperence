@@ -62,8 +62,9 @@ angular.module('prosperenceApp')
   };
 
   // Delete specific question.
-  $scope.deleteQuestion = function(question) {
-    $http.delete('/api/questions/' + question._id);
+  $scope.deleteQuestion = function() {
+    $state.go('forum.search');
+    $http.delete('/api/questions/' + qid);
   };
 
 });
