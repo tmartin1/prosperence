@@ -3,12 +3,12 @@
     <a href="#" ng-click="viewQuestion(question)">
       <div class="question-rating">{{ question.rating }}</div>
       <span class="question-search-title">{{ question.text }}</span>
-      <div class="question-replies">{{ question.responses.length }} answers</div>
+      <div class="question-replies">{{ question.comments.length }} answers</div>
     </a>
   </li>
 </ul>
 <br>
-<form class="question-form">
+<form class="question-form" ng-if="user.isAdvisor === false">
   <label>Can't find your question? Ask it here!</label>
   <p class="input-group">
     <input type="text" class="form-control" placeholder="Enter your question here." ng-model="newQuestion">

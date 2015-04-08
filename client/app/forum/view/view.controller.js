@@ -18,10 +18,6 @@ angular.module('prosperenceApp')
   };
   getQuestion();
 
-  function updateQuestion() {
-    $http.put('/api/questions/' + qid, { comments: $scope.currentQuestion.comments });
-  };
-
   // Go back to the main question search state.
   $scope.goBack = function() {
     $state.go('forum.search');
@@ -33,9 +29,14 @@ angular.module('prosperenceApp')
     if (!Auth.isLoggedIn()) return $rootScope.openLoginModal();
     // Only non-advisors can star questions.
     if (!Auth.isAdvisor()) {
-      $scope.user.starredQuestions[qid] = !$scope.user.starredQuestions[qid];
-      !!$scope.user.starredQuestions[qid] ? $scope.currentQuestion.rating++ : $scope.currentQuestion.rating--;
-      updateQuestion();
+      if ($scope.user.starredQuestions[qid]) {
+        delete $scope.user.starredQuestions[qid];
+        $scope.currentQuestion.rating--;
+      } else {
+        $scope.user.starredQuestions[qid] = true;
+        $scope.currentQuestion.rating++;
+      }
+      $http.put('/api/questions/' + qid, { rating: $scope.currentQuestion.rating });
     }
   };
 
@@ -46,7 +47,7 @@ angular.module('prosperenceApp')
     // Only non-advisors can up/downvote comments.
     if (!Auth.isAdvisor()) {
       comment.rating += (mod === 'up' ? 1 : -1);
-      updateQuestion();
+      $http.put('/api/questions/' + qid, { comments: $scope.currentQuestion.comments });
     }
   };
 
@@ -58,7 +59,7 @@ angular.module('prosperenceApp')
       text: $scope.newComment,
       timestamp: new Date()
     });
-    updateQuestion();
+    $http.put('/api/questions/' + qid, { comments: $scope.currentQuestion.comments });
   };
 
   // Delete specific question.
