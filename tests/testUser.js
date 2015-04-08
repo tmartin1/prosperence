@@ -3,6 +3,7 @@
 var testUser = {
   provider: 'local',
   email: 'test@test.com',
+  name: 'Test User',
   password: 'test',
   builderProgress: {
     // Object to track which sections of plan-builder the user has completed.

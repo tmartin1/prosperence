@@ -19,13 +19,8 @@ angular.module('prosperenceApp')
   getQuestion();
 
   function updateQuestion() {
-    // console.log($scope.currentQuestion.comments)
-    $http.put('/api/questions/' + qid, { comments: $scope.currentQuestion.comments })
-    .success(function(data) {
-      console.log(data.comments)
-      // $scope.currentQuestion = data;
-    });
-  }
+    $http.put('/api/questions/' + qid, { comments: $scope.currentQuestion.comments });
+  };
 
   // Go back to the main question search state.
   $scope.goBack = function() {
@@ -53,6 +48,17 @@ angular.module('prosperenceApp')
       comment.rating += (mod === 'up' ? 1 : -1);
       updateQuestion();
     }
+  };
+
+  // Adds new comment to the question.
+  $scope.addComment = function() {
+    $scope.currentQuestion.comments.push({
+      name: $scope.user.name,
+      rating: 0,
+      text: $scope.newComment,
+      timestamp: new Date()
+    });
+    updateQuestion();
   };
 
   // Delete specific question.
