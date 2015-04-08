@@ -50,7 +50,7 @@ Question.find({}).remove(function() {
     }]
   }, {
     text: 'Should I contribute to my Roth 401k or Traditional 401k?',
-    author: 'Test User',
+    author: 'Test User 2',
     rating: 18,
     comments: [{
       name: 'Example Advisor',
@@ -63,7 +63,7 @@ Question.find({}).remove(function() {
     }]
   }, {
     text: 'Is whole life insurance a scam?',
-    author: 'Test User',
+    author: 'Test User 2',
     rating: 12345,
     comments: [{
       name: 'Example Advisor',
@@ -76,7 +76,7 @@ Question.find({}).remove(function() {
     }]
   }, {
     text: 'Can a municipal bond fund be used as an emergency reserve?',
-    author: 'Test User',
+    author: 'Test User 2',
     rating: 77,
     comments: [{
       name: 'Example Advisor',

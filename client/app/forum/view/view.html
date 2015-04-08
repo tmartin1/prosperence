@@ -7,7 +7,7 @@
       <i class="fa" ng-class=" !!user.starredQuestions[currentQuestion._id] ? 'fa-star' : 'fa-star-o' "></i>
     </button>
   </div>
-  <button type="button" class="btn" style="float:right" ng-click="deleteQuestion()">
+  <button type="button" class="btn" style="float:right" ng-click="deleteQuestion()" ng-if="currentQuestion.author === user.name">
     Delete Question
   </button>
   <h2>{{ currentQuestion.text }}</h2>
