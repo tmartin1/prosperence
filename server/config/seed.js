@@ -38,8 +38,15 @@ Question.find({}).remove(function() {
     comments: [{
       name: 'Example Advisor',
       text: 'Great question, [insert appropriate, well written, unbiased response here].',
-      rating: 7,
-      isAdvisor: true
+      rating: 7
+    }, {
+      name: 'Example Advisor 2',
+      text: 'Great question, [insert appropriate, well written, unbiased response here].',
+      rating: 3
+    }, {
+      name: 'Example Advisor 3',
+      text: 'Great question, [insert appropriate, well written, unbiased response here].',
+      rating: 13
     }]
   }, {
     text: 'Should I contribute to my Roth 401k or Traditional 401k?',
@@ -48,8 +55,11 @@ Question.find({}).remove(function() {
     comments: [{
       name: 'Example Advisor',
       text: 'Great question, [insert appropriate, well written, unbiased response here].',
-      rating: 4,
-      isAdvisor: true
+      rating: 4
+    }, {
+      name: 'Example Advisor 2',
+      text: 'Great question, [insert appropriate, well written, unbiased response here].',
+      rating: 14
     }]
   }, {
     text: 'Is whole life insurance a scam?',
@@ -58,8 +68,11 @@ Question.find({}).remove(function() {
     comments: [{
       name: 'Example Advisor',
       text: 'Great question, [insert appropriate, well written, unbiased response here].',
-      rating: 19,
-      isAdvisor: true
+      rating: 9
+    }, {
+      name: 'Example Advisor 2',
+      text: 'Great question, [insert appropriate, well written, unbiased response here].',
+      rating: 19
     }]
   }, {
     text: 'Can a municipal bond fund be used as an emergency reserve?',
@@ -68,8 +81,11 @@ Question.find({}).remove(function() {
     comments: [{
       name: 'Example Advisor',
       text: 'Great question, [insert appropriate, well written, unbiased response here].',
-      rating: 12,
-      isAdvisor: true
+      rating: 2
+    }, {
+      name: 'Example Advisor 2',
+      text: 'Great question, [insert appropriate, well written, unbiased response here].',
+      rating: 12
     }]
   }, {
     text: 'How can I protect my estate from potential lawsuites?',
@@ -78,8 +94,11 @@ Question.find({}).remove(function() {
     comments: [{
       name: 'Example Advisor',
       text: 'Great question, [insert appropriate, well written, unbiased response here].',
-      rating: 1,
-      isAdvisor: true
+      rating: 1
+    }, {
+      name: 'Example Advisor 2',
+      text: 'Great question, [insert appropriate, well written, unbiased response here].',
+      rating: 7
     }]
   }, {
     text: 'How should I balance paying off my debts while still trying to save for retirement?',
@@ -88,8 +107,11 @@ Question.find({}).remove(function() {
     comments: [{
       name: 'Example Advisor',
       text: 'Great question, [insert appropriate, well written, unbiased response here].',
-      rating: 21,
-      isAdvisor: true
+      rating: 21
+    }, {
+      name: 'Example Advisor 2',
+      text: 'Great question, [insert appropriate, well written, unbiased response here].',
+      rating: 2
     }]
   }, function() {
     console.log('Finished populating questions.');

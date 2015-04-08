@@ -11,16 +11,16 @@
 </div>
 <hr>
 <div class="questionViewComments">
-  <div ng-repeat="comment in currentQuestion.comments" class="comment">
+  <div ng-repeat="comment in currentQuestion.comments | orderBy:'-rating'" class="comment">
     <!-- Upvote/downvote buttons -->
     <div class="rating">
       <div>{{ comment.rating }}</div>
     </div>
     <div class="btn-group-vertical buttons" role="group">
-      <button type="button" class="btn btn-default" ng-click="upVote(comment)">
+      <button type="button" class="btn btn-default" ng-click="vote(comment, 'up')">
         <i class="fa fa-thumbs-o-up"></i>
       </button>
-      <button type="button" class="btn btn-default" ng-click="downVote(comment)">
+      <button type="button" class="btn btn-default" ng-click="vote(comment, 'down')">
         <i class="fa fa-thumbs-o-down"></i>
       </button>
     </div>
@@ -28,8 +28,8 @@
       <h3 class="name">{{ comment.name }}</h3>
       <span class="text">{{ comment.text }}</span>
     </div>
+    <hr>
   </div>
-  <hr>
 </div>
 
 <div class="questionViewRelated">
