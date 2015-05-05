@@ -5,7 +5,7 @@ var Question = require('./question.model');
 
 // Get list of questions.
 exports.index = function(req, res) {
-  Question.find(function (err, questions) {
+  Question.find(function(err, questions) {
     if(err) { return handleError(res, err); }
     return res.json(200, questions);
   });
@@ -13,7 +13,7 @@ exports.index = function(req, res) {
 
 // Get a single question.
 exports.show = function(req, res) {
-  Question.findById(req.params.id, function (err, question) {
+  Question.findById(req.params.id, function(err, question) {
     if(err) { return handleError(res, err); }
     if(!question) { return res.send(404); }
     return res.json(question);
@@ -22,7 +22,7 @@ exports.show = function(req, res) {
 
 // Get all questions submitted by current user.
 exports.mine = function(req, res) {
-  Question.find({ authorID: req.params.id }, function (err, questions) {
+  Question.find({ authorID: req.params.id }, function(err, questions) {
     if(err) { return handleError(res, err); }
     return res.json(200, questions);
   });
@@ -30,7 +30,12 @@ exports.mine = function(req, res) {
 
 // Get all questions starred by current user.
 exports.starred = function(req, res) {
-
+  // [ '554948a369b84f08d8805880', '554948a369b84f08d8805889' ]
+  var starred = JSON.parse(req.params.starred);
+  Question.find({ '_id': { $in: starred } }, function(err, questions) {
+    if(err) { return handleError(res, err); }
+    return res.json(200, questions);
+  });
 };
 
 // Get all questions that match the keywords.
@@ -49,7 +54,7 @@ exports.create = function(req, res) {
 // Updates an existing question in the DB.
 exports.update = function(req, res) {
   if(req.body._id) { delete req.body._id; }
-  Question.findById(req.params.id, function (err, question) {
+  Question.findById(req.params.id, function(err, question) {
     if (err) { return handleError(res, err); }
     if(!question) { return res.send(404); }
     var updated = question;
@@ -65,7 +70,7 @@ exports.update = function(req, res) {
 
 // Deletes a question from the DB.
 exports.destroy = function(req, res) {
-  Question.findById(req.params.id, function (err, question) {
+  Question.findById(req.params.id, function(err, question) {
     if(err) { return handleError(res, err); }
     if(!question) { return res.send(404); }
     question.remove(function(err) {

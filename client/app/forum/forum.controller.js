@@ -29,18 +29,20 @@ angular.module('prosperenceApp')
   // Display questions that the user has starred.
   $scope.displayStarredQuestions = function() {
     // TODO: Set currentQuestions to stared questions. Add 'Starred' link to 'Links' section.
+    // TODO: Fix this.
+    $http.get('/api/questions/starred/' + JSON.stringify(Object.keys($scope.user.starredQuestions))).success(function(data) {
+      $scope.currentQuestions = data;
+      socket.syncUpdates('question', $scope.currentQuestions);
+    });
   };
 
   // Search for questions in database and display those questions.
   $scope.searchByKeyword = function() {
-    var results = [];
-    getQuestions();
-    for (var i=0, n=questionLibrary.length; i<n; i++) {
-      if (questionLibrary[i].text.match($scope.keywords)) {
-        results.push(questionLibrary[i]);
-      }
-    }
-    $scope.currentQuestions = results;
+    // TODO: Fix this.
+    $http.get('/api/questions/search/' + $scope.keywords).success(function(data) {
+      $scope.currentQuestions = data;
+      socket.syncUpdates('question', $scope.currentQuestions);
+    });
   };
 
   // Delete specific question.
