@@ -5,14 +5,46 @@ angular.module('prosperenceApp')
   $scope.user = Auth.getCurrentUser();
   $scope.user.starredQuestions = $scope.user.starredQuestions || {};
   $scope.currentQuestions = [];
+  var questionLibrary = questionLibrary || [];
+
+  $scope.categories = ['Debt Management', 'Retirement Savings', 'Investing', 'Life Insurance', 'Health Insurance', 'Disability Insurance'];
 
   // Get list of questions from the database.
-  $http.get('/api/questions').success(function(currentQuestions) {
-    $scope.currentQuestions = currentQuestions;
-    socket.syncUpdates('question', $scope.currentQuestions);
-  });
+  var getQuestions = function(resetView) {
+    $http.get('/api/questions').success(function(allQuestions) {
+      questionLibrary = allQuestions;
+      if (!!resetView) $scope.currentQuestions = questionLibrary;
+      socket.syncUpdates('question', $scope.currentQuestions);
+    });
+  };
 
-  $scope.categories = [ 'Debt Management', 'Retirement Savings', 'Life Insurance', 'Health Insurance', 'Disability Insurance' ];
+  // Reset question view to default view.
+  $scope.defaultView = function() {
+    getQuestions(true);
+  };
+  $scope.defaultView();
+
+  // Display questions authored by the current user.
+  $scope.displayMyQuestions = function() {
+    // TODO: Set currentQuestions to  questions that the current user authored.
+  };
+
+  // Display questions that the user has starred.
+  $scope.displayStarredQuestions = function() {
+    // TODO: Set currentQuestions to stared questions. Add 'Starred' link to 'Links' section.
+  };
+
+  // Search for questions in database and display those questions.
+  $scope.searchByKeyword = function() {
+    var results = [];
+    getQuestions();
+    for (var i=0, n=questionLibrary.length; i<n; i++) {
+      if (questionLibrary[i].text.match($scope.keywords)) {
+        results.push(questionLibrary[i]);
+      }
+    }
+    $scope.currentQuestions = results;
+  };
 
   // Delete specific question.
   $scope.deleteQuestion = function(question) {

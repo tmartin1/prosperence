@@ -15,7 +15,11 @@
       <ul class="nav nav-pills nav-stacked">
 
         <li class="heading">Keywords</li>
-          <input type="text" class="form-control" placeholder="Search questions" />
+          <input type="text"
+                 class="form-control"
+                 placeholder="Search questions"
+                 ng-model="keywords"
+                 ng-enter="searchByKeyword()" />
         <li></li>
 
         <li class="heading">Categories</li>
@@ -27,7 +31,10 @@
 
         <li class="heading">Links</li>
         <li role="presentation">
-          <a href="#">My Questions</a>
+          <a href="#" ng-click="displayMyQuestions()">My Questions</a>
+        </li>
+        <li role="presentation">
+          <a href="#" ng-click="displayStarredQuestions()">Starred Questions</a>
         </li>
         <li role="presentation">
           <a href="#" ng-click="askNewQuestion()">Ask New Question</a>
@@ -37,6 +44,10 @@
     </div>
 
     <!-- Main Content -->
+    <div class="">
+      <!-- TODO: Navbar to show current view, default views, etc.  -->
+    </div>
+
     <div class="col-sm-10" style="margin-top: 16px">
       <div ui-view></div>
     </div>
