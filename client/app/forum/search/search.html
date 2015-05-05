@@ -8,10 +8,10 @@
   </li>
 </ul>
 <br>
-<form class="question-form" ng-if="user.isAdvisor === false">
+<form class="question-form" ng-show="user.isAdvisor === false">
   <label>Can't find your question? Ask it here!</label>
   <p class="input-group">
-    <input type="text" class="form-control" placeholder="Enter your question here." ng-model="newQuestion">
+    <input type="text" class="form-control" placeholder="Enter your question here" ng-model="newQuestion">
     <span class="input-group-btn">
       <button type="submit" class="btn btn-primary" ng-click="addQuestion()">Submit Question</button>
     </span>

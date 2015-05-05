@@ -10,6 +10,7 @@ angular.module('prosperenceApp')
 
   // Submit a new question.
   $scope.addQuestion = function() {
+    console.log($scope.newQuestion)
     // If user is not logged in, show login modal.
     if (!Auth.isLoggedIn()) return $rootScope.openLoginModal();
     // Only non-advisors can post questions.
