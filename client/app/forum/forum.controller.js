@@ -26,7 +26,10 @@ angular.module('prosperenceApp')
 
   // Display questions authored by the current user.
   $scope.displayMyQuestions = function() {
-    // TODO: Set currentQuestions to  questions that the current user authored.
+    $http.get('/api/questions/mine/' + $scope.user._id).success(function(data) {
+      $scope.currentQuestions = data;
+      socket.syncUpdates('question', $scope.currentQuestions);
+    });
   };
 
   // Display questions that the user has starred.

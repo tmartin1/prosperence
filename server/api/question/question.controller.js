@@ -20,6 +20,25 @@ exports.show = function(req, res) {
   });
 };
 
+// Get all questions submitted by current user.
+exports.mine = function(req, res) {
+  console.log(req.params.id)
+  Question.find({ authorID: req.params.id }, function (err, questions) {
+    if(err) { return handleError(res, err); }
+    return res.json(200, questions);
+  });
+};
+
+// Get all questions starred by current user.
+exports.starred = function(req, res) {
+
+};
+
+// Get all questions that match the keywords.
+exports.search = function(req, res) {
+
+};
+
 // Create a new question in the DB.
 exports.create = function(req, res) {
   Question.create(req.body, function(err, question) {

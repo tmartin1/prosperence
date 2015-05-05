@@ -24,6 +24,7 @@ angular.module('prosperenceApp')
         $http.post('/api/questions', {
           text: $scope.newQuestion,
           author: Auth.getCurrentUser().name,
+          authorID: Auth.getCurrentUser()._id,
           rating: 0,
           timestamp: new Date()
         });

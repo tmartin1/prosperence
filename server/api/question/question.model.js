@@ -10,6 +10,7 @@ var QuestionSchema = new Schema({
     default: true
   },
   author: String, // Who asked the question.
+  authorID: String, // ID of the author.
   rating: { // Keeps track of how many users starred the question.
     type: Number,
     default: 0
@@ -17,6 +18,7 @@ var QuestionSchema = new Schema({
   timestamp: {}, // Date object of when the question was asked.
   comments: [{ // Replies to the question.
     name: String, // Name of who replied (links to profile if advisor).
+    comenterID: String, // User ID of the advisor who authored the comment.
     text: String, // Reply message.
     rating: { // Keeps track of up/down votes of the comment.
       type: Number,
