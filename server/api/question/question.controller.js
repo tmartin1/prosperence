@@ -22,7 +22,6 @@ exports.show = function(req, res) {
 
 // Get all questions submitted by current user.
 exports.mine = function(req, res) {
-  console.log(req.params.id)
   Question.find({ authorID: req.params.id }, function (err, questions) {
     if(err) { return handleError(res, err); }
     return res.json(200, questions);

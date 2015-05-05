@@ -5,22 +5,16 @@ angular.module('prosperenceApp')
   $scope.user = Auth.getCurrentUser();
   $scope.user.starredQuestions = $scope.user.starredQuestions || {};
   $scope.currentQuestions = [];
-  var questionLibrary = questionLibrary || [];
 
   $scope.categories = ['Debt Management', 'Retirement Savings', 'Investing', 'Life Insurance', 'Health Insurance', 'Disability Insurance'];
 
   // Get list of questions from the database.
-  var getQuestions = function(resetView) {
-    $http.get('/api/questions').success(function(allQuestions) {
-      questionLibrary = allQuestions;
-      if (!!resetView) $scope.currentQuestions = questionLibrary;
-      socket.syncUpdates('question', $scope.currentQuestions);
-    });
-  };
-
   // Reset question view to default view.
   $scope.defaultView = function() {
-    getQuestions(true);
+    $http.get('/api/questions').success(function(questions) {
+      $scope.currentQuestions = questions;
+      socket.syncUpdates('question', $scope.currentQuestions);
+    });
   };
   $scope.defaultView();
 
