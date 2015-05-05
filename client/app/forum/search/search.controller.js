@@ -17,7 +17,7 @@ angular.module('prosperenceApp')
       if($scope.newQuestion !== '') {
         $http.post('/api/questions', {
           text: $scope.newQuestion,
-          author: Auth.getCurrentUser(),
+          author: Auth.getCurrentUser().name,
           timestamp: new Date()
         });
       }
