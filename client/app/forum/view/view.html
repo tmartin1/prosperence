@@ -1,4 +1,5 @@
 <div class="questionViewHeader">
+
   <div class="btn-group" role="group">
     <button type="button" class="btn btn-default" ng-click="goBack()">
       <i class="fa fa-chevron-left"></i>
@@ -7,14 +8,22 @@
       <i class="fa" ng-class=" !!user.starredQuestions[currentQuestion._id] ? 'fa-star' : 'fa-star-o' "></i>
     </button>
   </div>
-  <button type="button" class="btn" style="float:right" ng-click="deleteQuestion()" ng-if="currentQuestion.author === user.name">
-    Delete Question
+
+  <button type="button"
+          class="btn"
+          style="float:right"
+          ng-click="deleteQuestion()"
+          ng-if="currentQuestion.author === user.name">
+          Delete Question
   </button>
+
   <h2>{{ currentQuestion.text }}</h2>
 </div>
 <hr>
+
 <div class="questionViewComments">
   <div ng-repeat="comment in currentQuestion.comments | orderBy:'-rating'" class="comment">
+
     <!-- Upvote/downvote buttons -->
     <div class="rating">
       <div>{{ comment.rating }}</div>
@@ -27,11 +36,14 @@
         <i class="fa fa-thumbs-o-down"></i>
       </button>
     </div>
+
+    <!-- Comment body -->
     <div class="body">
       <h3 class="name">{{ comment.name }}</h3>
       <span class="text">{{ comment.text }}</span>
     </div>
     <hr>
+
   </div>
 </div>
 
