@@ -14,5 +14,6 @@ router.put('/:id/password', auth.isAuthenticated(), controller.changePassword);
 router.get('/:id', auth.isAuthenticated(), controller.show);
 router.post('/', controller.create);
 router.put('/plan', auth.isAuthenticated(), controller.updatePlan);
+router.put('/stars', auth.isAuthenticated(), controller.updateForumStars);
 
 module.exports = router;

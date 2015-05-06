@@ -38,6 +38,7 @@ angular.module('prosperenceApp')
         $scope.currentQuestion.rating++;
       }
       $http.put('/api/questions/' + qid, { rating: $scope.currentQuestion.rating });
+      $http.put('/api/users/stars', { starred: $scope.user.forum.starred });
     }
   };
 
