@@ -3,6 +3,8 @@
 angular.module('prosperenceApp')
 .controller('QuestionViewCtrl', function ($scope, $rootScope, $state, $http, Auth) {
   $scope.currentQuestion = $scope.currentQuestion || {};
+  $scope.user.forum.starred = $scope.user.forum.starred || {};
+  $scope.user.forum.comments = $scope.user.forum.comments || {};
   var qid = $state.params.questionId;
 
   // Retreive the question object from the database.
@@ -41,36 +43,48 @@ angular.module('prosperenceApp')
     }
   };
 
+  // Handles up/down voting logic.
+  var vote = {
+    // Upvoted a comment that they already upvoted.
+    uptrue: function(comment) {
+      delete $scope.user.forum.comments[comment._id];
+      comment.rating--;
+    },
+    // Upvoted a comment that they previously downvoted.
+    upfalse: function(comment) {
+      $scope.user.forum.comments[comment._id] = true;
+      comment.rating += 2;
+    },
+    // Upvoted a comment that they have no current position on.
+    upundefined: function(comment) {
+      $scope.user.forum.comments[comment._id] = true;
+      comment.rating++;
+    },
+    // Downvoted a comment that they already upvoted.
+    downtrue: function(comment) {
+      $scope.user.forum.comments[comment._id] = false;
+      comment.rating -= 2;
+    },
+    // Downvoted a comment that they previously downvoted.
+    downfalse: function(comment) {
+      delete $scope.user.forum.comments[comment._id];
+      comment.rating++;
+    },
+    // Downvoted a comment that they have no current position on.
+    downundefined: function(comment) {
+      $scope.user.forum.comments[comment._id] = false;
+      comment.rating--;
+    }
+  };
+
   // Increment or decriment the rating of comment by one.
   $scope.vote = function(comment, mod) {
-    console.log(comment._id)
     // If user is not logged in, show login modal.
     if (!Auth.isLoggedIn()) return $rootScope.openLoginModal();
     // Only non-advisors can up/downvote comments.
     if (!Auth.isAdvisor()) {
-      // Comments stored in object: true = upvote, false = downvote, undef. = no vote.
-      if (mod === 'up') {
-        if (!!$scope.user.forum.comments[comment._id]) {
-          // If already upvoted, then remove upvote.
-          delete $scope.user.forum.comments[comment._id];
-          comment.rating--;
-        } else {
-          // If not upvoted, then upvote.
-          $scope.user.forum.comments[comment._id] = true;
-          comment.rating++;
-        }
-      } else {
-        // downvote or un-downvote
-        if (!!$scope.user.forum.comments[comment._id]) {
-          // If already downvoted, then remove downvote.
-          delete $scope.user.forum.comments[comment._id];
-          comment.rating++;
-        } else {
-          // If not downvoted, then downvote.
-          $scope.user.forum.comments[comment._id] = false;
-          comment.rating--;
-        }
-      }
+      var updown = mod+$scope.user.forum.comments[comment._id];
+      vote[updown](comment);
       $http.put('/api/questions/' + qid, { comments: $scope.currentQuestion.comments });
       $http.put('/api/users/comments', { comments: $scope.user.forum.comments });
     }
