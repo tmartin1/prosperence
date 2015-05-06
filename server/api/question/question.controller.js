@@ -30,7 +30,7 @@ exports.mine = function(req, res) {
 
 // Get all questions starred by current user.
 exports.starred = function(req, res) {
-  // [ '554948a369b84f08d8805880', '554948a369b84f08d8805889' ]
+  // req.params.starred is a stringified array of question ids.
   var starred = JSON.parse(req.params.starred);
   Question.find({ '_id': { $in: starred } }, function(err, questions) {
     if(err) { return handleError(res, err); }
@@ -39,8 +39,22 @@ exports.starred = function(req, res) {
 };
 
 // Get all questions that match the keywords.
+// Keywords are passed in as a stringified array to req.params.keywords
 exports.search = function(req, res) {
-
+  var keywords = JSON.parse(req.params.keywords);
+  Question.find({}, function(err, questions) {
+    if(err) { return handleError(res, err); }
+    var results = [];
+    for (var i=0, n=questions.length; i<n; i++) {
+      for (var j=0, m=keywords.length; j<m; j++) {
+        if (questions[i].text.toLowerCase().match(keywords[j].toLowerCase())) {
+          results.push(questions[i])
+          j = m; // stop searching once it matches one keyword.
+        }
+      }
+    }
+    return res.json(200, results);
+  })
 };
 
 // Create a new question in the DB.
