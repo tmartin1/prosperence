@@ -3,7 +3,9 @@
 angular.module('prosperenceApp')
 .controller('ForumCtrl', function ($scope, $rootScope, $http, socket, Auth) {
   $scope.user = Auth.getCurrentUser();
-  $scope.user.forum = $scope.user.forum || { starred: {}, comments: {} };
+  $scope.user.forum = $scope.user.forum || {};
+  $scope.user.forum.starred = $scope.user.forum.starred || {};
+  $scope.user.forum.comments = $scope.user.forum.comments || {};
   $scope.currentQuestions = [];
 
   $scope.categories = ['Debt Management', 'Retirement Savings', 'Investing', 'Life Insurance', 'Health Insurance', 'Disability Insurance'];

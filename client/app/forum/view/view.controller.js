@@ -3,8 +3,6 @@
 angular.module('prosperenceApp')
 .controller('QuestionViewCtrl', function ($scope, $rootScope, $state, $http, Auth) {
   $scope.currentQuestion = $scope.currentQuestion || {};
-  $scope.user.forum.starred = $scope.user.forum.starred || {};
-  $scope.user.forum.comments = $scope.user.forum.comments || {};
   var qid = $state.params.questionId;
 
   // Retreive the question object from the database.
