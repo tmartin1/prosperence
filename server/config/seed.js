@@ -17,7 +17,11 @@ User.find({}).remove(function() {
     name: 'Test Advisor',
     email: 'advisor@test.com',
     password: 'advisor',
-    isAdvisor: true
+    isAdvisor: true,
+    forum: {
+      starred: {},
+      comments: {}
+    },
   },
     // {
     //   provider: 'local',

@@ -17,6 +17,10 @@ var testUser = {
     tax: true,
     goals: true
   },
+  forum: {
+    starred: {},
+    comments: {}
+  },
   personal: {
     // Contains the user's personal inforamtion (and spouse if applicable).
     firstName: 'Test',
