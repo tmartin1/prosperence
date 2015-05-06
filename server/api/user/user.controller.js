@@ -32,7 +32,7 @@ exports.create = function(req, res, next) {
 // Get a single user.
 exports.show = function (req, res, next) {
   var userId = req.params.id;
-  User.findById(userId, function (err, user) {
+  User.findById(userId, function(err, user) {
     if (err) return next(err);
     if (!user) return res.send(401);
     res.json(user.profile);
@@ -81,10 +81,10 @@ exports.authCallback = function(req, res, next) {
   res.redirect('/');
 };
 
-// Update specific user information.
+// Update a user's starred questions.
 exports.updateForumStars = function(req, res, next) {
   var userId = req.user._id;
-  var starred = req.body.starred
+  var starred = req.body.starred;
   User.findById(userId, function (err, user) {
     if (err) return next(err);
     if (!user) return res.json(401);
@@ -96,10 +96,25 @@ exports.updateForumStars = function(req, res, next) {
   });
 };
 
+// Update a user's forum comment voting.
+exports.updateForumComments = function(req, res, next) {
+  var userId = req.user._id;
+  var comments = req.body.comments;
+  User.findById(userId, function (err, user) {
+    if (err) return next(err);
+    if (!user) return res.json(401);
+    user.forum.comments = comments;
+    user.save(function(err) {
+      if (err) return validationError(res, err);
+      res.send(200);
+    });
+  });
+};
+
 // Update specific user plan by overwriting the user's current plan.
 exports.updatePlan = function(req, res, next) {
   var userId = req.user._id;
-  var newPlan = req.body.newPlan
+  var newPlan = req.body.newPlan;
   User.findById(userId, function (err, user) {
     if (err) return next(err);
     if (!user) return res.json(401);

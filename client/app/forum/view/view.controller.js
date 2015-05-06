@@ -25,7 +25,6 @@ angular.module('prosperenceApp')
 
   // Star or unstar a specific question. Track in user.forum.starred and adjust question rating accordingly.
   $scope.starQuestion = function() {
-    console.log($scope.user)
     // If user is not logged in, show login modal.
     if (!Auth.isLoggedIn()) return $rootScope.openLoginModal();
     // Only non-advisors can star questions.
@@ -44,12 +43,36 @@ angular.module('prosperenceApp')
 
   // Increment or decriment the rating of comment by one.
   $scope.vote = function(comment, mod) {
+    console.log(comment._id)
     // If user is not logged in, show login modal.
     if (!Auth.isLoggedIn()) return $rootScope.openLoginModal();
     // Only non-advisors can up/downvote comments.
     if (!Auth.isAdvisor()) {
-      comment.rating += (mod === 'up' ? 1 : -1);
+      // Comments stored in object: true = upvote, false = downvote, undef. = no vote.
+      if (mod === 'up') {
+        if (!!$scope.user.forum.comments[comment._id]) {
+          // If already upvoted, then remove upvote.
+          delete $scope.user.forum.comments[comment._id];
+          comment.rating--;
+        } else {
+          // If not upvoted, then upvote.
+          $scope.user.forum.comments[comment._id] = true;
+          comment.rating++;
+        }
+      } else {
+        // downvote or un-downvote
+        if (!!$scope.user.forum.comments[comment._id]) {
+          // If already downvoted, then remove downvote.
+          delete $scope.user.forum.comments[comment._id];
+          comment.rating++;
+        } else {
+          // If not downvoted, then downvote.
+          $scope.user.forum.comments[comment._id] = false;
+          comment.rating--;
+        }
+      }
       $http.put('/api/questions/' + qid, { comments: $scope.currentQuestion.comments });
+      $http.put('/api/users/comments', { comments: $scope.user.forum.comments });
     }
   };
 
