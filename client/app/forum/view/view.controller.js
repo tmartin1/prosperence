@@ -23,17 +23,18 @@ angular.module('prosperenceApp')
     $state.go('forum.search');
   };
 
-  // Star or unstar a specific question. Track in user.starredQuestions and adjust question rating accordingly.
+  // Star or unstar a specific question. Track in user.forum.starred and adjust question rating accordingly.
   $scope.starQuestion = function() {
+    console.log($scope.user)
     // If user is not logged in, show login modal.
     if (!Auth.isLoggedIn()) return $rootScope.openLoginModal();
     // Only non-advisors can star questions.
     if (!Auth.isAdvisor()) {
-      if ($scope.user.starredQuestions[qid]) {
-        delete $scope.user.starredQuestions[qid];
+      if ($scope.user.forum.starred[qid]) {
+        delete $scope.user.forum.starred[qid];
         $scope.currentQuestion.rating--;
       } else {
-        $scope.user.starredQuestions[qid] = true;
+        $scope.user.forum.starred[qid] = true;
         $scope.currentQuestion.rating++;
       }
       $http.put('/api/questions/' + qid, { rating: $scope.currentQuestion.rating });

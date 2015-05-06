@@ -24,7 +24,7 @@ var QuestionSchema = new Schema({
       type: Number,
       default: 0
     },
-    timestamp: {} // Date object of when the comment was authored.
+    timestamp: { type: Date, default: Date.now } // Date object of when the comment was authored.
   }]
 });
 

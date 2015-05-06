@@ -3,7 +3,7 @@
 angular.module('prosperenceApp')
 .controller('ForumCtrl', function ($scope, $rootScope, $http, socket, Auth) {
   $scope.user = Auth.getCurrentUser();
-  $scope.user.starredQuestions = $scope.user.starredQuestions || {};
+  $scope.user.forum = $scope.user.forum || { starred: {}, comments: {} };
   $scope.currentQuestions = [];
 
   $scope.categories = ['Debt Management', 'Retirement Savings', 'Investing', 'Life Insurance', 'Health Insurance', 'Disability Insurance'];
@@ -28,7 +28,7 @@ angular.module('prosperenceApp')
 
   // Display questions that the user has starred.
   $scope.displayStarredQuestions = function() {
-    $http.get('/api/questions/starred/' + JSON.stringify(Object.keys($scope.user.starredQuestions))).success(function(data) {
+    $http.get('/api/questions/starred/' + JSON.stringify(Object.keys($scope.user.forum.starred))).success(function(data) {
       $scope.currentQuestions = data;
       socket.syncUpdates('question', $scope.currentQuestions);
     });
