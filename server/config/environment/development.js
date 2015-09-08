@@ -3,13 +3,12 @@
 // Development specific configuration
 // ==================================
 module.exports = {
+  
   // Server IP
-  ip:       process.env.IP ||
-            'localhost',
+  ip: process.env.IP || 'localhost',
 
   // Server port
-  port:     process.env.PORT ||
-            8080,
+  port: process.env.PORT || 8080,
 
   // MongoDB connection options
   mongo: {
