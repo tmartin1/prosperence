@@ -8,22 +8,28 @@
     'ui.router',
     'ui.bootstrap',
     'ui.select',
+    'prosperenceApp.service',
     'prosperenceApp.filter',
     'angularUtils.directives.dirPagination',
     'LocalStorageModule',
     'youtube-embed',
-    'btford.socket-io'
+    'btford.socket-io',
+    'prosperenceApp.about',
+    'prosperenceApp.admin',
+    'prosperenceApp.dashboard',
+    'prosperenceApp.forum',
+    'prosperenceApp.main'
   ])
-  .config(function($stateProvider, $urlRouterProvider, $locationProvider, $httpProvider) {
+  .config(function ($stateProvider, $urlRouterProvider, $locationProvider, $httpProvider) {
     $urlRouterProvider.otherwise('/');
 
     $locationProvider.html5Mode(true);
     $httpProvider.interceptors.push('authInterceptor');
   })
-  .factory('authInterceptor', function($rootScope, $q, $cookieStore, $location) {
+  .factory('authInterceptor', function ($rootScope, $q, $cookieStore, $location) {
     return {
       // Add authorization token to headers.
-      request: function(config) {
+      request: function (config) {
         config.headers = config.headers || {};
         if ($cookieStore.get('token')) {
           config.headers.Authorization = 'Bearer ' + $cookieStore.get('token');
@@ -31,7 +37,7 @@
         return config;
       },
       // Intercept 401s and redirect you to login.
-      responseError: function(response) {
+      responseError: function (response) {
         if (response.status === 401) {
           $location.path('/');
           // Remove any stale tokens.
@@ -43,22 +49,24 @@
       }
     };
   })
-  .run(function($rootScope, $location, Auth) {
+  .run(function ($rootScope, $location, Auth) {
     // Redirect to login if route requires auth and you're not logged in.
-    $rootScope.$on('$stateChangeStart', function(event, next) {
-      Auth.isLoggedInAsync(function(loggedIn) {
+    $rootScope.$on('$stateChangeStart', function (event, next) {
+      Auth.isLoggedInAsync(function (loggedIn) {
         if (next.authenticate && !loggedIn) {
           $location.path('/');
         }
       });
     });
   })
-  .directive('ngEnter', function() {
-    return function(scope, element, attrs) {
-      element.bind("keydown keypress", function(event) {
-        if(event.which === 13) {
+  .directive('ngEnter', function () {
+    return function (scope, element, attrs) {
+      element.bind("keydown keypress", function (event) {
+        if (event.which === 13) {
           scope.$apply(function(){
-              scope.$eval(attrs.ngEnter, {'event': event});
+              scope.$eval(attrs.ngEnter, {
+                'event': event
+              });
           });
           event.preventDefault();
         }

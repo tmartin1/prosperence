@@ -1,5 +1,5 @@
 <!-- HTML Template for the my-university view of the dashboard -->
 
 <div class="col-md-12 row flex-container">
-  <div class="flex-item highchart-planel" ng-repeat="planel in progressPlanels" ng-include="planelLibrary[planel]"></div>
+  <div class="flex-item highchart-planel" ng-repeat="planel in vm.progressPlanels" ng-include="vm.planelLibrary[planel]"></div>
 </div>

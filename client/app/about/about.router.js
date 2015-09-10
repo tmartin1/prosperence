@@ -1,7 +1,7 @@
 (function () {
   'use strict';
 
-  angular.module('prosperenceApp')
+  angular.module('prosperenceApp.about.router', [])
   .config(function ($stateProvider) {
     $stateProvider
     .state('about', {

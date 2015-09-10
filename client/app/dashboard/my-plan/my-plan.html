@@ -1,11 +1,16 @@
 <!-- HTML Template for the overview (default) state of the dashboard -->
-
 <div class="container col-md-12">
   <div class="row">
 
     <div class="container col-md-12">
       <div class="row">
-        <div ng-include="myPlanView"></div>
+        <!-- <div ng-include="vm.myPlanView"></div> -->
+        <div class="row flex-container">
+          <div class="flex-item highchart-planel"
+               ng-repeat="planel in vm.$state.current.data.planels track by $index"
+               ng-include="vm.planelLibrary[planel]">
+          </div>
+        </div>
       </div>
     </div>
 

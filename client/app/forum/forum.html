@@ -19,11 +19,11 @@
                  class="form-control"
                  placeholder="Search questions"
                  ng-model="keywords"
-                 ng-enter="searchByKeyword()" />
+                 ng-enter="vm.searchByKeyword()" />
         <li></li>
 
         <li class="heading">Categories</li>
-        <li role="presentation" ng-repeat="category in categories">
+        <li role="presentation" ng-repeat="category in vm.categories">
           <input type="checkbox"/>
           {{ category }}
         </li>
@@ -31,16 +31,16 @@
 
         <li class="heading">Links</li>
         <li role="presentation">
-          <a ui-sref="forum.search" ng-click="defaultView()">Most Popular</a>
+          <a ui-sref="forum.search" ng-click="vm.defaultView()">Most Popular</a>
         </li>
         <li role="presentation">
-          <a ui-sref="forum.search" ng-click="displayMyQuestions()">My Questions</a>
+          <a ui-sref="forum.search" ng-click="vm.displayMyQuestions()">My Questions</a>
         </li>
         <li role="presentation">
-          <a ui-sref="forum.search" ng-click="displayStarredQuestions()">Starred Questions</a>
+          <a ui-sref="forum.search" ng-click="vm.displayStarredQuestions()">Starred Questions</a>
         </li>
         <li role="presentation">
-          <a ui-sref="forum.search" ng-click="askNewQuestion()">Ask New Question</a>
+          <a ui-sref="forum.search" ng-click="vm.askNewQuestion()">Ask New Question</a>
         </li>
 
       </ul>

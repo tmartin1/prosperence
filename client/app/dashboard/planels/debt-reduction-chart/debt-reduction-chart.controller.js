@@ -1,6 +1,10 @@
-'use strict';
+(function () {
+  'use strict';
 
-angular.module('prosperenceApp')
-.controller('DebtReductionChartCtrl', function ($scope, Auth) {
-  //
-});
+  angular.module('prosperenceApp.planel.debtReductionChart', [])
+  .controller('DebtReductionChartCtrl', function (Auth, DashboardService) {
+    var user = Auth.getCurrentUser();
+    //
+  });
+
+})();

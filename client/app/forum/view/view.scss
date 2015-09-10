@@ -8,19 +8,24 @@
     margin: 4px;
     min-height: 65px;
   }
+
   .buttons {
     float: left;
     padding-right: 16px;
   }
+
   .body {
     margin-left: 10px;
   }
+
   .name {
 
   }
+
   .text {
 
   }
+
   .rating {
     float: left;
     font-size: 2em;
@@ -28,6 +33,7 @@
     min-width: 60px;
     height: 65px;
     display: table;
+    
     div {
       display: table-cell;
       vertical-align: middle;

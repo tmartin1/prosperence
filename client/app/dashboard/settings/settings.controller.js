@@ -1,6 +1,9 @@
-'use strict';
+(function () {
+  'use strict';
 
-angular.module('prosperenceApp')
-.controller('SettingsCtrl', function ($scope, User, Auth) {
-  // 
-});
+  angular.module('prosperenceApp.dashboard.settings', [])
+  .controller('SettingsCtrl', function (Auth) {
+    //
+  });
+
+})();
